@@ -1,0 +1,109 @@
+/* Ritmo da home: caixas em 8 px desde Y=0, independente do inspetor. */
+.home { --grid-row-gap: 32px; }
+/* A folga de fechamento pertence à caixa, não à métrica óptica da fonte. */
+html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; transition: none; }
+.home main :is(h1,h2,h3,p) { text-box: trim-both cap alphabetic; padding-bottom: var(--text-rhythm-tail, 0px); }
+.home .hero { height: auto; min-height: max(640px, round(up, 100svh, 8px)); }
+.home .hero-inner { padding-top: 144px; padding-bottom: 40px; }
+.home .hero-actions { margin-top: 24px; gap: 16px; }
+.home .hero-actions [data-icon] svg { width: 16px; height: 16px; }
+.home .hero-caption { margin-top: 16px; line-height: 16px; }
+.home .hero-caption a { margin-left: 8px; }
+.home .hero-foot { border: 0; box-shadow: inset 0 1px var(--line); }
+.home .hero-foot .wrap { padding: 24px var(--gut) var(--section-padding); row-gap: 16px; align-items: end; }
+.home .hero-meta .m b { line-height: 24px; }
+.home .hero-meta .m span { display: block; line-height: 16px; }
+.home .scroll-cue { line-height: 16px; }
+.home .home-intro { row-gap: 0; }
+.home main :is(h1,h2,h3) { text-wrap: balance; }
+.home .keep-together { white-space: nowrap; }
+.home .home-destinations { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home .home-homologations { padding-block: var(--section-padding); background: var(--bg-2, #101114); box-shadow: inset 0 1px var(--line-3); }
+/* Mesmos eixos para título, foto, critérios e ação. */
+.home .home-homologations-layout { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px var(--grid-gap); align-items: start; }
+.home .home-homologations-intro { grid-column: span 5; }
+.home .home-homologations-intro h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
+.home .home-homologations-intro p { margin-top: var(--text-space); font-size: 16px; line-height: 24px; color: var(--txt-2); }
+.home .home-homologations-photo { grid-column: 1 / span 5; grid-row: 2; margin: 0; }
+.home .home-homologations-photo img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.home .home-homologations-details { grid-column: 6 / -1; grid-row: 1 / span 2; }
+.home .home-homologations-details article { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding-block: 24px; box-shadow: inset 0 1px var(--line-3); }
+.home .home-homologations-details article:first-child { padding-top: 0; box-shadow: none; }
+.home .homologation-number { font-size: 14px; line-height: 24px; color: var(--txt-3); }
+.home .home-homologations-details h3 { font-size: 24px; line-height: 32px; margin: 0 0 16px; font-weight: 500; }
+.home .home-homologations-details p { max-width: 56ch; font-size: 16px; line-height: 24px; color: var(--txt-2); margin: 0; }
+.home .home-homologations-actions { margin: 0 0 0 48px; padding-top: 8px; }
+.home .showroom-section .st-l { max-width: 760px; flex: 1 1 620px; }
+.home .home-destinations > a { container-type: inline-size; padding-bottom: 0; }
+.home .home-destinations img {
+  height: round(nearest, calc(100cqw * 2 / 3), 8px);
+}
+.home .home-destinations h3 { margin-top: 24px; padding-right: 0; }
+.home .home-destinations b { bottom: 8px; line-height: 32px; }
+.home .home-factory { border: 0; box-shadow: inset 0 1px var(--line-3); }
+.home .home-factory-intro { margin-bottom: 40px; }
+.home .home-factory-panorama > img { height: round(nearest, clamp(430px,48vw,680px), 8px); }
+.home .home-factory-panorama figcaption { bottom: 40px; gap: 24px; }
+.home .home-factory-stat strong { font-size: 96px; line-height: 96px; }
+.home .home-factory-stat strong > span { font-size: 40px; line-height: 48px; }
+.home .home-factory-stat > span { line-height: 24px; margin-top: 16px; }
+.home .home-factory-location { line-height: 24px; padding: 0; }
+.home .showroom-section { border: 0; box-shadow: inset 0 1px var(--line), inset 0 -1px var(--line); }
+.home .section-head { row-gap: 24px; margin-bottom: var(--collection-space); }
+.home .stock-categories { margin: 0 0 32px; }
+.home .car-card { container-type: inline-size; }
+.home .car-media { height: round(nearest, calc(100cqw * 2 / 3), 8px); }
+.home .car-body { gap: 16px; }
+.home .car-brand { line-height: 16px; }
+.home .car-head .car-year { line-height: 16px; }
+.home .car-body .ver { line-height: 24px; }
+.home .car-specs { padding-block: 16px; line-height: 24px; border: 0; box-shadow: inset 0 1px var(--line); }
+.home .price small { line-height: 16px; margin-bottom: 8px; }
+.home .price b { display: block; line-height: 32px; }
+.home .car-link { line-height: 16px; }
+.home .fine-print { margin-top: 24px; }
+.home .consignment-note { padding-top: 32px; border: 0; box-shadow: inset 0 1px var(--line-2); gap: 24px; align-items: end; }
+.home .consignment-note b { display: block; line-height: 24px; }
+.home .consignment-note p { line-height: 24px; }
+.home .page-cta { border: 0; box-shadow: inset 0 1px var(--line-2); }
+.home .page-cta .wrap { align-items: end; row-gap: 24px; }
+.home .footer-grid { row-gap: 32px; }
+.home .footer .footer-unit-link { display: inline; margin-top: 0; font-size: 14px; line-height: inherit; }
+.home .footer h4 { margin-bottom: 16px; }
+.home .footer ul { gap: 8px; }
+.home .footer ul a { display: block; }
+/* O template compartilhado contém uma margem inline; esta regra vale só na home. */
+.home .socials { margin-top: 24px !important; }
+.home .footer-bot { border: 0; box-shadow: inset 0 1px var(--line); line-height: 16px; gap: 16px; }
+@media (max-width: 1080px) {
+  .home .home-homologations-layout { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .home .home-homologations-intro { grid-column: span 4; }
+  .home .home-homologations-photo { grid-column: 1 / span 4; }
+  .home .home-homologations-details { grid-column: 5 / -1; }
+}
+@media (max-width: 860px) {
+  .home .home-homologations-layout { grid-template-columns: 1fr; gap: 32px; }
+  .home .home-homologations-intro, .home .home-homologations-photo, .home .home-homologations-details { grid-column: auto; grid-row: auto; }
+  .home .home-homologations-photo img { max-height: 400px; }
+
+  .home .home-destinations { grid-template-columns: 1fr; }
+  .home .home-intro { row-gap: 24px; }
+  .home .home-factory-stat strong { font-size: 72px; line-height: 72px; }
+  .home .home-factory-stat strong > span { font-size: 32px; line-height: 40px; }
+  .home .consignment-note, .home .page-cta .wrap { align-items: start; }
+}
+@media (max-width: 760px) {
+  .home .home-factory-panorama > img { height: 408px; }
+  .home .home-factory-panorama figcaption { bottom: 24px; }
+}
+@media (max-width: 600px) {
+  .home .home-homologations-details article { grid-template-columns: 24px minmax(0, 1fr); gap: 16px; }
+  .home .home-homologations-actions { margin-left: 0; }
+  .home .home-homologations-details h3 { font-size: 20px; line-height: var(--small-title-leading); }
+
+  .home .home-destinations { margin-top: 8px; }
+}
+
+@media (max-width: 360px) {
+  .home .hero-title { font-size: 28px; line-height: 32px; }
+}
