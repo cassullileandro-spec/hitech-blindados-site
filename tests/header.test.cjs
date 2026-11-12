@@ -12,6 +12,7 @@ function node() {
 }
 for (const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))) {
   const html=fs.readFileSync(path.join(root,file),'utf8');
+  if (!html.includes('id="site-header"')) continue;
   const active=html.match(/data-page="([^"]+)"/)?.[1] || html.match(/renderChrome\('([^']+)'\)/)?.[1] || (file==='index.html'?'home':undefined);
   const opening=html.match(/<main[^>]*>\s*<[^>]+>/)?.[0] || '';
   const photo=opening.includes('photo-hero');

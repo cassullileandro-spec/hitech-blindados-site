@@ -29,7 +29,7 @@ function proposalWhatsAppLink(values, vehicle) {
 }
 const SITE_PAGES = [
   ['blindagem', 'blindagem.html', 'Processo de blindagem'],
-  ['estoque', 'estoque.html', 'Showroom'],
+  ['estoque', 'showroom.html', 'Showroom'],
   ['empresa', 'empresa.html', 'A Hi-Tech'],
   ['homologacoes', 'homologacoes.html', 'Homologações'],
   ['assistencia', 'assistencia.html', 'Assistência'],
@@ -191,7 +191,7 @@ function renderChrome(active) {
     ${SITE_PAGES.map(([key, href, label]) => `<a class="mm-link" href="${href}"${current === key ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
     <div class="mm-foot">
       <div class="mm-phone">Showroom Aeroporto · (11) 3202-7777</div>
-      <a href="estoque.html" class="btn btn-primary btn-lg btn-block">Ver showroom</a>
+      <a href="showroom.html" class="btn btn-primary btn-lg btn-block">Ver showroom</a>
     </div>`;
   document.body.appendChild(menu);
   const tog = document.querySelector('.menu-toggle');

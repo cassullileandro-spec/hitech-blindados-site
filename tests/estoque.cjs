@@ -39,7 +39,7 @@ assert.equal(galleries['ford-ranger-2'].length,9);
 for (const url of galleries['ford-ranger-2']) assert.match(url,/\/estoque\/ford-ranger-2\/\d+\.webp$/,'Raptor must use the locally converted original photos');
 assert(read('carro.html').includes('new URL(gallery[0], url).href'),'Open Graph image stays absolute');
 assert(read('carro.html').includes('gallery.map(image => new URL(image, url).href)'),'Structured data image URLs stay absolute');
-const html=read('estoque.html');
+const html=read('showroom.html');
 vm.runInContext(html.match(/const limites =[^\n]+/)[0]+html.match(/const state =[^\n]+/)[0],ctx);
 vm.runInContext(html.slice(html.indexOf('    function matches('),html.indexOf('    function activeChips(')),ctx);
 assert.equal(vm.runInContext('CARROS.filter(matches).length',ctx),55,'Default filters must show the entire inventory');
@@ -51,9 +51,19 @@ vm.runInContext("state.km=limites.km; state.carrocerias.add('Hatch')",ctx);
 assert.equal(vm.runInContext('CARROS.filter(matches).length',ctx),1);
 vm.runInContext("state.carrocerias.clear(); state.sort='km'",ctx);
 assert.equal(vm.runInContext('sortList(CARROS).at(-1).km',ctx),null);
-for (const file of ['carro.html','estoque.html','index.html']) {
+for (const file of ['carro.html','showroom.html','index.html']) {
  for (const match of read(file).matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
   if (!/src=|application\/ld\+json/.test(match[1])) new vm.Script(match[2],{filename:file});
  }
 }
 console.log('Estoque: 55 anúncios, 645 fotos; categorias, dados, filtros e scripts aprovados.');
+
+const redirect = read('estoque.html').match(/<script>([\s\S]*?)<\/script>/)[1];
+for (const [search, hash] of [['', ''], ['?carroceria=SUV', '#conteudo'], ['?carroceria=Sedan&q=S%C3%A3o%20Paulo', '']]) {
+ let destination;
+ vm.runInNewContext(redirect, {location: {search, hash, replace: url => { destination = url; }}});
+ assert.equal(destination, 'showroom.html' + search + hash, 'Legacy URL must preserve filters and fragment');
+}
+assert(read('sitemap.xml').includes('/showroom.html'));
+assert(!read('sitemap.xml').includes('/estoque.html'));
+console.log('Showroom: legacy redirect preserves query and fragment.');
