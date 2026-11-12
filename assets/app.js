@@ -135,6 +135,7 @@ function renderChrome(active) {
       </div>
       <div><h4>Navegação</h4><ul>
         ${SITE_PAGES.map(([, href, label]) => `<li><a href="${href}">${label}</a></li>`).join('')}
+        <li><a href="trabalhe-conosco.html"${active === 'carreiras' ? ' aria-current="page"' : ''}>Trabalhe conosco</a></li>
       </ul></div>
       <div><h4>Serviços</h4><ul>
         <li><a href="blindagem.html">Blindagem de veículos</a></li>
