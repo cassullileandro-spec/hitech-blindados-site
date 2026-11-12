@@ -21,7 +21,7 @@
 .tour-pin span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:#f9f9f9d9; color:#164e73; box-shadow:0 0 0 4px #ffffff25; font-size:10px; font-weight:600; transition:background .2s,color .2s,transform .2s; }
 .tour-pin:hover span,.tour-pin:focus-visible span { background:#155b86; color:#fff; transform:scale(1.12); }
 .tour-detail { position:absolute; z-index:5; right:clamp(20px,3vw,64px); top:130px; max-height:calc(100% - 238px); width:340px; overflow:auto; overscroll-behavior:contain; padding:32px 26px 22px; border-radius:18px; background:#f9f9f9eb; backdrop-filter:blur(24px); color:#34414a; box-shadow:0 16px 60px #142e4326; animation:tour-card-in .45s both; }
-.tour-stage .tour-close { position:absolute; top:5px; right:5px; background:transparent; font-size:17px; }
+.tour-stage .tour-close { position:sticky; top:-27px; z-index:2; display:block; margin:-27px -21px -17px auto; border-radius:50%; background:#f9f9f9eb; font-size:17px; }
 .tour-kicker { display:block; margin-right:16px; font-size:11px; line-height:17px; letter-spacing:.04em; color:#17648e; }
 .tour-detail h2 { font-size:30px; line-height:34px; font-weight:600; letter-spacing:-.025em; margin:20px 0; }
 .tour-detail p { font-size:14px; line-height:22px; color:#53616d; }
@@ -70,6 +70,7 @@
 :root:not([data-theme="light"]) .tour-detail { background:#102332ee; color:#f3f6f8; }
 :root:not([data-theme="light"]) .tour-detail :is(p,li,figcaption,.tour-detail-count) { color:#c1cdd6; }
 :root:not([data-theme="light"]) .tour-kicker { color:#8cc2e4; }
+:root:not([data-theme="light"]) .tour-close { background:#102332ee; }
 :root:not([data-theme="light"]) .tour-detail-nav button { background:#2c4557; }
 @keyframes tour-card-in { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
 @media(max-width:1000px) {
@@ -117,6 +118,7 @@
  .tour-feedback { bottom:144px; }
  .tour-detail { top:auto; left:12px; right:12px; bottom:max(12px,calc(100% - 100svh + 12px)); width:auto; max-height:46svh; padding:30px 18px 20px; border-radius:16px; }
  .has-detail .tour-bottom { visibility:hidden; }
+ .tour-stage .tour-close { top:-25px; margin:-25px -13px -19px auto; }
  .tour-detail h2 { font-size:26px; line-height:30px; }
  .tour-detail article { display:flex; flex-direction:column; }
  .tour-detail h2 { order:1; margin:14px 0; }
@@ -130,6 +132,7 @@
 /* Reserve only the tallest step's content, so autoplay does not move the sections below. */
 @media(max-width:1180px) {
  .blindagem-v3 { --section-padding:48px; }
+ .blindagem-v3:has(.tour-stage.has-detail) .wa-float { visibility:hidden; }
  .blindagem-v3 .process-details { display:grid; min-height:0; }
  .blindagem-v3 .process-details > div { grid-area:1 / 1; }
  .blindagem-v3 .process-details > [hidden] { display:block; visibility:hidden; pointer-events:none; }
