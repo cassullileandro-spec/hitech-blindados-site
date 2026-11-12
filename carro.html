@@ -59,23 +59,23 @@
 
   <script src="assets/data.js?v=estoque-webp-2"></script>
   <script src="assets/galerias.js?v=estoque-webp-2"></script>
-  <script src="assets/app.js?v=header-sem-orcamento-20261112"></script>
+  <script src="assets/app.js?v=showroom-20261112"></script>
   <script>
     renderChrome();
-    document.getElementById('rel-all').innerHTML = 'Ver estoque ' + I.arrow;
+    document.getElementById('rel-all').innerHTML = 'Ver showroom ' + I.arrow;
 
     const id = new URLSearchParams(location.search).get('id') || CARROS[0].id;
     const c = CARROS.find(x => x.id === id);
     if (!c) {
       document.title = 'Veículo indisponível — Hi-Tech Blindados';
-      document.getElementById('pdp').innerHTML = '<h1>Veículo indisponível.</h1><p>Este anúncio não está no estoque atual.</p><a class="btn btn-primary" href="estoque.html">Explorar estoque atual</a>';
+      document.getElementById('pdp').innerHTML = '<h1>Veículo indisponível.</h1><p>Este anúncio não está no showroom atual.</p><a class="btn btn-primary" href="estoque.html">Explorar showroom atual</a>';
       document.getElementById('relacionados').closest('section').hidden = true;
     } else {
     const protecao = armorLabel(c);
     document.title = `${c.marca} ${c.modelo} — ${protecao} — Hi-Tech Blindados`;
 
     document.getElementById('crumb').innerHTML =
-      `<a href="index.html">Início</a> / <a href="estoque.html">Estoque</a> / <span>${c.marca} ${c.modelo}</span>`;
+      `<a href="index.html">Início</a> / <a href="estoque.html">Showroom</a> / <span>${c.marca} ${c.modelo}</span>`;
 
     // galeria: fotos reais do carro (galerias.js) — senão a foto principal
     const gAll = (typeof GALERIAS !== 'undefined' && GALERIAS[c.id]) ? GALERIAS[c.id].slice() : (c.gallery && c.gallery.length ? c.gallery.slice() : []);
@@ -131,7 +131,7 @@
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://cassullileandro-spec.github.io/hitech-blindados-site/" },
-          { "@type": "ListItem", "position": 2, "name": "Estoque", "item": "https://cassullileandro-spec.github.io/hitech-blindados-site/estoque.html" },
+          { "@type": "ListItem", "position": 2, "name": "Showroom", "item": "https://cassullileandro-spec.github.io/hitech-blindados-site/estoque.html" },
           { "@type": "ListItem", "position": 3, "name": `${c.marca} ${c.modelo}`, "item": url }
         ]
       };
