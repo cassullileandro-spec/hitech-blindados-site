@@ -361,6 +361,8 @@ input, select, textarea { font-family: inherit; }
 .editorial-split .fine-print + .btn { margin-top: var(--action-space); }
 .revision-copy > .editorial-heading { display: block; margin-bottom: 32px; }
 .revision-copy > .editorial-heading p { margin-top: var(--text-space); }
+.editorial-split .revision-copy > .btn { margin-left: 0; }
+[data-page="assistencia"] #servicos .photo-card > img { object-position: center 20%; }
 .photo-banner { min-height: 640px; padding-block: var(--section-padding); display: flex; align-items: end; }
 .photo-banner > .wrap { width: 100%; }
 .photo-banner .photo-hero-photo { object-position: 65% 40%; }
