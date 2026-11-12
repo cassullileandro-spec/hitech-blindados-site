@@ -359,6 +359,8 @@ input, select, textarea { font-family: inherit; }
 .editorial-steps p { margin-top: var(--text-space); color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
 .editorial-split .btn { margin-left: 48px; }
 .editorial-split .fine-print + .btn { margin-top: var(--action-space); }
+.revision-copy > .editorial-heading { display: block; margin-bottom: 32px; }
+.revision-copy > .editorial-heading p { margin-top: var(--text-space); }
 .photo-banner { min-height: 640px; padding-block: var(--section-padding); display: flex; align-items: end; }
 .photo-banner > .wrap { width: 100%; }
 .photo-banner .photo-hero-photo { object-position: 65% 40%; }
@@ -375,15 +377,6 @@ input, select, textarea { font-family: inherit; }
 .editorial-answers summary::after { content: '+'; flex-shrink: 0; font-size: 24px; font-weight: 300; color: var(--txt-2); }
 .editorial-answers details[open] summary::after { content: '−'; }
 .editorial-answers p { margin-bottom: 24px; color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
-.assistance-services-layout { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: var(--grid-gap-wide); }
-.assistance-services-photo { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--r); }
-.assistance-services-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4/3; object-fit: cover; }
-.assistance-services-list { min-width: 0; }
-.assistance-services-list details[open] summary { color: var(--accent); }
-@media (max-width: 860px) {
-  .assistance-services-layout { grid-template-columns: 1fr; gap: 24px; }
-  .assistance-services-photo img { aspect-ratio: 3/2; max-height: 400px; }
-}
  .editorial-page .page-cta { background: var(--bg); border-top: 1px solid var(--line-3); }
 @media (max-width:1080px) {
   .photo-cards { grid-template-columns: 1fr; }
@@ -434,7 +427,7 @@ a.photo-card > b { position: absolute; top: 24px; right: 24px; width: 40px; heig
 :root { --photo-brand-color: #3E9BE0; --photo-brand-opacity: .2; }
 .photo-hero::after, .photo-card::before,
 .home-factory-panorama::before, .home-homologations-photo::after,
-.editorial-split > figure::after, .story-slide::after, .assistance-services-photo::after {
+.editorial-split > figure::after, .story-slide::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: var(--photo-brand-color); opacity: var(--photo-brand-opacity); mix-blend-mode: color;
 }
