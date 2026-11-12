@@ -28,11 +28,11 @@ function proposalWhatsAppLink(values, vehicle) {
   return url.href;
 }
 const SITE_PAGES = [
+  ['blindagem', 'blindagem.html', 'Processo de blindagem'],
+  ['estoque', 'estoque.html', 'Estoque'],
   ['empresa', 'empresa.html', 'A Hi-Tech'],
-  ['blindagem', 'blindagem.html', 'Blindagem'],
   ['homologacoes', 'homologacoes.html', 'Homologações'],
   ['assistencia', 'assistencia.html', 'Assistência'],
-  ['estoque', 'estoque.html', 'Estoque'],
   ['contato', 'contato.html', 'Contato']
 ];
 
