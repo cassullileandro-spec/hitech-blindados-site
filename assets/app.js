@@ -112,10 +112,21 @@ function renderChrome(active) {
 
   const footer = `
   <footer class="footer" id="contato"><div class="wrap">
+    <div class="footer-invitation">
+      <div class="footer-intro">
+        <p class="footer-intro-title">Conte com a gente em cada etapa.</p>
+        <p>Converse sobre blindagem, escolha do veículo ou assistência. Nossa equipe orienta o seu próximo passo.</p>
+        <div class="footer-team"><img src="assets/media/logo-hitech.webp" alt="" width="96" height="48" loading="lazy"><div><strong>Equipe Hi-Tech</strong><span>Atendimento e orientação</span></div></div>
+      </div>
+      <div class="footer-cta">
+        <h2>Seu próximo passo começa com uma conversa.</h2>
+        <a href="${whatsappLink('empresa')}" class="btn btn-primary" data-contact="empresa">Falar com a Hi-Tech <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
     <div class="footer-grid">
-      <div>
+      <div class="footer-brand">
         <a href="index.html" class="logo" aria-label="Hi-Tech Blindados"><img src="assets/media/logo-hitech.webp" alt="Hi-Tech Blindados"></a>
-        <p>Há mais de 20 anos, tecnologia e cuidado em cada detalhe da blindagem. Fábrica própria, showroom e assistência para acompanhar você.</p>
+        <p>Fábrica própria, showroom e assistência para acompanhar você.</p>
         <div class="socials">
           <a href="https://www.facebook.com/hitechblindados/" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a>
           <a href="https://www.instagram.com/hitech.blindagens/" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>
@@ -132,9 +143,18 @@ function renderChrome(active) {
         <li><a href="${whatsappLink('consignacao')}" data-contact="consignacao">Consignação</a></li>
         <li><a href="documentos.html">Documentação</a></li>
       </ul></div>
-      <div><h4>Unidades</h4>
-        <p class="addr"><b>Showroom Aeroporto</b><br>Av. Washington Luís, 5670<br>Jardim Aeroporto — São Paulo/SP<br><a href="tel:+551132027777">(11) 3202-7777</a><br><a href="https://www.google.com/maps/search/?api=1&query=Av.+Washington+Luis+5670+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a></p>
-        <p class="addr"><b>Fábrica e assistência</b><br>Rua Barão de Monte Santo, 426<br>Moóca — São Paulo/SP<br><a href="tel:+551132027676">(11) 3202-7676</a><br><a href="https://www.google.com/maps/search/?api=1&query=Rua+Barao+de+Monte+Santo+426+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a></p>
+      <div class="footer-units"><h4>Conheça nossas unidades</h4><div class="footer-maps">
+        <div class="footer-location">
+          <iframe title="Mapa do Showroom Aeroporto Hi-Tech" src="https://www.google.com/maps?q=Av.+Washington+Luis,+5670,+Sao+Paulo,+SP&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <p class="addr"><b>Showroom Aeroporto</b><br>Av. Washington Luís, 5670<br>Jardim Aeroporto — São Paulo/SP<br><a href="tel:+551132027777">(11) 3202-7777</a></p>
+          <a href="https://www.google.com/maps/search/?api=1&query=Av.+Washington+Luis+5670+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a>
+        </div>
+        <div class="footer-location">
+          <iframe title="Mapa da fábrica e assistência Hi-Tech" src="https://www.google.com/maps?q=Rua+Barao+de+Monte+Santo,+426,+Sao+Paulo,+SP&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <p class="addr"><b>Fábrica e assistência</b><br>Rua Barão de Monte Santo, 426<br>Moóca — São Paulo/SP<br><a href="tel:+551132027676">(11) 3202-7676</a></p>
+          <a href="https://www.google.com/maps/search/?api=1&query=Rua+Barao+de+Monte+Santo+426+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a>
+        </div>
+      </div>
       </div>
     </div>
     <div class="footer-bot">
