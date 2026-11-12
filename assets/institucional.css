@@ -10,15 +10,18 @@ input, select, textarea { font-family: inherit; }
 .page-band { background: var(--bg-2); box-shadow: inset 0 1px var(--line), inset 0 -1px var(--line); }
 
 /* Abertura da home */
-.home .hero-scrim { background: linear-gradient(105deg,rgba(8,9,11,.82),rgba(8,9,11,.48) 48%,rgba(8,9,11,.08) 100%),linear-gradient(0deg,rgba(8,9,11,.55),transparent 35%); }
+.home .hero-scrim { background: linear-gradient(105deg,rgba(8,9,11,.82),rgba(8,9,11,.74) 48%,rgba(8,9,11,.72) 100%),linear-gradient(0deg,rgba(8,9,11,.55),transparent 35%); }
 .home .hero-grain { display: none; }
 .home .hero-foot { background: rgba(8,9,11,.15); }
 .home .hero-foot .wrap { padding-right: calc(var(--gut) + 65px); }
 .home .hero-meta .m span { color: #c6c9cd; letter-spacing: .04em; text-transform: none; }
 .home .hero-meta .m b { font-weight: 400; }
-.hero-video { container-type: size; background: url('media/fabrica-hitech.webp?v=qualidade-20261030') center / cover; background-image: image-set(url('media/fabrica-hitech-1600.webp?v=qualidade-20261030') 1x,url('media/fabrica-hitech.webp?v=qualidade-20261030') 2x); }
-.hero-video iframe { position: absolute; top: 50%; left: 50%; width: max(100cqw,177.7778cqh); height: max(100cqh,56.25cqw); transform: translate(-50%,-50%); border: 0; pointer-events: none; opacity: 0; transition: opacity .5s; }
-.hero-video.playing iframe { opacity: 1; }
+.hero-video { background: url('media/hero-poster.webp') center / cover; }
+.hero-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0; transition: opacity .5s; }
+.hero-video.playing video { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-video video { display: none; transition: none; }
+}
 .hero-caption { margin-top: 15px; color: #c1c5cb; font-size: var(--caption-size); line-height: var(--caption-leading); }
 .hero-caption a { display: inline-block; margin-left: 10px; text-decoration: underline; text-underline-offset: 3px; }
 .hero-sub { font-size: var(--body-size); line-height: var(--body-leading); max-width: 51ch; color: #d1d3d7; }
