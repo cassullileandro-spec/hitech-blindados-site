@@ -718,8 +718,8 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .theme-toggle[aria-checked="true"] .theme-thumb { transform: translateX(18px); }
 .theme-toggle[aria-checked="true"] .theme-label-light { font-weight: 400; }
 .theme-toggle[aria-checked="true"] .theme-label-dark { font-weight: 600; }
-.home .header .theme-toggle { margin-left: auto; }
-@media (min-width:1081px) { .home .header .nav { position: absolute; left: 50%; transform: translateX(-50%); } }
+.header .theme-toggle { margin-left: auto; }
+@media (min-width:1081px) { .header .nav { position: absolute; left: 50%; transform: translateX(-50%); } }
 @media (min-width:1081px) and (max-width:1600px) { .header-phone { display: none; } }
 @media (min-width:1081px) and (max-width:1440px) { .header .nav a { padding-inline: 10px; } }
 @media (min-width:1081px) and (max-width:1280px) { .header-right .btn-wa { display: none; } }

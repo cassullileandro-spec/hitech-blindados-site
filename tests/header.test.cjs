@@ -15,14 +15,15 @@ for (const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))) {
   const active=html.match(/data-page="([^"]+)"/)?.[1] || html.match(/renderChrome\('([^']+)'\)/)?.[1] || (file==='index.html'?'home':undefined);
   const opening=html.match(/<main[^>]*>\s*<[^>]+>/)?.[0] || '';
   const photo=opening.includes('photo-hero');
-  const body=node(), header=node(), host=node(), themeToggle=node(), events={};
+  const body=node(), header=node(), host=node(), headerHost=node(), themeToggle=node(), events={};
   const isTour=/<body[^>]*class="[^"]*blindagem-v3/.test(html);
   if(isTour) body.classList.add('blindagem-v3');
-  const document={body,documentElement:{dataset:{theme:'light'}},createElement:node,addEventListener(){},getElementById:()=>host,
+  const document={body,documentElement:{dataset:{theme:'light'}},createElement:node,addEventListener(){},getElementById:id=>id==='site-header'?headerHost:host,
     querySelector:s=>s==='main > .photo-hero:first-child'?(photo?node():null):s==='.header'?header:s==='.theme-toggle'?themeToggle:node(),querySelectorAll:()=>[]};
   const window={scrollY:0,addEventListener:(k,fn)=>events[k]=fn,matchMedia:()=>node()};
   const context={document,window,SITE_PAGES:[],CONTACT_MESSAGES:{},whatsappLink:()=>'',I:{},initMotion(){},applyTheme(theme){document.documentElement.dataset.theme=theme;},localStorage:{setItem(){}}};
   vm.runInNewContext(render+';renderChrome('+JSON.stringify(active)+');',context);
+  assert(!headerHost.innerHTML.includes('Solicitar orçamento'),file+': no quote button in header');
   assert.equal(themeToggle.attrs['aria-checked'],'false',file+': light switch state');
   themeToggle.click();
   assert.equal(document.documentElement.dataset.theme,'dark');

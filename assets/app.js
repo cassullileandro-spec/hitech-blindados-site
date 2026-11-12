@@ -102,10 +102,6 @@ function renderChrome(active) {
     <nav class="nav" aria-label="Navegação principal">
       ${SITE_PAGES.map(([key, href, label]) => `<a href="${href}"${current === key ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('')}
     </nav>
-    ${!isHome ? `<div class="header-right">
-      <a href="tel:+551132027777" class="header-phone">(11) 3202-7777</a>
-      <a href="${whatsappLink('blindagem')}" class="btn btn-wa" data-contact="blindagem">${I.wa} Solicitar orçamento</a>
-    </div>` : ''}
     <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo escuro"><span class="theme-label theme-label-light" aria-hidden="true">Light</span><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span><span class="theme-label theme-label-dark" aria-hidden="true">Dark</span></button>
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">${I.menu}</button>
   </div></header>`;
@@ -195,7 +191,6 @@ function renderChrome(active) {
     ${SITE_PAGES.map(([key, href, label]) => `<a class="mm-link" href="${href}"${current === key ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
     <div class="mm-foot">
       <div class="mm-phone">Showroom Aeroporto · (11) 3202-7777</div>
-      <a href="${whatsappLink('blindagem')}" class="btn btn-wa btn-lg btn-block">${I.wa} Solicitar orçamento</a>
       <a href="estoque.html" class="btn btn-primary btn-lg btn-block">Ver estoque</a>
     </div>`;
   document.body.appendChild(menu);
