@@ -69,7 +69,8 @@ const I = {
 
 /* ---------- Helpers ---------- */
 const fmtPrice = n => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 0 });
-const fmtKm = n => n === 0 ? '0 km' : n.toLocaleString('pt-BR') + ' km';
+const fmtKm = n => n == null ? 'Km sob consulta' : n === 0 ? '0 km' : n.toLocaleString('pt-BR') + ' km';
+const armorLabel = c => c.blindado === false ? 'Não blindado' : c.blindado === true ? (c.nivel ? 'Blindado ' + c.nivel : 'Blindado') : 'Blindagem sob consulta';
 
 function parcelaEstimada(preco, entradaPct = 20, meses = 48, taxa = 0.0149) {
   const financiado = preco * (1 - entradaPct / 100);
@@ -81,10 +82,22 @@ function parcelaEstimada(preco, entradaPct = 20, meses = 48, taxa = 0.0149) {
 function renderChrome(active) {
   const isHome = active === 'home';
   const current = active === 'carro' ? 'estoque' : active;
+  const overMedia = isHome || active === 'estoque' || !!document.querySelector('main > .photo-hero:first-child');
+  if (overMedia || document.body.classList.contains('blindagem-v3')) document.body.classList.add('header-overlay');
   const header = `
-  <header class="header ${isHome ? '' : 'solid'}"><div class="wrap">
+  <svg class="brand-filters" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs>
+    <filter id="brand-logo-light" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -5 0 5 0 0" result="accentMask"/>
+      <feFlood flood-color="#666666" result="gray"/>
+      <feComposite in="gray" in2="SourceAlpha" operator="in" result="grayLogo"/>
+      <feComposite in="grayLogo" in2="accentMask" operator="out" result="neutralLogo"/>
+      <feComposite in="SourceGraphic" in2="accentMask" operator="in" result="accentLogo"/>
+      <feMerge><feMergeNode in="neutralLogo"/><feMergeNode in="accentLogo"/></feMerge>
+    </filter>
+  </defs></svg>
+  <header class="header ${overMedia ? 'over-media' : ''}"><div class="wrap">
     <a href="index.html" class="logo" aria-label="Hi-Tech Blindados">
-      <img src="assets/media/logo-hitech.png" alt="Hi-Tech Blindados">
+      <img src="assets/media/logo-hitech.webp" alt="Hi-Tech Blindados">
     </a>
     <nav class="nav" aria-label="Navegação principal">
       ${SITE_PAGES.map(([key, href, label]) => `<a href="${href}"${current === key ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('')}
@@ -93,6 +106,7 @@ function renderChrome(active) {
       <a href="tel:+551132027777" class="header-phone">(11) 3202-7777</a>
       <a href="${whatsappLink('blindagem')}" class="btn btn-wa" data-contact="blindagem">${I.wa} Solicitar orçamento</a>
     </div>
+    <button class="theme-toggle" type="button" aria-label="Ativar modo escuro"><span aria-hidden="true">◐</span></button>
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">${I.menu}</button>
   </div></header>`;
 
@@ -100,9 +114,9 @@ function renderChrome(active) {
   <footer class="footer" id="contato"><div class="wrap">
     <div class="footer-grid">
       <div>
-        <a href="index.html" class="logo" aria-label="Hi-Tech Blindados"><img src="assets/media/logo-hitech.png" alt="Hi-Tech Blindados"></a>
+        <a href="index.html" class="logo" aria-label="Hi-Tech Blindados"><img src="assets/media/logo-hitech.webp" alt="Hi-Tech Blindados"></a>
         <p>Há mais de 20 anos, tecnologia e cuidado em cada detalhe da blindagem. Fábrica própria, showroom e assistência para acompanhar você.</p>
-        <div class="socials" style="margin-top:18px">
+        <div class="socials">
           <a href="https://www.facebook.com/hitechblindados/" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a>
           <a href="https://www.instagram.com/hitech.blindagens/" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>
           <a href="https://www.youtube.com/c/HITECHBLINDADOSOFICIAL/videos" target="_blank" rel="noopener" aria-label="YouTube">${I.yt}</a>
@@ -120,7 +134,7 @@ function renderChrome(active) {
       </ul></div>
       <div><h4>Unidades</h4>
         <p class="addr"><b>Showroom Aeroporto</b><br>Av. Washington Luís, 5670<br>Jardim Aeroporto — São Paulo/SP<br><a href="tel:+551132027777">(11) 3202-7777</a><br><a href="https://www.google.com/maps/search/?api=1&query=Av.+Washington+Luis+5670+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a></p>
-        <p class="addr" style="margin-top:16px"><b>Fábrica e assistência</b><br>Rua Barão de Monte Santo, 426<br>Moóca — São Paulo/SP<br><a href="tel:+551132027676">(11) 3202-7676</a><br><a href="https://www.google.com/maps/search/?api=1&query=Rua+Barao+de+Monte+Santo+426+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a></p>
+        <p class="addr"><b>Fábrica e assistência</b><br>Rua Barão de Monte Santo, 426<br>Moóca — São Paulo/SP<br><a href="tel:+551132027676">(11) 3202-7676</a><br><a href="https://www.google.com/maps/search/?api=1&query=Rua+Barao+de+Monte+Santo+426+Sao+Paulo" class="footer-unit-link" target="_blank" rel="noopener">Como chegar ↗</a></p>
       </div>
     </div>
     <div class="footer-bot">
@@ -132,6 +146,20 @@ function renderChrome(active) {
 
   document.getElementById('site-header').innerHTML = header;
   document.getElementById('site-footer').innerHTML = footer;
+
+  const themeToggle = document.querySelector('.theme-toggle');
+  const updateThemeLabel = () => {
+    const label = document.documentElement.dataset.theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro';
+    themeToggle.setAttribute('aria-label', label);
+    themeToggle.title = label;
+  };
+  updateThemeLabel();
+  themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+    try { localStorage.setItem('hitech-theme', theme); } catch { /* O tema continua funcionando sem armazenamento. */ }
+    updateThemeLabel();
+  });
 
   if (!isHome) document.body.classList.add('inner');
 
@@ -154,6 +182,7 @@ function renderChrome(active) {
   const setMenu = (open) => {
     menu.inert = !open;
     menu.classList.toggle('open', open);
+    document.querySelector('.header').classList.toggle('menu-open', open);
     tog.setAttribute('aria-expanded', String(open));
     tog.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     tog.innerHTML = open ? I.close : I.menu;
@@ -182,12 +211,9 @@ function renderChrome(active) {
     link.href = whatsappLink(link.dataset.contact);
   });
 
-  // header solidifica no scroll (home) + reveal on scroll
   const hdr = document.querySelector('.header');
-  if (isHome) {
-    const onScroll = () => hdr.classList.toggle('solid', window.scrollY > window.innerHeight * 0.7);
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  }
+  const onScroll = () => hdr.classList.toggle('solid', window.scrollY > 48);
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
   initMotion();
 }
 
@@ -222,7 +248,7 @@ function carCard(c) {
   <a href="carro.html?id=${c.id}" class="car-card reveal">
     <div class="car-media">
       <img loading="lazy" src="${c.img}" srcset="${c.imgSrcset || ''}" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1080px) 45vw, 400px" alt="${c.marca} ${c.modelo}" decoding="async">
-      <span class="badge">${I.shield} ${c.nivel}</span>
+      <span class="badge">${c.blindado === true ? I.shield : I.tag} ${armorLabel(c)}</span>
     </div>
     <div class="car-body">
       <span class="car-brand">${c.marca}</span>
@@ -230,7 +256,7 @@ function carCard(c) {
       <p class="ver">${c.versao}</p>
       <div class="car-specs">
         <span>${I.gauge}${fmtKm(c.km)}</span>
-        <span>${I.gear}${c.cambio}</span>
+        <span>${I.gear}${c.cambio || 'Câmbio sob consulta'}</span>
         <span>${I.fuel}${c.combustivel}</span>
       </div>
       <div class="car-foot">

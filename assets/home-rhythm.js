@@ -1,6 +1,6 @@
 /* Completa só a caixa externa; mantém cap height/baseline e o reflow do texto. */
 (() => {
-  const texts = [...document.querySelectorAll('.home main :is(h1,h2,h3,p)')];
+  const texts = [...document.querySelectorAll('.home main :is(h1,h2,h3,p):not(.car-card *)')];
   let frame = 0;
   function alignTextBoxes() {
     frame = 0;

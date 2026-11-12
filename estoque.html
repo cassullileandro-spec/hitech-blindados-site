@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>try{if(sessionStorage.getItem('htpre'))document.documentElement.classList.add('pre-skip')}catch(e){}</script>
-  <title>Estoque de Carros Blindados NIII-A à Venda — Hi-Tech Blindados</title>
+  <title>Estoque de Veículos à Venda — Hi-Tech Blindados</title>
   <meta name="description" content="Veículos blindados NIII-A à venda em São Paulo: SUVs, sedãs e picapes de marcas premium. Filtre por marca, preço, ano e km. Pronta entrega com garantia Hi-Tech.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#08090B">
+  <meta name="theme-color" content="#F4F6F8">
+  <script src="assets/theme.js?v=cards-frios-20261111-r10"></script>
   <meta name="geo.region" content="BR-SP">
   <meta name="geo.placename" content="São Paulo">
   <link rel="canonical" href="https://cassullileandro-spec.github.io/hitech-blindados-site/estoque.html">
-  <link rel="icon" type="image/png" href="assets/media/logo-hitech.png">
+  <link rel="icon" type="image/webp" href="assets/media/logo-hitech.webp">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Hi-Tech Blindados">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="Estoque de Carros Blindados NIII-A à Venda — Hi-Tech Blindados">
+  <meta property="og:title" content="Estoque de Veículos à Venda — Hi-Tech Blindados">
   <meta property="og:description" content="SUVs, sedãs e picapes blindados NIII-A à venda em São Paulo. Filtre por marca, preço, ano e km.">
   <meta property="og:url" content="https://cassullileandro-spec.github.io/hitech-blindados-site/estoque.html">
-  <meta property="og:image" content="https://www.hitechblindados.com.br/wp-content/uploads/elementor/thumbs/M_1-rp6qag16vq57hv5lah5infro4hdhr5uii2rc9mmsv4.jpeg">
+  <meta property="og:image" content="https://cassullileandro-spec.github.io/hitech-blindados-site/assets/media/estoque/caoa-chery-tiggo-7-pro/01.webp">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,8 +29,8 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=padding96-20261105-r3">
-  <link rel="stylesheet" href="assets/institucional.css?v=padding96-20261105-r3">
+  <link rel="stylesheet" href="assets/styles.css?v=header-overlay-20261111">
+  <link rel="stylesheet" href="assets/institucional.css?v=carrosseis-20261111">
 
   <script type="application/ld+json">
   {
@@ -46,8 +47,8 @@
   <a href="#conteudo" class="skip-link">Ir para o conteúdo</a>
   <div class="preloader" id="preloader" role="status" aria-label="Carregando">
     <div class="pre-logo-wrap">
-      <img class="pre-base" src="assets/media/logo-hitech.png" alt="Hi-Tech Blindados" width="250" height="128">
-      <img class="pre-fill" src="assets/media/logo-hitech.png" alt="" aria-hidden="true" width="250" height="128">
+      <img class="pre-base" src="assets/media/logo-hitech.webp" alt="Hi-Tech Blindados" width="250" height="128">
+      <img class="pre-fill" src="assets/media/logo-hitech.webp" alt="" aria-hidden="true" width="250" height="128">
     </div>
   </div>
 
@@ -55,7 +56,7 @@
 
   <div class="page-head"><div class="wrap">
     <div class="breadcrumb"><a href="index.html">Início</a> / <span>Estoque</span></div>
-    <h1>Estoque de&nbsp;<span class="serif">blindados.</span></h1><p class="stock-intro">Encontre seu próximo veículo. Explore o estoque por marca, carroceria e faixa de preço, com as informações que ajudam na sua escolha.</p>
+    <h1>Nosso&nbsp;<span class="serif">estoque.</span></h1><p class="stock-intro">Encontre seu próximo veículo. Explore o estoque por marca, carroceria e faixa de preço, com as informações que ajudam na sua escolha.</p>
   </div></div>
 
   <div class="wrap">
@@ -128,8 +129,8 @@
 
   <div id="site-footer"></div>
 
-  <script src="assets/data.js?v=qualidade-20261030"></script>
-  <script src="assets/app.js?v=padding96-20261105-r3"></script>
+  <script src="assets/data.js?v=estoque-webp-2"></script>
+  <script src="assets/app.js?v=media-webp-20261111"></script>
   <script>
     renderChrome('estoque');
 
@@ -139,7 +140,8 @@
     syncFilterPanel();
     wideFilters.addEventListener('change', syncFilterPanel);
 
-    const state = { search:'', marcas:new Set(), carrocerias:new Set(), combustiveis:new Set(), preco:900000, ano:2016, km:80000, sort:'relevancia' };
+    const limites = { preco: Math.ceil(Math.max(...CARROS.map(c => c.preco)) / 10000) * 10000, ano: Math.min(...CARROS.map(c => c.ano)), km: Math.ceil(Math.max(...CARROS.map(c => c.km ?? 0)) / 5000) * 5000 };
+    const state = { search:'', marcas:new Set(), carrocerias:new Set(), combustiveis:new Set(), preco:limites.preco, ano:limites.ano, km:limites.km, sort:'relevancia' };
 
     // pré-preenche via querystring vindo da home
     const qs = new URLSearchParams(location.search);
@@ -167,9 +169,9 @@
     checkGroup('f-combustiveis', COMBUSTIVEIS, state.combustiveis, 'combustivel');
 
     // sliders
-    const pEl = document.getElementById('f-preco'); pEl.value = state.preco;
-    const aEl = document.getElementById('f-ano');
-    const kEl = document.getElementById('f-km');
+    const pEl = document.getElementById('f-preco'); pEl.max = limites.preco; pEl.value = state.preco;
+    const aEl = document.getElementById('f-ano'); aEl.min = limites.ano; aEl.max = Math.max(...CARROS.map(c => c.ano)); aEl.value = state.ano;
+    const kEl = document.getElementById('f-km'); kEl.max = limites.km; kEl.value = state.km;
     pEl.addEventListener('input', () => { state.preco = +pEl.value; render(); });
     aEl.addEventListener('input', () => { state.ano = +aEl.value; render(); });
     kEl.addEventListener('input', () => { state.km = +kEl.value; render(); });
@@ -177,8 +179,8 @@
     document.getElementById('f-sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
     document.getElementById('clear-filters').addEventListener('click', () => {
       state.search=''; state.marcas.clear(); state.carrocerias.clear(); state.combustiveis.clear();
-      state.preco=900000; state.ano=2016; state.km=80000; state.sort='relevancia';
-      document.getElementById('f-search').value=''; pEl.value=900000; aEl.value=2016; kEl.value=80000;
+      state.preco=limites.preco; state.ano=limites.ano; state.km=limites.km; state.sort='relevancia';
+      document.getElementById('f-search').value=''; pEl.value=limites.preco; aEl.value=limites.ano; kEl.value=limites.km;
       document.getElementById('f-sort').value='relevancia';
       document.querySelectorAll('.filters input[type=checkbox]').forEach(i=>i.checked=false);
       render();
@@ -194,7 +196,7 @@
       if (state.combustiveis.size && !state.combustiveis.has(c.combustivel)) return false;
       if (c.preco > state.preco) return false;
       if (c.ano < state.ano) return false;
-      if (c.km > state.km) return false;
+      if (state.km < limites.km && (c.km == null || c.km > state.km)) return false;
       return true;
     }
 
@@ -203,7 +205,7 @@
       const arr = [...list];
       if (s==='menor') arr.sort((a,b)=>a.preco-b.preco);
       else if (s==='maior') arr.sort((a,b)=>b.preco-a.preco);
-      else if (s==='km') arr.sort((a,b)=>a.km-b.km);
+      else if (s==='km') arr.sort((a,b)=>(a.km ?? Infinity)-(b.km ?? Infinity));
       else if (s==='ano') arr.sort((a,b)=>b.ano-a.ano);
       else arr.sort((a,b)=>(b.destaque?1:0)-(a.destaque?1:0));
       return arr;
@@ -214,9 +216,9 @@
       state.marcas.forEach(m => chips.push(['marca',m]));
       state.carrocerias.forEach(m => chips.push(['carroceria',m]));
       state.combustiveis.forEach(m => chips.push(['combustivel',m]));
-      if (state.preco < 900000) chips.push(['preco', 'Até '+fmtPrice(state.preco)]);
-      if (state.ano > 2016) chips.push(['ano', 'A partir de '+state.ano]);
-      if (state.km < 80000) chips.push(['km', 'Até '+state.km.toLocaleString('pt-BR')+' km']);
+      if (state.preco < limites.preco) chips.push(['preco', 'Até '+fmtPrice(state.preco)]);
+      if (state.ano > limites.ano) chips.push(['ano', 'A partir de '+state.ano]);
+      if (state.km < limites.km) chips.push(['km', 'Até '+state.km.toLocaleString('pt-BR')+' km']);
       const box = document.getElementById('active-filters');
       box.innerHTML = chips.map(([k,v]) => `<span class="fchip">${v} <button data-k="${k}" data-v="${v}">✕</button></span>`).join('');
       box.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
@@ -224,9 +226,9 @@
         if (k==='marca') state.marcas.delete(v);
         else if (k==='carroceria') state.carrocerias.delete(v);
         else if (k==='combustivel') state.combustiveis.delete(v);
-        else if (k==='preco') { state.preco=900000; pEl.value=900000; }
-        else if (k==='ano') { state.ano=2016; aEl.value=2016; }
-        else if (k==='km') { state.km=80000; kEl.value=80000; }
+        else if (k==='preco') { state.preco=limites.preco; pEl.value=limites.preco; }
+        else if (k==='ano') { state.ano=limites.ano; aEl.value=limites.ano; }
+        else if (k==='km') { state.km=limites.km; kEl.value=limites.km; }
         document.querySelectorAll('.filters input[type=checkbox]').forEach(i=>{ if(i.value===v) i.checked=false; });
         render();
       }));
@@ -236,7 +238,7 @@
       document.getElementById('pmin').textContent = 'R$ 0';
       document.getElementById('pmax').textContent = fmtPrice(state.preco);
       document.getElementById('anoval').textContent = state.ano;
-      document.getElementById('kmval').textContent = state.km >= 80000 ? 'Qualquer' : state.km.toLocaleString('pt-BR')+' km';
+      document.getElementById('kmval').textContent = state.km >= limites.km ? 'Qualquer' : state.km.toLocaleString('pt-BR')+' km';
 
       const list = sortList(CARROS.filter(matches));
       document.getElementById('rc').textContent = list.length;

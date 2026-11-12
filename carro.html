@@ -7,17 +7,18 @@
   <title>Veículo Blindado NIII-A — Hi-Tech Blindados</title>
   <meta name="description" content="Veículo blindado nível NIII-A à venda na Hi-Tech Blindados, São Paulo. Ficha técnica completa, galeria de fotos, simulação de financiamento e proposta pelo WhatsApp.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#08090B">
+  <meta name="theme-color" content="#F4F6F8">
+  <script src="assets/theme.js?v=cards-frios-20261111-r10"></script>
   <meta name="geo.region" content="BR-SP">
   <meta name="geo.placename" content="São Paulo">
-  <link rel="icon" type="image/png" href="assets/media/logo-hitech.png">
+  <link rel="icon" type="image/webp" href="assets/media/logo-hitech.webp">
 
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="Hi-Tech Blindados">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Veículo Blindado NIII-A — Hi-Tech Blindados">
   <meta property="og:description" content="Veículo blindado nível NIII-A à venda na Hi-Tech Blindados, São Paulo.">
-  <meta property="og:image" content="https://www.hitechblindados.com.br/wp-content/uploads/elementor/thumbs/M_1-rp6qag16vq57hv5lah5infro4hdhr5uii2rc9mmsv4.jpeg">
+  <meta property="og:image" content="https://cassullileandro-spec.github.io/hitech-blindados-site/assets/media/estoque/caoa-chery-tiggo-7-pro/01.webp">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,15 +27,15 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=padding96-20261105-r3">
-  <link rel="stylesheet" href="assets/institucional.css?v=padding96-20261105-r3">
+  <link rel="stylesheet" href="assets/styles.css?v=header-overlay-20261111">
+  <link rel="stylesheet" href="assets/institucional.css?v=carrosseis-20261111">
 </head>
 <body class="vehicle-page">
   <a href="#conteudo" class="skip-link">Ir para o conteúdo</a>
   <div class="preloader" id="preloader" role="status" aria-label="Carregando">
     <div class="pre-logo-wrap">
-      <img class="pre-base" src="assets/media/logo-hitech.png" alt="Hi-Tech Blindados" width="250" height="128">
-      <img class="pre-fill" src="assets/media/logo-hitech.png" alt="" aria-hidden="true" width="250" height="128">
+      <img class="pre-base" src="assets/media/logo-hitech.webp" alt="Hi-Tech Blindados" width="250" height="128">
+      <img class="pre-fill" src="assets/media/logo-hitech.webp" alt="" aria-hidden="true" width="250" height="128">
     </div>
   </div>
 
@@ -48,7 +49,7 @@
   <!-- Relacionados -->
   <section class="section">
     <div class="wrap">
-      <div class="section-head"><div class="st-l"><h2>Blindados <span class="serif">semelhantes.</span></h2></div>
+      <div class="section-head"><div class="st-l"><h2>Veículos <span class="serif">semelhantes.</span></h2></div>
       <a href="estoque.html" class="tlink" id="rel-all"></a></div>
       <div class="grid-cars" id="relacionados"></div>
     </div>
@@ -56,16 +57,22 @@
 
   <div id="site-footer"></div>
 
-  <script src="assets/data.js?v=qualidade-20261030"></script>
-  <script src="assets/galerias.js?v=qualidade-20261030"></script>
-  <script src="assets/app.js?v=padding96-20261105-r3"></script>
+  <script src="assets/data.js?v=estoque-webp-2"></script>
+  <script src="assets/galerias.js?v=estoque-webp-2"></script>
+  <script src="assets/app.js?v=media-webp-20261111"></script>
   <script>
     renderChrome();
     document.getElementById('rel-all').innerHTML = 'Ver estoque ' + I.arrow;
 
     const id = new URLSearchParams(location.search).get('id') || CARROS[0].id;
-    const c = CARROS.find(x => x.id === id) || CARROS[0];
-    document.title = `${c.marca} ${c.modelo} Blindado ${c.nivel} — Hi-Tech Blindados`;
+    const c = CARROS.find(x => x.id === id);
+    if (!c) {
+      document.title = 'Veículo indisponível — Hi-Tech Blindados';
+      document.getElementById('pdp').innerHTML = '<h1>Veículo indisponível.</h1><p>Este anúncio não está no estoque atual.</p><a class="btn btn-primary" href="estoque.html">Explorar estoque atual</a>';
+      document.getElementById('relacionados').closest('section').hidden = true;
+    } else {
+    const protecao = armorLabel(c);
+    document.title = `${c.marca} ${c.modelo} — ${protecao} — Hi-Tech Blindados`;
 
     document.getElementById('crumb').innerHTML =
       `<a href="index.html">Início</a> / <a href="estoque.html">Estoque</a> / <span>${c.marca} ${c.modelo}</span>`;
@@ -78,12 +85,12 @@
     // ===== SEO/GEO por veículo: meta dinâmico + JSON-LD (Vehicle/Product) =====
     (function seo() {
       const url = `https://cassullileandro-spec.github.io/hitech-blindados-site/carro.html?id=${c.id}`;
-      const desc = `${c.marca} ${c.modelo} ${c.versao}, blindado nível ${c.nivel}, ${c.ano}, ${fmtKm(c.km)}, ${c.cambio}, ${c.combustivel}. À venda por ${fmtPrice(c.preco)} na Hi-Tech Blindados, São Paulo. ${c.resumo}`;
+      const desc = `${c.marca} ${c.modelo} ${c.versao}, ${protecao}, ${c.ano}, ${fmtKm(c.km)}, ${c.cambio || 'Câmbio sob consulta'}, ${c.combustivel}. À venda por ${fmtPrice(c.preco)} na Hi-Tech Blindados, São Paulo. ${c.resumo}`;
       const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
       setMeta('meta[name="description"]', desc);
-      setMeta('meta[property="og:title"]', `${c.marca} ${c.modelo} Blindado ${c.nivel} — ${fmtPrice(c.preco)}`);
+      setMeta('meta[property="og:title"]', `${c.marca} ${c.modelo} — ${protecao} — ${fmtPrice(c.preco)}`);
       setMeta('meta[property="og:description"]', desc);
-      setMeta('meta[property="og:image"]', gallery[0]);
+      setMeta('meta[property="og:image"]', new URL(gallery[0], url).href);
       setMeta('meta[name="twitter:card"]', 'summary_large_image');
       let og = document.querySelector('meta[property="og:url"]');
       if (!og) { og = document.createElement('meta'); og.setAttribute('property','og:url'); document.head.appendChild(og); }
@@ -94,35 +101,30 @@
       const ld = {
         "@context": "https://schema.org",
         "@type": "Vehicle",
-        "name": `${c.marca} ${c.modelo} Blindado ${c.nivel}`,
+        "name": `${c.marca} ${c.modelo} — ${protecao}`,
         "description": desc,
         "brand": { "@type": "Brand", "name": c.marca },
         "model": c.modelo,
         "vehicleConfiguration": c.versao,
         "vehicleModelDate": String(c.ano),
-        "productionDate": String(c.ano),
         "bodyType": c.carroceria,
-        "color": c.cor,
-        "numberOfDoors": c.portas,
         "fuelType": fuelMap[c.combustivel] || c.combustivel,
-        "vehicleTransmission": c.cambio,
-        "mileageFromOdometer": { "@type": "QuantitativeValue", "value": c.km, "unitCode": "KMT" },
-        "vehicleEngine": { "@type": "EngineSpecification", "enginePower": c.potencia },
-        "image": gallery,
+        "vehicleTransmission": c.cambio || undefined,
+        "mileageFromOdometer": c.km == null ? undefined : { "@type": "QuantitativeValue", "value": c.km, "unitCode": "KMT" },
+        "image": gallery.map(image => new URL(image, url).href),
         "url": url,
-        "itemCondition": c.km === 0 ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
+        "itemCondition": c.condicao === "Novo" ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
         "offers": {
           "@type": "Offer",
           "priceCurrency": "BRL",
           "price": c.preco,
           "availability": "https://schema.org/InStock",
-          "itemCondition": c.km === 0 ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
+          "itemCondition": c.condicao === "Novo" ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
           "url": url,
           "seller": { "@type": "AutoDealer", "name": "Hi-Tech Blindados", "telephone": "+551132027777", "areaServed": "São Paulo" }
         },
         "additionalProperty": [
-          { "@type": "PropertyValue", "name": "Blindagem", "value": `Nível ${c.nivel}` },
-          { "@type": "PropertyValue", "name": "Blindado", "value": "Sim" }
+          { "@type": "PropertyValue", "name": "Blindagem", "value": protecao }
         ]
       };
       const bc = {
@@ -142,14 +144,12 @@
     })();
 
     const specs = [
-      [I.calendar, 'Ano', `${c.ano}/${c.anoModelo}`],
+      [I.calendar, 'Ano', c.ano],
       [I.gauge, 'Quilometragem', fmtKm(c.km)],
-      [I.gear, 'Câmbio', c.cambio],
+      [I.gear, 'Câmbio', c.cambio || 'Sob consulta'],
       [I.fuel, 'Combustível', c.combustivel],
-      [I.palette, 'Cor', c.cor],
-      [I.door, 'Portas', c.portas + ' portas'],
-      [I.bolt, 'Potência', c.potencia],
-      [I.hash, 'Final placa', c.finalPlaca],
+      [I.shield, 'Blindagem', protecao],
+      [I.tag, 'Condição', c.condicao],
     ];
 
     const parcela = parcelaEstimada(c.preco);
@@ -164,16 +164,16 @@
       <div class="pdp-main">
         <figure class="pdp-gallery reveal">
           <div class="pg-main" id="pg-main">
-            <span class="badge">${I.shield} Blindado ${c.nivel}</span>
+            <span class="badge">${c.blindado === true ? I.shield : I.tag} ${protecao}</span>
             ${gallery.length > 1 ? `<button class="pg-nav pg-prev" id="pg-prev" aria-label="Anterior">${I.chevronL}</button>
             <button class="pg-nav pg-next" id="pg-next" aria-label="Próxima">${I.chevronR}</button>
             <div class="pg-count"><span id="pg-i">1</span> / ${gallery.length}</div>
             <button class="pg-expand" id="pg-expand">${I.expand} Ver fotos</button>` : ''}
-            <img id="pg-img" src="${gallery[0]}" alt="${c.marca} ${c.modelo} blindado ${c.nivel}" fetchpriority="high" width="1200" height="800">
+            <img id="pg-img" src="${gallery[0]}" alt="${c.marca} ${c.modelo}" fetchpriority="high" width="1200" height="800">
           </div>
           ${gallery.length > 1 ? `<div class="pg-thumbs" id="pg-thumbs">
             ${gallery.map((u,i)=>`<button class="pg-thumb ${i===0?'active':''}" data-i="${i}" aria-label="Ver foto ${i+1}" aria-pressed="${i===0}"><img loading="lazy" src="${imageThumbnail(u)}" alt="" decoding="async"></button>`).join('')}
-          </div>` : `<div class="gallery-note">${I.camera} Galeria completa disponível no showroom · agende sua visita</div>`}
+          </div>` : `<div class="gallery-note">${I.camera} Uma foto disponível neste anúncio · consulte mais imagens</div>`}
         </figure>
 
         <section class="pdp-block reveal">
@@ -183,8 +183,8 @@
           </div>
         </section>
 
-        <section class="pdp-block reveal">
-          <div class="pdp-block-head"><h2>Proteção nível <span class="serif">${c.nivel}</span>.</h2></div>
+        ${c.blindado === true ? `<section class="pdp-block reveal">
+          <div class="pdp-block-head"><h2>${c.nivel ? `Proteção nível <span class="serif">${c.nivel}</span>.` : 'Blindagem do veículo.'}</h2></div>
           <div class="armor-hero">
             <div class="armor-copy">
               <p class="pdp-prose">Tecnologia Hi-Tech com materiais balísticos e atenção aos detalhes de aplicação. Consulte a ficha de blindagem deste veículo para conhecer os materiais, os certificados e as condições de garantia do projeto.</p>
@@ -195,17 +195,17 @@
               </div>
             </div>
           </div>
-        </section>
+        </section>` : ''}
 
         <section class="pdp-block reveal">
-          <div class="pdp-block-head"><h2>Sobre este <span class="serif">blindado.</span></h2></div>
-          <p class="pdp-prose">${c.resumo}</p>
+          <div class="pdp-block-head"><h2>Sobre este <span class="serif">veículo.</span></h2></div>
+          <p class="pdp-prose">${c.resumo || 'Entre em contato para conhecer os detalhes deste veículo.'}</p>
         </section>
 
         <section class="pdp-block reveal">
           <div class="pdp-block-head"><h2>Equipamentos &amp; conforto.</h2></div>
           <div class="opcionais">
-            ${c.opcionais.map(o=>`<span class="op">${I.check} ${o}</span>`).join('')}
+            ${c.opcionais.length ? c.opcionais.map(o=>`<span class="op">${I.check} ${o}</span>`).join('') : '<p>Consulte os equipamentos deste veículo com nossa equipe.</p>'}
           </div>
         </section>
       </div>
@@ -213,7 +213,7 @@
       <!-- SIDEBAR -->
       <aside class="pdp-side">
         <div class="buy-card">
-          <span class="cond">${I.check} ${c.km===0?'0 km — Novo':'Seminovo revisado'}</span>
+          <span class="cond">${I.check} ${c.condicao}</span>
           <div class="big-price">${fmtPrice(c.preco)}</div>
           <div class="parcela">ou a partir de <b>${fmtPrice(Math.round(parcela))}/mês</b> · 48x</div>
           <div class="buy-actions">
@@ -334,6 +334,7 @@
 
     // conteúdo da PDP é montado após o renderChrome inicial — re-observa os .reveal
     initMotion();
+    }
   </script>
 </body>
 </html>

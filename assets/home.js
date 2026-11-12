@@ -13,6 +13,7 @@ let playerReady = false;
 let userPaused = false;
 
 function updateVideoToggle(playing) {
+  if (playing) heroVideo.parentElement.classList.add('playing');
   videoToggle.textContent = playing ? 'Pausar vídeo Ⅱ' : 'Reproduzir vídeo ▷';
   videoToggle.setAttribute('aria-label', playing ? 'Pausar vídeo de abertura' : 'Reproduzir vídeo de abertura');
 }
@@ -37,12 +38,12 @@ function playHeroVideo() {
           playerReady = true;
           event.target.mute();
           videoToggle.hidden = false;
-          updateVideoToggle(false);
           if (document.hidden || reduceMotion.matches || userPaused) event.target.pauseVideo();
           else event.target.playVideo();
+          // O autoplay pode começar antes de a API registrar a mudança de estado.
+          updateVideoToggle(event.target.getPlayerState() === YT.PlayerState.PLAYING);
         },
         onStateChange(event) {
-          if (event.data === YT.PlayerState.PLAYING) heroVideo.parentElement.classList.add('playing');
           updateVideoToggle(event.data === YT.PlayerState.PLAYING);
           if (event.data === YT.PlayerState.ENDED && !document.hidden && !reduceMotion.matches && !userPaused) {
             event.target.seekTo(15, true);
