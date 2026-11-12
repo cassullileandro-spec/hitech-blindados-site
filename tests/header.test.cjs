@@ -8,21 +8,28 @@ const render = app.slice(app.indexOf('function renderChrome('), app.indexOf('/* 
 function node() {
   const classes = new Set();
   return { style:{}, attrs:{}, classList:{add:k=>classes.add(k),contains:k=>classes.has(k),toggle:(k,on)=>on?classes.add(k):classes.delete(k)},
-    setAttribute(k,v){this.attrs[k]=v;}, addEventListener(){}, querySelector:()=>node(), querySelectorAll:()=>[], appendChild(){} };
+    setAttribute(k,v){this.attrs[k]=v;}, addEventListener(k,fn){this[k]=fn;}, querySelector:()=>node(), querySelectorAll:()=>[], appendChild(){} };
 }
 for (const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))) {
   const html=fs.readFileSync(path.join(root,file),'utf8');
   const active=html.match(/data-page="([^"]+)"/)?.[1] || html.match(/renderChrome\('([^']+)'\)/)?.[1] || (file==='index.html'?'home':undefined);
   const opening=html.match(/<main[^>]*>\s*<[^>]+>/)?.[0] || '';
   const photo=opening.includes('photo-hero');
-  const body=node(), header=node(), host=node(), events={};
+  const body=node(), header=node(), host=node(), themeToggle=node(), events={};
   const isTour=/<body[^>]*class="[^"]*blindagem-v3/.test(html);
   if(isTour) body.classList.add('blindagem-v3');
   const document={body,documentElement:{dataset:{theme:'light'}},createElement:node,addEventListener(){},getElementById:()=>host,
-    querySelector:s=>s==='main > .photo-hero:first-child'?(photo?node():null):s==='.header'?header:node(),querySelectorAll:()=>[]};
+    querySelector:s=>s==='main > .photo-hero:first-child'?(photo?node():null):s==='.header'?header:s==='.theme-toggle'?themeToggle:node(),querySelectorAll:()=>[]};
   const window={scrollY:0,addEventListener:(k,fn)=>events[k]=fn,matchMedia:()=>node()};
-  const context={document,window,SITE_PAGES:[],CONTACT_MESSAGES:{},whatsappLink:()=>'',I:{},initMotion(){},applyTheme(){}};
+  const context={document,window,SITE_PAGES:[],CONTACT_MESSAGES:{},whatsappLink:()=>'',I:{},initMotion(){},applyTheme(theme){document.documentElement.dataset.theme=theme;},localStorage:{setItem(){}}};
   vm.runInNewContext(render+';renderChrome('+JSON.stringify(active)+');',context);
+  assert.equal(themeToggle.attrs['aria-checked'],'false',file+': light switch state');
+  themeToggle.click();
+  assert.equal(document.documentElement.dataset.theme,'dark');
+  assert.equal(themeToggle.attrs['aria-checked'],'true',file+': dark switch state');
+  themeToggle.click();
+  assert.equal(document.documentElement.dataset.theme,'light');
+  assert.equal(themeToggle.attrs['aria-checked'],'false');
   assert.equal(header.classList.contains('solid'),false,file+': transparent at top');
   window.scrollY=49;events.scroll();assert(header.classList.contains('solid'),file+': solid after scroll');
   window.scrollY=0;events.scroll();assert(!header.classList.contains('solid'),file+': transparent on return');

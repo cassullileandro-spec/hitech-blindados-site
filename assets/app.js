@@ -102,11 +102,11 @@ function renderChrome(active) {
     <nav class="nav" aria-label="Navegação principal">
       ${SITE_PAGES.map(([key, href, label]) => `<a href="${href}"${current === key ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('')}
     </nav>
-    <div class="header-right">
+    ${!isHome ? `<div class="header-right">
       <a href="tel:+551132027777" class="header-phone">(11) 3202-7777</a>
       <a href="${whatsappLink('blindagem')}" class="btn btn-wa" data-contact="blindagem">${I.wa} Solicitar orçamento</a>
-    </div>
-    <button class="theme-toggle" type="button" aria-label="Ativar modo escuro"><span aria-hidden="true">◐</span></button>
+    </div>` : ''}
+    <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo escuro"><span class="theme-label theme-label-light" aria-hidden="true">Light</span><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span><span class="theme-label theme-label-dark" aria-hidden="true">Dark</span></button>
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">${I.menu}</button>
   </div></header>`;
 
@@ -171,7 +171,7 @@ function renderChrome(active) {
   const themeToggle = document.querySelector('.theme-toggle');
   const updateThemeLabel = () => {
     const label = document.documentElement.dataset.theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro';
-    themeToggle.setAttribute('aria-label', label);
+    themeToggle.setAttribute('aria-checked', String(document.documentElement.dataset.theme === 'dark'));
     themeToggle.title = label;
   };
   updateThemeLabel();
