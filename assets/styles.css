@@ -372,6 +372,10 @@ select::-ms-expand { display: none; }
 .stock-page .page-head h1 { margin-top: 0; }
 
 .estoque-layout { display: grid; grid-template-columns: 258px minmax(0,1fr); gap: var(--grid-gap); align-items: start; padding: var(--section-padding) 0; }
+@media (min-width: 1200px) {
+  .stock-page .grid-cars { grid-template-columns: repeat(3,minmax(0,1fr)); column-gap: 24px; }
+  .stock-page .car-foot { flex-direction: column; align-items: flex-start; }
+}
 .filters { position: sticky; top: calc(var(--header-h) + 20px); padding: var(--card-padding); background: var(--panel-bg); max-height: calc(100dvh - var(--header-h) - 45px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #465765 transparent; border: 0; border-radius: var(--r); }
 .stock-refinements > summary { display: none; }
 .stock-intro { color: var(--txt-2); margin-top: var(--text-space); max-width: 59ch; font-size: var(--body-size); line-height: var(--body-leading); }
