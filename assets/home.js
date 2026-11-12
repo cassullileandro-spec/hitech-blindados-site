@@ -12,7 +12,7 @@ const mobileVideo = window.matchMedia('(max-width: 760px)');
 let userPaused = false;
 
 function updateVideoToggle(playing) {
-  videoToggle.textContent = playing ? 'Pausar vídeo Ⅱ' : 'Reproduzir vídeo ▷';
+  videoToggle.textContent = playing ? 'Ⅱ' : '▷';
   videoToggle.setAttribute('aria-label', playing ? 'Pausar vídeo de abertura' : 'Reproduzir vídeo de abertura');
 }
 
