@@ -583,9 +583,22 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .socials a:hover { background: var(--button-hover); color: var(--txt); border-color: var(--line-3); }
 .socials svg { width: 16px; height: 16px; }
 
-.wa-float { position: fixed; right: 24px; bottom: 24px; z-index: 90; width: 40px; height: 40px; border-radius: var(--control-radius); background: var(--button-bg); border: 1px solid var(--line-2); display: grid; place-items: center; color: var(--green); transition: .3s; }
-.wa-float:hover { border-color: rgba(55,194,107,.2); transform: translateY(-2px); }
-.wa-float svg { width: 16px; height: 16px; }
+.wa-float { position: fixed; right: 24px; bottom: 24px; z-index: 90; width: 56px; height: 56px; border-radius: 50%; background: #167C48; display: grid; place-items: center; color: #FFFFFF; box-shadow: 0 4px 20px rgba(0,0,0,.18); transition: transform .25s, background .25s; }
+.wa-float:hover { background: #12663C; transform: translateY(-2px); }
+.wa-mark { display: grid; place-items: center; animation: wa-rebuild 4.8s ease-out; }
+.wa-mark svg { width: 28px; height: 28px; }
+.wa-float .wa-armor { position: absolute; inset: -4px; width: 64px; height: 64px; pointer-events: none; stroke: #8DD5FF; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.wa-shield { stroke-dasharray: 100; opacity: 0; animation: wa-shield-repair 4.8s ease-out; }
+.wa-impact { opacity: 0; animation: wa-impact .65s ease-out .8s; }
+.wa-impact-two { animation-delay: 1.35s; }
+.wa-impact-three { animation-delay: 1.9s; }
+.wa-cracks { opacity: 0; animation: wa-crack-repair 4.8s ease-out; }
+@keyframes wa-impact { 0% { opacity: 0; transform: scale(1.14); } 20%,45% { opacity: 1; transform: scale(1); } 100% { opacity: 0; } }
+@keyframes wa-shield-repair { 0% { opacity: 0; stroke-dashoffset: 100; } 15%,48% { opacity: 1; stroke-dashoffset: 0; } 55% { opacity: .65; stroke-dashoffset: 35; } 76%,88% { opacity: 1; stroke-dashoffset: 0; } 100% { opacity: 0; stroke-dashoffset: 0; } }
+@keyframes wa-crack-repair { 0%,20% { opacity: 0; } 30%,50% { opacity: .9; } 76%,100% { opacity: 0; } }
+@keyframes wa-rebuild { 0%,15%,26%,38%,50%,100% { transform: scale(1); } 20%,32%,44% { transform: scale(.9); } 60% { transform: scale(.94); } 76% { transform: scale(1.05); } }
+@media (prefers-reduced-motion: reduce) { .wa-float, .wa-mark, .wa-armor * { animation: none; transition: none; } .wa-armor { display: none; } }
+
 
 /* =====================================================================
    MOTION — reveal on scroll

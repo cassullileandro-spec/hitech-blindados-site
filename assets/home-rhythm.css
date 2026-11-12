@@ -5,9 +5,15 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home main :is(h1,h2,h3,p):not(.car-card *) { text-box: trim-both cap alphabetic; padding-bottom: var(--text-rhythm-tail, 0px); }
 .home .hero { height: auto; min-height: max(520px, 100svh); justify-content: center; }
 .home .hero-inner { margin-block: 0; padding-block: 120px; text-align: center; }
-.home .hero-title { max-width: 24ch; margin-inline: auto; }
+.home .hero-title { max-width: 24ch; margin-inline: auto; font-weight: 300; }
 .home .hero-sub { max-width: 48ch; margin-inline: auto; color: #F1F3F5; text-wrap: balance; }
-.home .hero-scrim { background: linear-gradient(180deg,rgba(8,9,11,.72),rgba(8,9,11,.64) 45%,rgba(8,9,11,.70)); }
+.home .hero-scrim { background: radial-gradient(ellipse at center,rgba(8,9,11,.35),transparent 75%),linear-gradient(180deg,rgba(8,9,11,.65),rgba(8,9,11,.42) 45%,rgba(8,9,11,.65)); }
+.home .hero-actions { justify-content: center; flex-direction: row; gap: 12px; margin-top: 32px; }
+.home .hero-actions .btn { flex: 0 1 auto; min-height: 44px; padding-inline: 24px; border-radius: 2px; font-weight: 400; }
+.home .hero-actions .btn-primary { background: #F9F9F9; color: #24282C; }
+.home .hero-actions .btn-line { background: rgba(8,9,11,.24); border-color: rgba(255,255,255,.65); color: #F9F9F9; }
+.home .hero-actions .btn:hover { background: #FFFFFF; color: #24282C; }
+@media (max-width: 420px) { .home .hero-actions .btn { padding-inline: 14px; } }
 .home .hero-scroll { position: absolute; z-index: 2; bottom: 28px; left: calc(50% - 24px); width: 48px; height: 48px; display: grid; place-items: center; color: #F1F3F5; border-radius: 24px; }
 .home .hero-scroll-mouse { display: block; width: 22px; height: 34px; border: 1.5px solid currentColor; border-radius: 12px; position: relative; animation: hero-scroll-bob 2s ease-in-out infinite; }
 .home .hero-scroll-mouse::after { content: ''; position: absolute; width: 2px; height: 7px; top: 7px; left: 8.5px; border-radius: 2px; background: currentColor; }
