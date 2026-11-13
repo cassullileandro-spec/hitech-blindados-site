@@ -29,7 +29,7 @@ function syncHeroVideo() {
     return;
   }
   if (document.hidden) { heroVideo.pause(); return; }
-  const source = mobileVideo.matches ? heroVideo.dataset.mobileSrc : heroVideo.dataset.src;
+  const source = !mobileVideo.matches && window.innerWidth * window.devicePixelRatio > 1920 ? heroVideo.dataset.src : heroVideo.dataset.mobileSrc;
   heroVideo.muted = true;
   heroVideo.autoplay = !userPaused;
   if (heroVideo.getAttribute('src') !== source) {
@@ -57,5 +57,5 @@ videoToggle.addEventListener('click', () => {
 });
 document.addEventListener('visibilitychange', syncHeroVideo);
 reduceMotion.addEventListener('change', syncHeroVideo);
-mobileVideo.addEventListener('change', syncHeroVideo);
+window.addEventListener('resize', syncHeroVideo);
 syncHeroVideo();

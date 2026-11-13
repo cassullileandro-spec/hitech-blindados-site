@@ -116,3 +116,6 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
   .home .home-homologations-layout { grid-template-columns: minmax(0,1.45fr) minmax(0,1fr); gap: 32px; }
   .home .home-homologations-intro h2 { font-size: 40px; line-height: 48px; }
 }
+
+.home .preloader { background: linear-gradient(rgba(238,241,244,.88),rgba(238,241,244,.88)), url('media/hero-poster.webp?v=4k-20261112') center / cover; }
+.home .hero-video { background-image: url('media/hero-poster.webp?v=4k-20261112'); }

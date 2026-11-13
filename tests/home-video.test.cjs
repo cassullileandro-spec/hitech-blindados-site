@@ -4,14 +4,14 @@ const vm = require('node:vm');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../assets/home.js'), 'utf8').split('const heroVideo')[1];
 
-function setup({ reduced = false, mobile = false, saveData = false } = {}) {
+function setup({ reduced = false, mobile = false, saveData = false, width = 1920, dpr = 1 } = {}) {
   const events = {};
   const classes = new Set();
   const motion = { matches: reduced, addEventListener: (_, fn) => { motion.change = fn; } };
   const size = { matches: mobile, addEventListener: (_, fn) => { size.change = fn; } };
   const button = { hidden: true, setAttribute() {}, addEventListener: (_, fn) => { button.click = fn; } };
   const video = {
-    dataset: { src: 'hero.mp4', mobileSrc: 'hero-mobile.mp4' }, paused: true,
+    dataset: { src: 'hero.mp4', mobileSrc: 'hero-1080.mp4' }, paused: true,
     parentElement: { classList: { add: v => classes.add(v), remove: v => classes.delete(v) } },
     addEventListener: (name, fn) => { events[name] = fn; },
     hasAttribute: () => !!video.src, getAttribute: () => video.src,
@@ -23,9 +23,10 @@ function setup({ reduced = false, mobile = false, saveData = false } = {}) {
     hidden: false, getElementById: id => id === 'hero-video' ? video : button,
     addEventListener: (_, fn) => { document.visibility = fn; }
   };
+  const window = {innerWidth: width, devicePixelRatio: dpr, addEventListener: (_, fn) => { size.change = fn; }, matchMedia: query => query.includes('reduced-motion') ? motion : query.includes('max-width') ? size : { matches: false }};
   vm.runInNewContext('const heroVideo' + source, {
     document, navigator: { connection: { saveData } },
-    window: { matchMedia: query => query.includes('reduced-motion') ? motion : query.includes('max-width') ? size : { matches: false } }
+    window
   });
   return { video, button, motion, size, document, classes, events };
 }
@@ -35,11 +36,14 @@ assert.equal(reduced.video.src, undefined, 'Reduced motion must not load an MP4'
 assert(reduced.video.paused && reduced.button.hidden);
 assert.equal(setup({ saveData: true }).video.src, undefined);
 
-const s = setup();
+assert.equal(setup().video.src, 'hero-1080.mp4', '1920 physical pixels uses 1080p');
+assert.equal(setup({width: 1440, dpr: 2}).video.src, 'hero.mp4', 'Physical pixels account for Retina displays');
+assert.equal(setup({width: 760, dpr: 3, mobile: true}).video.src, 'hero-1080.mp4', 'Mobile stays on 1080p');
+const s = setup({width: 2560});
 assert.equal(s.video.src, 'hero.mp4');
 assert(s.video.muted && !s.video.paused && s.classes.has('playing'));
 s.size.matches = true; s.size.change();
-assert.equal(s.video.src, 'hero-mobile.mp4');
+assert.equal(s.video.src, 'hero-1080.mp4');
 s.button.click();
 assert(s.video.paused && !s.video.autoplay);
 s.size.matches = false; s.size.change();

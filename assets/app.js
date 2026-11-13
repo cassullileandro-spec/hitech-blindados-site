@@ -289,7 +289,8 @@ function initPreloader() {
   if (!pre) return;
   let skip = false;
   try { skip = !!sessionStorage.getItem('htpre'); } catch (e) {}
-  if (skip) { pre.remove(); return; }
+  const hero = document.getElementById('hero-video');
+  if (skip && !hero) { pre.remove(); return; }
 
   const fill = pre.querySelector('.pre-fill');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -303,15 +304,34 @@ function initPreloader() {
   if (reduce) { p = 0.9; apply(); }
   else { iv = setInterval(() => { if (p < 0.9) { p = Math.min(0.9, p + Math.random() * 0.10 + 0.02); apply(); } }, 150); }
 
+  let finished = false;
+  let safetyTimer;
   const finish = () => {
+    if (finished) return;
+    finished = true;
+    clearTimeout(safetyTimer);
+    if (hero) { hero.removeEventListener('canplaythrough', finish); hero.removeEventListener('error', finish); }
     if (iv) clearInterval(iv);
     p = 1; apply();
-    setTimeout(() => {
+    const dismiss = () => {
       pre.classList.add('done');
       try { sessionStorage.setItem('htpre', '1'); } catch (e) {}
       setTimeout(() => pre.remove(), 650);
-    }, reduce ? 120 : 400);
+    };
+    if (hero) dismiss();
+    else setTimeout(dismiss, reduce ? 120 : 400);
   };
+
+  if (hero) {
+    const saveData = window.matchMedia('(prefers-reduced-data: reduce)').matches || navigator.connection?.saveData;
+    if (reduce || saveData || hero.readyState >= 4) finish();
+    else {
+      hero.addEventListener('canplaythrough', finish);
+      hero.addEventListener('error', finish);
+      safetyTimer = setTimeout(finish, 8000);
+    }
+    return;
+  }
 
   const start = Date.now();
   const ready = () => {
