@@ -21,6 +21,8 @@ Em `categories`, configure slug, nome e descrição. Cada categoria gera `catego
 
 Artigos publicados recebem canonical, Open Graph e dados estruturados BlogPosting. Capas devem ser WebP com qualidade suficiente para o destaque; uma largura de 1600 px é adequada. O tempo de leitura é calculado pelo texto, e os relacionados priorizam a mesma categoria.
 
+A abertura de `blog.html` reutiliza a hero fotográfica institucional da assistência: mesma altura responsiva, contraste e cabeçalho sobre a foto. O destaque editorial fica abaixo dela; categorias e artigos mantêm suas aberturas próprias.
+
 Para alterar o layout: `assets/blog.css` e `scripts/build-blog.cjs`. Para comportamento de busca e compartilhamento: `assets/blog.js`. O manifesto `blog-pages.json` controla apenas os arquivos criados pelo gerador.
 
 O campo opcional `thumbnail` pode apontar para uma versão WebP menor da capa, usada apenas nos cards. `image` continua sendo a capa de maior resolução do artigo.

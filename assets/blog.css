@@ -1,4 +1,6 @@
 /* Blog usa os mesmos tokens de cor, tipografia e controles do site. */
+.blog-hero + .blog-feature { margin-top: var(--section-padding); }
+.blog-page #artigos { scroll-margin-top: var(--header-h); }
 .blog-heading { padding-block: 64px 48px; }
 .blog-heading h1 { font-size: var(--hero-title-size); line-height: var(--heading-leading); max-width: 24ch; margin-top: 16px; }
 .blog-heading > p { max-width: 64ch; margin-top: 24px; color: var(--txt-2); }
