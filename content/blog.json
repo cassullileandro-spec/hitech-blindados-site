@@ -1,0 +1,203 @@
+{
+  "title": "Blog Hi-Tech",
+  "description": "Informação e orientação sobre blindagem, cuidados com o veículo e o próximo passo da sua escolha.",
+  "categories": [
+    {
+      "slug": "blindagem",
+      "name": "Blindagem",
+      "description": "Entenda as etapas do projeto e organize as perguntas para conversar com a equipe."
+    },
+    {
+      "slug": "cuidados",
+      "name": "Cuidados e revisão",
+      "description": "Informações para preparar o atendimento e acompanhar o seu blindado ao longo do uso."
+    },
+    {
+      "slug": "homologacoes",
+      "name": "Homologações",
+      "description": "O que conferir sobre modelos, materiais e condições antes de definir seu projeto."
+    },
+    {
+      "slug": "showroom",
+      "name": "Showroom",
+      "description": "Prepare sua visita e conheça as possibilidades de compra, venda e consignação."
+    }
+  ],
+  "posts": [
+    {
+      "slug": "antes-de-blindar-por-onde-comecar",
+      "title": "Antes de blindar: por onde começar?",
+      "description": "Do primeiro contato à proposta: as informações que ajudam a planejar a blindagem do seu veículo.",
+      "category": "blindagem",
+      "date": "2026-11-13",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "featured": true,
+      "image": "assets/media/processo/planejar-editorial.webp",
+      "imageAlt": "Imagem ilustrativa de planejamento de um projeto automotivo",
+      "intro": "A primeira conversa é o momento de apresentar o veículo, explicar o que você procura e entender as etapas do atendimento. Reunir algumas informações ajuda a transformar dúvidas em um planejamento claro.",
+      "sections": [
+        {
+          "title": "Comece pelo veículo e pelo seu uso",
+          "paragraphs": [
+            "Informe marca, modelo, versão e ano do carro. Conte também como ele participa da sua rotina e quais pontos você considera importantes no projeto.",
+            "Se o veículo já tiver blindagem ou tiver passado por intervenções anteriores, avise a equipe. Esse contexto ajuda a orientar a avaliação e os próximos passos."
+          ],
+          "bullets": [
+            "Marca, modelo, versão e ano.",
+            "Uso habitual do veículo e dúvidas sobre o projeto.",
+            "Histórico de blindagem ou intervenções anteriores, quando houver."
+          ]
+        },
+        {
+          "title": "Entenda o que está previsto na proposta",
+          "paragraphs": [
+            "Peça à equipe que apresente os materiais, as etapas e os acabamentos previstos. Aproveite para esclarecer como serão organizados a entrada do veículo, o acompanhamento do trabalho e a entrega.",
+            "A proposta é também o momento de conferir condições de garantia e orientações de manutenção. Registre as dúvidas e confirme os detalhes aplicáveis ao seu carro antes da contratação."
+          ]
+        },
+        {
+          "title": "Organize a documentação com orientação",
+          "paragraphs": [
+            "O atendimento considera o veículo e o perfil do proprietário. Informe se o carro está em nome de uma pessoa física ou jurídica e solicite a relação de documentos para o seu caso.",
+            "Confirme a lista e o canal de envio com a equipe antes de encaminhar documentos. A página de documentação reúne a orientação inicial para começar essa conversa."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Conhecer o processo de blindagem",
+        "href": "blindagem.html"
+      }
+    },
+    {
+      "slug": "como-preparar-a-revisao-do-blindado",
+      "title": "Como preparar a revisão do seu blindado",
+      "description": "Organize o histórico e as observações do veículo para aproveitar melhor o atendimento de assistência.",
+      "category": "cuidados",
+      "date": "2026-11-13",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/manutencao/bmw-revisao.webp",
+      "imageAlt": "Imagem ilustrativa de um veículo em revisão na oficina",
+      "intro": "A assistência começa antes da visita à oficina: contar o que você percebeu e reunir o histórico do veículo ajuda a equipe a compreender a necessidade do atendimento.",
+      "sections": [
+        {
+          "title": "Registre o que você percebeu",
+          "paragraphs": [
+            "Ao solicitar o atendimento, descreva o motivo da visita de forma objetiva. Se percebeu um ruído ou uma mudança no funcionamento de algum componente, conte em que situação isso acontece.",
+            "Essas observações orientam a conversa inicial. A avaliação do veículo pela equipe é o que permite identificar o serviço necessário."
+          ],
+          "bullets": [
+            "Qual é a sua principal dúvida ou observação?",
+            "Em que situação o comportamento aparece?",
+            "Houve algum serviço recente no veículo?"
+          ]
+        },
+        {
+          "title": "Reúna o histórico disponível",
+          "paragraphs": [
+            "Separe as informações de revisões e manutenções anteriores, quando disponíveis. Informe marca, modelo, ano e o que souber sobre a blindagem do veículo.",
+            "No agendamento, confirme com a Hi-Tech quais informações e documentos devem acompanhar o carro. Assim, você evita deixar para o dia da visita uma dúvida que poderia ser resolvida antes."
+          ]
+        },
+        {
+          "title": "Combine atendimento e acompanhamento",
+          "paragraphs": [
+            "Confirme a unidade, o horário e a forma de atendimento antes de se deslocar. A fábrica e assistência da Hi-Tech ficam na Rua Barão de Monte Santo, 426, na Moóca, em São Paulo.",
+            "Depois da avaliação, esclareça com a equipe o serviço proposto e as orientações para acompanhar o veículo. Periodicidade, cuidados e coberturas devem seguir as condições aplicáveis ao seu projeto."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Conhecer a assistência",
+        "href": "assistencia.html"
+      },
+      "thumbnail": "assets/media/manutencao/bmw-revisao-800.webp"
+    },
+    {
+      "slug": "homologacao-o-que-confirmar-no-seu-veiculo",
+      "title": "Homologação: o que confirmar para o seu veículo",
+      "description": "Modelo, versão, materiais e cobertura: os pontos para esclarecer antes de escolher um projeto de blindagem.",
+      "category": "homologacoes",
+      "date": "2026-11-13",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/empresa-qualidade-1600.webp",
+      "imageAlt": "Veículo em avaliação na fábrica Hi-Tech",
+      "intro": "Ao conhecer uma opção de blindagem, vale olhar além do nome da marca. A conversa com a equipe deve considerar o veículo específico e as condições do projeto apresentado.",
+      "sections": [
+        {
+          "title": "Confirme modelo e versão",
+          "paragraphs": [
+            "Apresente marca, modelo, versão e ano do seu veículo e pergunte quais projetos se aplicam a ele. A equipe verifica a elegibilidade e as condições antes da contratação.",
+            "Não presuma que uma condição apresentada para um carro se estende automaticamente a todas as versões da mesma marca. Peça a confirmação referente ao veículo que você pretende blindar."
+          ]
+        },
+        {
+          "title": "Conheça os componentes previstos",
+          "paragraphs": [
+            "Vidros, materiais de proteção e acabamento fazem parte da definição do projeto. Solicite as especificações previstas na proposta e esclareça como esses componentes serão apresentados na contratação.",
+            "Se você estiver comparando opções, reúna as propostas e suas condições completas. Isso ajuda a identificar o que está incluído em cada alternativa, sem depender apenas de um resumo comercial."
+          ]
+        },
+        {
+          "title": "Leia as condições de cobertura",
+          "paragraphs": [
+            "Consulte separadamente as coberturas da montadora, dos materiais e do serviço. Pergunte também pelas condições de manutenção e pelas revisões previstas após a entrega.",
+            "A página de homologações da Hi-Tech apresenta as informações disponíveis para iniciar essa consulta. A confirmação final deve considerar o seu veículo e a proposta que será contratada."
+          ],
+          "bullets": [
+            "Projeto aplicável ao modelo e à versão.",
+            "Materiais e especificações da proposta.",
+            "Condições de garantia, manutenção e acompanhamento."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Consultar homologações",
+        "href": "homologacoes.html"
+      },
+      "thumbnail": "assets/media/empresa-qualidade-800.webp"
+    },
+    {
+      "slug": "prepare-sua-visita-ao-showroom",
+      "title": "Prepare sua visita ao showroom",
+      "description": "Uma conversa mais objetiva sobre compra, venda ou consignação começa com as informações certas.",
+      "category": "showroom",
+      "date": "2026-11-13",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/empresa-showroom-1600.webp",
+      "imageAlt": "Veículos no showroom Hi-Tech Aeroporto",
+      "intro": "Conhecer um veículo de perto é uma oportunidade para esclarecer dúvidas e conversar sobre o que faz sentido para você. Antes de ir ao showroom, organize o assunto da visita e confirme o atendimento com a equipe.",
+      "sections": [
+        {
+          "title": "Escolha os veículos que quer conhecer",
+          "paragraphs": [
+            "Explore o showroom no site e anote os anúncios que despertaram seu interesse. Marca, modelo, ano e referência do anúncio ajudam a equipe a identificar o carro sobre o qual você quer conversar.",
+            "Confirme a disponibilidade antes de se deslocar e leve suas perguntas sobre as informações apresentadas no anúncio. A visita permite aprofundar os detalhes da sua escolha."
+          ]
+        },
+        {
+          "title": "Vai vender ou consignar? Conte sobre o seu carro",
+          "paragraphs": [
+            "Informe marca, modelo, versão, ano e quilometragem, quando disponível. Se houver blindagem, compartilhe as informações que você tem sobre ela e sobre o histórico de manutenção.",
+            "A equipe apresenta as possibilidades de avaliação e esclarece as condições para o atendimento. Evite assumir valores ou condições antes dessa conversa."
+          ]
+        },
+        {
+          "title": "Combine a visita",
+          "paragraphs": [
+            "O Showroom Aeroporto fica na Av. Washington Luís, 5670, Jardim Aeroporto, em São Paulo. O telefone da unidade é (11) 3202-7777.",
+            "A página de contato reúne endereço, telefone e rota. Converse com a Hi-Tech para combinar sua visita e confirmar a unidade adequada ao assunto que deseja tratar."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Explorar o showroom",
+        "href": "showroom.html"
+      },
+      "thumbnail": "assets/media/empresa-showroom-800.webp"
+    }
+  ]
+}

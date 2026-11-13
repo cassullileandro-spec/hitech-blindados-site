@@ -33,6 +33,7 @@ const SITE_PAGES = [
   ['empresa', 'empresa.html', 'A Hi-Tech'],
   ['homologacoes', 'homologacoes.html', 'Homologações'],
   ['assistencia', 'assistencia.html', 'Assistência'],
+  ['blog', 'blog.html', 'Blog'],
   ['contato', 'contato.html', 'Contato']
 ];
 
