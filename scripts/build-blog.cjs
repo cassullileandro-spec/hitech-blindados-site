@@ -48,7 +48,7 @@ function build({preview = false} = {}) {
 <meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${base+file}"><meta property="og:image" content="${base+image}"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/styles.css?v=blog-20261113"><link rel="stylesheet" href="assets/institucional.css?v=unidades-20261113"><link rel="stylesheet" href="assets/blog.css?v=hero-20261113">
+<link rel="stylesheet" href="assets/styles.css?v=blog-20261113"><link rel="stylesheet" href="assets/institucional.css?v=unidades-20261113"><link rel="stylesheet" href="assets/blog.css?v=alinhamento-20261113">
 ${schema && !preview ? '<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\\u003c')+'</script>':''}
 </head><body class="inner blog-page" data-page="blog"><a href="#conteudo" class="skip-link">Ir para o conteúdo</a><div id="site-header"></div>
 <main id="conteudo">${content}</main><div id="site-footer"></div>

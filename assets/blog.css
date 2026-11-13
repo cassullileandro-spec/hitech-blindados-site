@@ -15,10 +15,10 @@
 .blog-feature-copy p { margin-top: 16px; color: var(--txt-2); }
 .blog-feature-copy .btn { margin-top: 24px; }
 .blog-feature[hidden], .blog-card[hidden], .blog-empty[hidden] { display: none; }
-.blog-list-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 32px; }
+.blog-list-head { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-bottom: 32px; }
 .blog-list-head h2, .blog-related > .wrap > h2 { font-size: var(--card-title-size); line-height: var(--title-leading); font-weight: 600; }
 .blog-search { width: min(100%,440px); }
-.blog-search label { display: block; margin-bottom: 8px; font-size: var(--aux-size); }
+.blog-search label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .blog-search > div { display: flex; gap: 8px; }
 .blog-search input { min-width: 0; flex: 1; min-height: 40px; background: var(--surface); border: 1px solid var(--field-border); border-radius: var(--control-radius); padding: 7px 12px; color: var(--txt); font: inherit; }
 .blog-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
