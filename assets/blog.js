@@ -7,6 +7,13 @@ function matchesBlogQuery(text, query) {
 }
 if (typeof module !== 'undefined') module.exports = {normalizeBlogText, matchesBlogQuery};
 if (typeof document !== 'undefined') {
+  const refinements = document.querySelector('.blog-refinements');
+  if (refinements) {
+    const wideFilters = window.matchMedia('(min-width: 861px)');
+    const syncFilters = () => { refinements.open = wideFilters.matches; };
+    syncFilters();
+    wideFilters.addEventListener('change', syncFilters);
+  }
   const form = document.querySelector('.blog-search');
   if (form) {
     const input = form.querySelector('input');

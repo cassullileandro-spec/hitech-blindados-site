@@ -23,6 +23,8 @@ Artigos publicados recebem canonical, Open Graph e dados estruturados BlogPostin
 
 A abertura de `blog.html` reutiliza a hero fotográfica institucional da assistência: mesma altura responsiva, contraste e cabeçalho sobre a foto. O destaque editorial fica abaixo dela; categorias e artigos mantêm suas aberturas próprias.
 
+A listagem e as categorias usam busca e categorias na lateral, com os tokens do painel do showroom. Até 860 px, o painel fica acima dos artigos e as categorias começam recolhidas; a busca permanece visível. Na migração para Elementor, esta área corresponde ao painel de JetSmartFilters ao lado do Listing Grid.
+
 Para alterar o layout: `assets/blog.css` e `scripts/build-blog.cjs`. Para comportamento de busca e compartilhamento: `assets/blog.js`. O manifesto `blog-pages.json` controla apenas os arquivos criados pelo gerador.
 
 O campo opcional `thumbnail` pode apontar para uma versão WebP menor da capa, usada apenas nos cards. `image` continua sendo a capa de maior resolução do artigo.
