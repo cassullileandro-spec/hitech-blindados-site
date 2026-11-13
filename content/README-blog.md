@@ -21,7 +21,7 @@ Em `categories`, configure slug, nome e descrição. Cada categoria gera `catego
 
 Artigos publicados recebem canonical, Open Graph e dados estruturados BlogPosting. Capas devem ser WebP com qualidade suficiente para o destaque; uma largura de 1600 px é adequada. O tempo de leitura é calculado pelo texto, e os relacionados priorizam a mesma categoria.
 
-A abertura do blog e das categorias reutiliza a mesma hero fotográfica institucional: foto da fábrica, altura responsiva, contraste e cabeçalho sobre a foto. Cada categoria exibe seu próprio título e descrição, com acesso à listagem pelo botão “Explorar artigos”. A barra lateral é preservada. O destaque editorial fica abaixo da hero apenas no blog; os artigos mantêm sua abertura própria.
+A abertura do blog e das categorias reutiliza a mesma hero fotográfica institucional: altura responsiva, contraste e cabeçalho sobre a foto. O blog usa a foto da fábrica; cada categoria tem uma imagem relacionada ao assunto, definida em `categories[].hero` (`image`, `width`, `height` e `position` para o ponto de foco em percentuais). As versões WebP `-800` e `-1600` são incluídas automaticamente quando existem, sem gerar novos arquivos. Cada categoria exibe seu próprio título e descrição, com acesso à listagem pelo botão “Explorar artigos”. A barra lateral é preservada. O destaque editorial fica abaixo da hero apenas no blog; os artigos mantêm sua abertura própria.
 
 A listagem e as categorias usam busca e categorias na lateral, com os tokens do painel do showroom. Até 860 px, o painel fica acima dos artigos e as categorias começam recolhidas; a busca permanece visível. Na migração para Elementor, esta área corresponde ao painel de JetSmartFilters ao lado do Listing Grid.
 

@@ -5,22 +5,46 @@
     {
       "slug": "blindagem",
       "name": "Blindagem",
-      "description": "Entenda as etapas do projeto e organize as perguntas para conversar com a equipe."
+      "description": "Entenda as etapas do projeto e organize as perguntas para conversar com a equipe.",
+      "hero": {
+        "image": "assets/media/hitech/tecnico-porta.webp",
+        "width": 3200,
+        "height": 2133,
+        "position": "25% 55%"
+      }
     },
     {
       "slug": "cuidados",
       "name": "Cuidados e revisão",
-      "description": "Informações para preparar o atendimento e acompanhar o seu blindado ao longo do uso."
+      "description": "Informações para preparar o atendimento e acompanhar o seu blindado ao longo do uso.",
+      "hero": {
+        "image": "assets/media/manutencao/bmw-revisao.webp",
+        "width": 1774,
+        "height": 887,
+        "position": "68% 55%"
+      }
     },
     {
       "slug": "homologacoes",
       "name": "Homologações",
-      "description": "O que conferir sobre modelos, materiais e condições antes de definir seu projeto."
+      "description": "O que conferir sobre modelos, materiais e condições antes de definir seu projeto.",
+      "hero": {
+        "image": "assets/media/empresa-qualidade.webp",
+        "width": 3200,
+        "height": 2400,
+        "position": "22% 55%"
+      }
     },
     {
       "slug": "showroom",
       "name": "Showroom",
-      "description": "Prepare sua visita e conheça as possibilidades de compra, venda e consignação."
+      "description": "Prepare sua visita e conheça as possibilidades de compra, venda e consignação.",
+      "hero": {
+        "image": "assets/media/empresa-showroom.webp",
+        "width": 3200,
+        "height": 2400,
+        "position": "50% 55%"
+      }
     }
   ],
   "posts": [

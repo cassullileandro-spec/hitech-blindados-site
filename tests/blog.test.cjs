@@ -13,10 +13,17 @@ assert(matchesBlogQuery('Showroom Aeroporto', '  '));
 assert(!matchesBlogQuery('Manutenção do veículo', 'showroom'));
 assert.equal(escape('<script>"&'), '&lt;script&gt;&quot;&amp;');
 const invalid = structuredClone(data); invalid.posts[0].category='ausente'; assert.throws(()=>validate(invalid));
+const invalidHero=structuredClone(data); invalidHero.categories[0].hero={image:'../missing.webp',width:800,height:500}; assert.throws(()=>validate(invalidHero));
+const invalidPosition=structuredClone(data); invalidPosition.categories[0].hero.position='center;display:none'; assert.throws(()=>validate(invalidPosition));
 const duplicated=structuredClone(data); duplicated.posts.push(duplicated.posts[0]); assert.throws(()=>validate(duplicated));
 for(const file of JSON.parse(fs.readFileSync(path.join(root,'content/blog-pages.json'),'utf8'))) {
  const html=fs.readFileSync(path.join(root,file),'utf8');
  assert(html.includes('rel="canonical"') && html.includes('name="robots"'));
+ const category=data.categories.find(c=>file===`categoria-${c.slug}.html`);
+ if(category?.hero) {
+  assert(html.includes(`class="photo-hero-photo" src="${category.hero.image}"`));
+  for(const source of html.matchAll(/srcset="([^"]+)"/g)) for(const candidate of source[1].split(',')) assert(fs.existsSync(path.join(root,candidate.trim().split(' ')[0])), 'Missing responsive hero');
+ }
  if(html.includes('Prévia editorial')) assert(html.includes('noindex, follow') && !html.includes('BlogPosting'));
  for(const match of html.matchAll(/(?:href|src)="([^"?#]+)(?:[?#][^"]*)?"/g)) {
   if(!/^(https?:|tel:|#)/.test(match[1])) assert(fs.existsSync(path.join(root,match[1])), file+': missing '+match[1]);

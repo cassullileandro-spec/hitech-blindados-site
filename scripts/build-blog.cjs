@@ -14,6 +14,11 @@ function validate(data) {
   for (const c of data.categories) {
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(c.slug) && !categories.has(c.slug), 'Categoria inválida ou duplicada');
     assert(c.name && c.description); categories.add(c.slug);
+    if (c.hero) {
+      assert(/^assets\/media\/[\w/-]+\.webp$/.test(c.hero.image) && fs.existsSync(path.join(root,c.hero.image)), 'Hero WebP da categoria não encontrada');
+      if (c.hero.position) assert(/^(?:100|[0-9]{1,2})% (?:100|[0-9]{1,2})%$/.test(c.hero.position), 'Posição da hero inválida');
+      assert(Number.isInteger(c.hero.width) && c.hero.width > 0 && Number.isInteger(c.hero.height) && c.hero.height > 0, 'Dimensões da hero inválidas');
+    }
   }
   for (const p of data.posts) {
     assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) && !slugs.has(p.slug), 'Artigo inválido ou duplicado'); slugs.add(p.slug);
@@ -66,7 +71,9 @@ ${schema && !preview ? '<script type="application/ld+json">'+JSON.stringify(sche
     const description=category?category.description:data.description;
     const featured=!category && posts.find(p=>p.featured);
     const feature=featured?`<section class="wrap blog-feature" aria-label="Artigo em destaque"><a href="${articleURL(featured)}" class="blog-feature-image" tabindex="-1" aria-hidden="true"><img src="${featured.image}" alt="" width="1200" height="750" loading="lazy" decoding="async"></a><div class="blog-feature-copy"><span class="blog-eyebrow">Em destaque · ${escape(cat(featured).name)}</span><h2><a href="${articleURL(featured)}">${escape(featured.title)}</a></h2><p>${escape(featured.description)}</p><a href="${articleURL(featured)}" class="btn btn-primary">Ler artigo <span aria-hidden="true">↗</span></a></div></section>`:'';
-    const opening=`<header class="institutional-hero photo-hero blog-hero"><img class="photo-hero-photo" src="assets/media/hitech/linha-montagem.webp" srcset="assets/media/hitech/linha-montagem-800.webp 800w, assets/media/hitech/linha-montagem-1600.webp 1600w, assets/media/hitech/linha-montagem.webp 3761w" sizes="(max-width: 760px) 860px, 100vw" alt="" width="3761" height="2115" fetchpriority="high" decoding="async"><div class="wrap">${crumbs(category?category.name:'Blog')}<h1>${category?escape(category.name):'Conhecimento para seguir <span class="light">com confiança.</span>'}</h1><p class="page-intro">${escape(description)}</p>${review}<a class="btn btn-primary" href="#artigos">Explorar artigos <span aria-hidden="true">↓</span></a></div></header>`;
+    const hero=category?.hero || {image:'assets/media/hitech/linha-montagem.webp',width:3761,height:2115};
+    const heroSources=[800,1600].filter(w=>w<hero.width && fs.existsSync(path.join(root,hero.image.replace('.webp',`-${w}.webp`)))).map(w=>`${hero.image.replace('.webp',`-${w}.webp`)} ${w}w`).concat(`${hero.image} ${hero.width}w`).join(', ');
+    const opening=`<header class="institutional-hero photo-hero blog-hero"><img class="photo-hero-photo" src="${hero.image}"${hero.position?` style="object-position:${hero.position}"`: ''} srcset="${heroSources}" sizes="(max-width: 760px) 860px, 100vw" alt="" width="${hero.width}" height="${hero.height}" fetchpriority="high" decoding="async"><div class="wrap">${crumbs(category?category.name:'Blog')}<h1>${category?escape(category.name):'Conhecimento para seguir <span class="light">com confiança.</span>'}</h1><p class="page-intro">${escape(description)}</p>${review}<a class="btn btn-primary" href="#artigos">Explorar artigos <span aria-hidden="true">↓</span></a></div></header>`;
     const content=`${opening}${feature}
 <section class="section" id="artigos" aria-labelledby="blog-list-title"><div class="wrap blog-list-layout">
 <aside class="filters blog-filters" aria-label="Filtros do blog"><div class="filters-head"><b>Filtros</b><a href="blog.html#artigos">Limpar tudo</a></div>
@@ -74,7 +81,7 @@ ${schema && !preview ? '<script type="application/ld+json">'+JSON.stringify(sche
 <details class="blog-refinements" open><summary>Categorias${category?' · '+escape(category.name):''}</summary><nav class="blog-categories" aria-label="Categorias do blog"><a href="blog.html#artigos" ${!category?'aria-current="page"':''}>Todos <span>${posts.length}</span></a>${categories.map(c=>`<a href="${categoryURL(c)}#artigos" ${category?.slug===c.slug?'aria-current="page"':''}>${escape(c.name)} <span>${posts.filter(p=>p.category===c.slug).length}</span></a>`).join('')}</nav></details></aside>
 <div class="blog-results"><div class="blog-list-head"><h2 id="blog-list-title">${category?'Artigos desta categoria':'Todos os artigos'}</h2><p class="blog-count" id="blog-count" role="status" aria-live="polite">${entries.length} ${entries.length===1?'artigo':'artigos'}</p></div><div class="blog-grid">${entries.map(card).join('')}</div>
 <div class="blog-empty" id="blog-empty" ${entries.length?'hidden':''}><h3>${entries.length?'Nenhum artigo encontrado.':'Em breve, novos conteúdos.'}</h3><p>${entries.length?'Tente outra palavra ou explore as categorias.':'Estamos preparando artigos para esta categoria.'}</p><a class="btn" href="${file}">Limpar busca</a><a class="blog-read" href="blog.html">Ver todos os artigos ↗</a></div><noscript><p>A busca precisa de JavaScript. Os artigos e as categorias continuam disponíveis acima.</p></noscript></div></div></section>`;
-    pages.set(file,shell(file,title,description,content,{schema:{'@context':'https://schema.org','@type':category?'CollectionPage':'Blog',name:title,description,url:base+file,inLanguage:'pt-BR'}}));
+    pages.set(file,shell(file,title,description,content,{...(category?{image:hero.image}:{}),schema:{'@context':'https://schema.org','@type':category?'CollectionPage':'Blog',name:title,description,url:base+file,inLanguage:'pt-BR'}}));
   }
   listing(); categories.forEach(listing);
   for (const p of posts) {
