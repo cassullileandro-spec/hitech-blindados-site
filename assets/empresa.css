@@ -4,8 +4,6 @@
 .story-slide:first-child > img { object-position: center 62%; }
 .story-slide:nth-child(3) > img { object-position: center 35%; }
 
-.company-photo-source { padding-block: 24px; }
-.company-photo-source a { text-decoration: underline; }
 
 /* Bento editorial: três colunas, contraste claro/escuro e cinco conteúdos preservados. */
 .commitments-bento { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: minmax(304px,auto) minmax(336px,auto); gap: 24px; }
