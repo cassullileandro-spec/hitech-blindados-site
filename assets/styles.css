@@ -390,6 +390,17 @@ select::-ms-expand { display: none; }
 .check input:checked { background: var(--accent); border-color: var(--accent); }
 .check input:checked::after { content: '✓'; color: var(--accent-ink); font-size: 11px; font-weight: 700; }
 .check .cnt { margin-left: auto; font-family: var(--mono); font-size: var(--caption-size); color: var(--txt-3); line-height: var(--caption-leading); }
+.brand-filter-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.brand-filter { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-width: 0; min-height: 92px; padding: 20px 4px 6px; border-radius: var(--control-radius); background: #f9f9f9; color: #40464d; cursor: pointer; }
+.brand-filter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.brand-filter img { width: 100%; max-width: 60px; height: 36px; object-fit: contain; }
+.brand-filter-mono { filter: brightness(0); }
+.brand-filter-name { font-size: 10px; line-height: 13px; text-align: center; overflow-wrap: anywhere; min-height: 26px; display: flex; align-items: center; }
+.brand-filter .cnt { position: absolute; top: 4px; right: 6px; font-size: 10px; line-height: 14px; pointer-events: none; }
+.brand-filter:hover { background: #e9f0f5; }
+.brand-filter:has(input:checked) { background: #dcecf7; box-shadow: inset 0 0 0 2px #21658d; }
+.brand-filter:has(input:checked)::before { content: '✓'; position: absolute; top: 3px; left: 5px; color: #175275; font-size: 12px; line-height: 16px; pointer-events: none; }
+.brand-filter:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 .f-select { width: 100%; height: var(--control-height); padding: 7px 12px; line-height: var(--body-leading); background: var(--surface); border: 1px solid var(--field-border); border-radius: var(--control-radius); color: var(--txt); font-size: var(--body-size); font-family: inherit; }
 .f-select::placeholder, .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--txt-3); opacity: 1; }
 .range-val { display: flex; justify-content: space-between; font-family: var(--mono); font-size: var(--caption-size); color: var(--txt); margin-bottom: 12px; letter-spacing: .02em; line-height: var(--caption-leading); }
