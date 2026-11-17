@@ -3,6 +3,27 @@ renderChrome('home');
 document.querySelectorAll('[data-icon]').forEach(element => { element.innerHTML = I[element.dataset.icon] || ''; });
 initMotion();
 
+// Abas das homologações: clique e setas do teclado (padrão WAI-ARIA tabs).
+const homologTabs = [...document.querySelectorAll('.hh-tab')];
+function selectHomologTab(tab) {
+  homologTabs.forEach(item => {
+    const active = item === tab;
+    item.setAttribute('aria-selected', String(active));
+    item.tabIndex = active ? 0 : -1;
+    document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
+  });
+}
+homologTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectHomologTab(tab));
+  tab.addEventListener('keydown', event => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+    if (!step) return;
+    const next = homologTabs[(index + step + homologTabs.length) % homologTabs.length];
+    selectHomologTab(next);
+    next.focus();
+  });
+});
+
 // Abertura trocável: com <video id="hero-video"> toca o vídeo; com <img class="hero-banner"> fica só o banner.
 const heroVideo = document.getElementById('hero-video');
 if (heroVideo) {
@@ -61,3 +82,4 @@ if (heroVideo) {
   window.addEventListener('resize', syncHeroVideo);
   syncHeroVideo();
 }
+

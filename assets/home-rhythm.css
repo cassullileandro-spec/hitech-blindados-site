@@ -21,18 +21,8 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .keep-together { white-space: nowrap; }
 .home .home-destinations { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: var(--collection-space); }
 .home .home-homologations { --txt: #F3F5F7; --txt-2: #BFC8D1; --button-bg: #292C30; --button-hover: #383C41; --primary-bg: #F3F5F7; --primary-ink: #0B1016; --primary-hover: #FFFFFF; --line-2: rgba(255,255,255,.2); --edge-hover: #6FBAF0; --accent: #6FBAF0; padding-block: var(--section-padding); background: linear-gradient(135deg,#141D26,#0B1016); color: var(--txt); }
-.home .home-homologations-layout { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: var(--grid-gap-wide); align-items: center; }
-.home .home-homologations-content { min-width: 0; }
 .home .home-homologations-intro h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
 .home .home-homologations-intro p { margin-top: var(--text-space); font-size: var(--body-size); line-height: var(--body-leading); color: var(--txt-2); }
-.home .home-homologations-photo { margin: 0; border-radius: 0; overflow: visible; }
-.home .home-homologations-photo img { display: block; width: calc(100% + 56px); max-width: none; height: auto; margin-left: -28px; }
-.home .home-homologations-photo::after { content: none; }
-.home .home-homologations-details { display: grid; gap: 16px; margin-top: 32px; padding-left: 20px; list-style: disc; color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
-.home .home-homologations-details li { padding-left: 4px; }
-.home .home-homologations-details li::marker { color: var(--accent); }
-.home .home-homologations-details strong { color: var(--txt); font-weight: 500; }
-.home .home-homologations-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
 .home .showroom-section .st-l { max-width: 760px; flex: 1 1 620px; }
 .home .home-factory { padding-bottom: 0; border: 0; box-shadow: inset 0 1px var(--line-3); }
 .home .home-factory-intro { margin-bottom: 40px; }
@@ -67,8 +57,6 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 @media (max-width: 860px) {
   .home .category-cards { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 148px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
   .home .category-card { scroll-snap-align: start; }
-  .home .home-homologations-layout { grid-template-columns: 1fr; gap: 32px; }
-  .home .home-homologations-photo img { width: 100%; margin-left: 0; }
 
   .home .home-destinations { grid-template-columns: 1fr; margin-top: calc(var(--collection-space) - var(--text-space)); }
   .home .home-intro { row-gap: var(--text-space); }
@@ -91,29 +79,11 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
   .home .category-card img { transition: none; }
 }
 
-@media (min-width: 1201px) {
-  .home .home-homologations { position: relative; isolation: isolate; background: #0B1016; }
-  .home .home-homologations-layout { grid-template-columns: minmax(0,1.65fr) minmax(0,1fr); }
-  .home .home-homologations-content { grid-column: 2; position: relative; z-index: 1; }
-  .home .home-homologations-photo { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
-  .home .home-homologations-photo picture { display: block; width: 100%; height: 100%; }
-  .home .home-homologations-photo img { width: 100%; height: 100%; margin: 0; object-fit: cover; object-position: left center; }
-  .home .home-homologations-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,transparent 48%,rgba(11,16,22,.45) 63%,rgba(11,16,22,.8)),linear-gradient(0deg,#0B1016,transparent 20%,transparent 80%,#0B1016); opacity: 1; mix-blend-mode: normal; }
-}
 
 .home #stock-title > .light, .home #home-factory-title > .light { display: block; }
 .home .stock-explore { --button-bg: #FFFFFF; --button-hover: #F4F6F8; --txt: #414141; --txt-2: #414141; }
-@media (max-width: 1200px) {
-  .home .home-homologations { padding-top: 0; background: #0B1016; }
-  .home .home-homologations-layout { grid-template-columns: minmax(0,1fr); gap: 32px; }
-  .home .home-homologations-photo { width: 100vw; margin-inline: calc(50% - 50vw); overflow: hidden; }
-  .home .home-homologations-photo img { width: 100%; height: clamp(280px,55vw,460px); margin: 0; object-fit: cover; object-position: center 65%; }
-  .home .home-homologations-photo::after { content: ''; background: linear-gradient(0deg,#0B1016,transparent 35%); opacity: 1; mix-blend-mode: normal; }
-}
 
 @media (min-width: 1201px) and (max-width: 1439px) {
-  .home .home-homologations { padding-block: 48px; }
-  .home .home-homologations-layout { grid-template-columns: minmax(0,1.45fr) minmax(0,1fr); gap: 32px; }
   .home .home-homologations-intro h2 { font-size: 40px; line-height: 48px; }
 }
 
@@ -126,3 +96,36 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .showroom-last { padding: 32px 0; border-top: 1px solid var(--line); }
 .home .showroom-last .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
 .home .showroom-last p { margin: 0; color: var(--txt-3); font-size: var(--aux-size); }
+/* Homologações em abas por montadora (call 17/11, opção B). */
+.home .hh-tabs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: var(--collection-space); border-bottom: 1px solid var(--line-2); }
+.home .hh-tab { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 0 20px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); text-align: left; cursor: pointer; opacity: .6; transition: opacity .25s, border-color .25s; }
+.home .hh-tab:hover { opacity: .85; }
+.home .hh-tab[aria-selected="true"] { opacity: 1; border-bottom-color: var(--accent); color: var(--txt); }
+.home .hh-logo { display: block; width: 120px; height: 36px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
+.home .hh-logo-jeep { width: 92px; }
+.home .hh-panel { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--grid-gap-wide); align-items: center; padding-top: 48px; }
+.home .hh-panel[hidden] { display: none; }
+.home .hh-panel:focus-visible { outline-offset: 8px; }
+.home .hh-models { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.home .hh-models[data-count="1"] { grid-template-columns: minmax(0,1fr); }
+.home .hh-models li { display: grid; gap: 8px; color: var(--txt-2); font-size: var(--aux-size); }
+.home .hh-models img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
+.home .hh-label { display: block; margin-bottom: 16px; color: var(--accent); font-size: var(--aux-size); font-weight: 500; }
+.home .hh-copy h3 { font-size: var(--card-title-size); line-height: 40px; font-weight: 400; }
+.home .hh-copy p { margin-top: var(--text-space); color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
+.home .hh-benefits { display: grid; gap: 12px; margin: 24px 0 0; padding-left: 20px; list-style: disc; color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
+.home .hh-benefits li::marker { color: var(--accent); }
+.home .hh-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 32px; }
+.home .hh-credentials { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line-2); }
+.home .hh-credentials a { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: var(--r); background: rgba(255,255,255,.04); color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); transition: background .25s; }
+.home .hh-credentials a:hover { background: rgba(255,255,255,.08); }
+.home .hh-credentials img { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
+.home .hh-credentials b { display: block; color: var(--txt); font-weight: 500; }
+.home .hh-credentials .hh-other { justify-content: space-between; }
+@media (max-width: 860px) {
+  .home .hh-panel { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
+  .home .hh-credentials { grid-template-columns: 1fr; margin-top: 48px; }
+  .home .hh-tab span { display: none; }
+  .home .hh-logo { width: 88px; height: 28px; }
+  .home .hh-logo-jeep { width: 68px; }
+}

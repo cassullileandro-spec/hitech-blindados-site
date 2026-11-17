@@ -11,6 +11,7 @@ const CONTACT_MESSAGES = {
   jeep: 'Olá! Gostaria de conhecer os modelos e as condições da blindagem certificada Jeep.',
   caoa: 'Olá! Gostaria de conhecer os modelos e as condições da blindagem homologada CAOA.',
   gwm: 'Olá! Gostaria de conhecer os modelos e as condições da blindagem certificada GWM.',
+  ram: 'Olá! Gostaria de conhecer os modelos e as condições da blindagem homologada RAM.',
   empresa: 'Olá! Gostaria de conhecer melhor a Hi-Tech e seus serviços.',
   carreiras: 'Olá! Gostaria de informações sobre oportunidades na Hi-Tech e orientação para envio de currículo.',
   documentos: 'Olá! Gostaria da lista de documentos para iniciar a blindagem do meu veículo.',
