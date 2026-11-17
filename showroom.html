@@ -29,7 +29,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=marcas-logos-20261117">
+  <link rel="stylesheet" href="assets/styles.css?v=marcas-refinadas-20261117">
   <link rel="stylesheet" href="assets/institucional.css?v=carrosseis-20261111">
 
   <script type="application/ld+json">
@@ -153,10 +153,10 @@
     const countBy = (key, val) => CARROS.filter(c => c[key] === val).length;
 
     const BRAND_LOGOS = {
-      'Audi':'audi.svg', 'BMW':'bmw.webp', 'BYD':'byd.svg', 'CAOA Chery':'chery.png',
-      'Denza':'denza.svg', 'Ford':'ford.png', 'GWM':'gwm.svg', 'Honda':'honda.webp',
-      'Jeep':'jeep.webp', 'Land Rover':'land-rover.webp', 'Mercedes-Benz':'mercedes-benz.webp',
-      'Omoda':'omoda.png', 'Porsche':'porsche.webp', 'Toyota':'toyota.webp', 'Volkswagen':'volkswagen.webp'
+      'Audi':'filtros/audi.svg', 'BMW':'filtros/bmw.svg', 'BYD':'byd.svg', 'CAOA Chery':'filtros/chery.svg',
+      'Denza':'filtros/denza.svg', 'Ford':'filtros/ford.svg', 'GWM':'gwm.svg', 'Honda':'filtros/honda.svg',
+      'Jeep':'filtros/jeep.svg', 'Land Rover':'filtros/land-rover.svg', 'Mercedes-Benz':'filtros/mercedes-benz.svg',
+      'Omoda':'filtros/omoda.svg', 'Porsche':'filtros/porsche.svg', 'Toyota':'filtros/toyota.svg', 'Volkswagen':'filtros/volkswagen.svg'
     };
 
     // render checkbox groups
@@ -164,7 +164,7 @@
       document.getElementById(containerId).innerHTML = list.map(v => {
         const logo = key === 'marca' && BRAND_LOGOS[v];
         return logo
-          ? `<label class="brand-filter" title="${v}"><input type="checkbox" value="${v}" aria-label="${v}" ${stateSet.has(v)?'checked':''}><img src="assets/logos/${logo}" alt="" width="60" height="36" ${v==='GWM'?'class="brand-filter-mono"':''}><span class="brand-filter-name">${v}</span><span class="cnt" aria-hidden="true">${countBy(key,v)}</span></label>`
+          ? `<label class="brand-filter" title="${v}"><input type="checkbox" value="${v}" aria-label="${v}" ${stateSet.has(v)?'checked':''}><img src="assets/logos/${logo}" alt="" width="72" height="44" class="${v==='Land Rover'||v==='Mercedes-Benz'?'brand-filter-original':'brand-filter-mono'}"><span class="brand-filter-name">${v}</span><span class="cnt" aria-hidden="true">${countBy(key,v)}</span></label>`
           : `<label class="check"><input type="checkbox" value="${v}" ${stateSet.has(v)?'checked':''}> ${v} <span class="cnt">${countBy(key,v)}</span></label>`;
       }).join('');
       document.getElementById(containerId).querySelectorAll('input').forEach(inp => {
