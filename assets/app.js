@@ -139,6 +139,7 @@ function renderChrome(active) {
         <li><a href="assistencia.html#revisoes">Revisão de blindados</a></li>
         <li><a href="${whatsappLink('consignacao')}" data-contact="consignacao">Consignação</a></li>
         <li><a href="documentos.html">Documentação</a></li>
+        <li><a href="iso-14001.html">ISO 14001</a></li>
       </ul></div>
       <div class="footer-units"><h4>Conheça nossas unidades</h4><div class="footer-maps">
         <div class="footer-location">

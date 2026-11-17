@@ -1,0 +1,12 @@
+/* Página ISO 14001: listas numeradas no ritmo da ficha técnica da Blindagem. */
+.iso-list { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
+.iso-waste { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.iso-list li { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--line); }
+.iso-list span { font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--accent); }
+.iso-list b { font-size: var(--compact-title-size); line-height: 28px; font-weight: 600; }
+.iso-list p { color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); }
+.iso-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--collection-space); }
+.iso-actions [hidden] { display: none; }
+.iso-waste-section .document-link { margin-top: var(--collection-space); }
+@media (max-width: 1080px) { .iso-list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; } .iso-waste { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .iso-list { grid-template-columns: 1fr; } }

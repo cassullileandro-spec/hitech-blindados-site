@@ -69,3 +69,4 @@
 /* Alternância de superfícies solicitada: estrutura clara e compromissos escuros. */
 :root[data-theme="light"] .company-structure { --txt: #414141; --txt-2: #626262; --txt-3: #707070; --button-bg: #EEF1F4; --button-hover: #E4E9EE; --primary-bg: #555555; --primary-ink: #F9F9F9; --primary-hover: #484848; --line-2: rgba(65,65,65,.12); --line-3: rgba(65,65,65,.18); --accent: #176B9E; --edge-hover: #A8A8A8; background: #F9F9F9; }
 #compromissos { --txt: #F3F5F7; --txt-2: #BFC8D1; background: linear-gradient(135deg,#141D26,#0B1016); color: var(--txt); }
+.company-environment-policy .tlink { align-self: start; margin-top: 16px; }
