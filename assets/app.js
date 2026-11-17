@@ -128,7 +128,7 @@ function renderChrome(active) {
         <div class="socials">
           <a href="https://www.facebook.com/hitechblindados/" target="_blank" rel="noopener" aria-label="Facebook">${I.fb}</a>
           <a href="https://www.instagram.com/hitech.blindagens/" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>
-          <a href="https://www.youtube.com/c/HITECHBLINDADOSOFICIAL/videos" target="_blank" rel="noopener" aria-label="YouTube">${I.yt}</a>
+          <a href="https://www.youtube.com/@GabrielBucker" target="_blank" rel="noopener" aria-label="YouTube">${I.yt}</a>
         </div>
       </div>
       <div><h4>Navegação</h4><ul>
