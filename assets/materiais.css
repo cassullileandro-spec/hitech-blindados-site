@@ -12,3 +12,13 @@
 .material-carousel > .fine-print { margin-top: 24px; }
 @media (max-width:1080px) { .material-card { flex-basis: calc((100% - 24px) / 2); } }
 @media (max-width:600px) { .material-track { gap: 16px; } .material-card { flex-basis: 88%; } }
+
+/* V2 · ficha técnica dos materiais (fonte: página Tecnologia do site Hi-Tech) */
+.armor-specs { margin: 0; border-top: 1px solid var(--line); }
+.armor-spec { display: grid; grid-template-columns: 4fr 8fr; gap: var(--grid-gap); padding: 32px 0; border-bottom: 1px solid var(--line); }
+.armor-spec dt { display: flex; gap: 16px; align-items: baseline; font-size: var(--compact-title-size); line-height: 28px; font-weight: 600; }
+.armor-spec dt span { font-family: var(--mono); font-size: 12px; line-height: 16px; font-weight: 400; color: var(--accent); }
+.armor-spec dd { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--grid-gap); }
+.armor-spec dd b { font-size: var(--body-size); line-height: var(--body-leading); font-weight: 500; color: var(--txt); }
+.armor-spec dd p { font-size: var(--aux-size); line-height: var(--body-leading); color: var(--txt-2); }
+@media (max-width: 860px) { .armor-spec, .armor-spec dd { grid-template-columns: 1fr; gap: 12px; } .armor-spec { padding: 24px 0; } }

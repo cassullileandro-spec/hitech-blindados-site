@@ -8,10 +8,23 @@ function formatContactMessage(values) {
 
 renderChrome(document.body.dataset.page);
 
+// Cópia por e-mail para os gestores (call de 17/11). Fica desligada até a Hi-Tech definir quem recebe
+// (tarefa 28). No WordPress vira a ação "E-mail" do Form do Elementor, antes do redirecionamento ao WhatsApp.
+const CONTACT_EMAIL = { endpoint: '', recipients: [] };
+function sendContactEmail(values) {
+  if (!CONTACT_EMAIL.endpoint || !navigator.sendBeacon) return false;
+  const body = new FormData();
+  for (const [key, value] of values) body.append(key, value);
+  body.append('destinatarios', CONTACT_EMAIL.recipients.join(','));
+  body.append('pagina', location.href);
+  return navigator.sendBeacon(CONTACT_EMAIL.endpoint, body);
+}
+
 const inquiryForm = document.getElementById('inquiry-form');
 if (inquiryForm) {
   inquiryForm.addEventListener('submit', event => {
     event.preventDefault();
+    sendContactEmail(new FormData(inquiryForm));
     window.location.assign('https://wa.me/5511975548105?text=' + encodeURIComponent(formatContactMessage(new FormData(inquiryForm))));
   });
 }

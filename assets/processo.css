@@ -15,7 +15,7 @@
 .process-navigation button[aria-pressed="true"] { color: var(--txt); }
 .process-navigation button[aria-pressed="true"] > span { background: var(--accent); color: var(--accent-ink); }
 .process-navigation button:hover > span { box-shadow: 0 0 0 2px var(--accent); }
-.process-details { min-height: 196px; }
+.process-details { min-height: 260px; }
 .process-eyebrow { display: block; margin-bottom: 16px; color: var(--accent); font-size: 12px; line-height: 16px; letter-spacing: .08em; text-transform: uppercase; }
 .process-details h3 { font-size: var(--card-title-size); line-height: 1.125; font-weight: 600; }
 .process-details p { margin-top: 24px; font-size: var(--body-size); line-height: var(--body-leading); color: var(--txt-2); }
