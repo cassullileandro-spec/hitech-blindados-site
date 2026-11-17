@@ -103,7 +103,7 @@ function renderChrome(active) {
     <nav class="nav" aria-label="Navegação principal">
       ${SITE_PAGES.map(([key, href, label]) => `<a href="${href}"${current === key ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('')}
     </nav>
-    <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo escuro"><span class="theme-label theme-label-light" aria-hidden="true">Light</span><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span><span class="theme-label theme-label-dark" aria-hidden="true">Dark</span></button>
+    <a href="${whatsappLink('blindagem')}" class="btn btn-quote" data-contact="blindagem"><span>Faça seu orçamento</span></a>
     <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">${I.menu}</button>
   </div></header>`;
 
@@ -160,7 +160,8 @@ function renderChrome(active) {
       <span>Design & desenvolvimento — RNW</span>
     </div>
   </div></footer>
-  <a href="${whatsappLink(current === 'estoque' ? 'estoque' : CONTACT_MESSAGES[active] ? active : 'blindagem')}" class="wa-float" aria-label="Falar com a Hi-Tech pelo WhatsApp"><span class="wa-mark" aria-hidden="true">${I.wa}</span><svg class="wa-armor" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path class="wa-shield" d="M32 5 55 14v17c0 14-13 23-23 28C22 54 9 45 9 31V14Z" pathLength="100"/><g class="wa-impact"><path d="m1 9 12 12m-3-7 3 7-7-3M13 21l6-2m-6 2 1 6m-1-6 5 4"/></g><g class="wa-impact wa-impact-two"><path d="m63 15-12 9m6-7-6 7 7-2M51 24l-6-2m6 2-1 6m1-6-5 4"/></g><g class="wa-impact wa-impact-three"><path d="m1 44 12-8m-7 1 7-1-3 6M13 36l6 2m-6-2 1-6m-1 6 5-4"/></g><path class="wa-cracks" d="m13 21 7 5-3 6 6 6m28-14-8 5 3 7-6 5m-27-5 8 5 1 6"/></svg></a>`;
+  <a href="${whatsappLink(current === 'estoque' ? 'estoque' : CONTACT_MESSAGES[active] ? active : 'blindagem')}" class="wa-float" aria-label="Falar com a Hi-Tech pelo WhatsApp"><span class="wa-label" aria-hidden="true">Fale conosco</span><span class="wa-mark" aria-hidden="true">${I.wa}</span><svg class="wa-armor" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path class="wa-shield" d="M32 5 55 14v17c0 14-13 23-23 28C22 54 9 45 9 31V14Z" pathLength="100"/><g class="wa-impact"><path d="m1 9 12 12m-3-7 3 7-7-3M13 21l6-2m-6 2 1 6m-1-6 5 4"/></g><g class="wa-impact wa-impact-two"><path d="m63 15-12 9m6-7-6 7 7-2M51 24l-6-2m6 2-1 6m1-6-5 4"/></g><g class="wa-impact wa-impact-three"><path d="m1 44 12-8m-7 1 7-1-3 6M13 36l6 2m-6-2 1-6m-1 6 5-4"/></g><path class="wa-cracks" d="m13 21 7 5-3 6 6 6m28-14-8 5 3 7-6 5m-27-5 8 5 1 6"/></svg></a>
+  <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Modo escuro"><span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span></button>`;
 
   document.getElementById('site-header').innerHTML = header;
   document.getElementById('site-footer').innerHTML = footer;
@@ -192,7 +193,7 @@ function renderChrome(active) {
     ${SITE_PAGES.map(([key, href, label]) => `<a class="mm-link" href="${href}"${current === key ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
     <div class="mm-foot">
       <div class="mm-phone">Showroom Aeroporto · (11) 3202-7777</div>
-      <a href="showroom.html" class="btn btn-primary btn-lg btn-block">Ver showroom</a>
+      <a href="${whatsappLink('blindagem')}" class="btn btn-quote btn-lg btn-block" data-contact="blindagem"><span>Faça seu orçamento</span></a>
     </div>`;
   document.body.appendChild(menu);
   const tog = document.querySelector('.menu-toggle');

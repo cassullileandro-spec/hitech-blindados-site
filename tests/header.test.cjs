@@ -24,7 +24,7 @@ for (const file of fs.readdirSync(root).filter(f=>f.endsWith('.html'))) {
   const window={scrollY:0,addEventListener:(k,fn)=>events[k]=fn,matchMedia:()=>node()};
   const context={document,window,SITE_PAGES:[],CONTACT_MESSAGES:{},whatsappLink:()=>'',I:{},initMotion(){},applyTheme(theme){document.documentElement.dataset.theme=theme;},localStorage:{setItem(){}}};
   vm.runInNewContext(render+';renderChrome('+JSON.stringify(active)+');',context);
-  assert(!headerHost.innerHTML.includes('Solicitar orçamento'),file+': no quote button in header');
+  assert(headerHost.innerHTML.includes('Faça seu orçamento'),file+': quote button in header');
   assert.equal(themeToggle.attrs['aria-checked'],'false',file+': light switch state');
   themeToggle.click();
   assert.equal(document.documentElement.dataset.theme,'dark');

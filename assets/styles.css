@@ -739,3 +739,28 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 @media (min-width:1081px) and (max-width:1320px) { .header-phone { display: none; } .header .wrap { gap: 16px; } .nav a { padding-inline: 10px; } }
 @media (max-width:1080px) { .header .wrap { gap: 16px; } .theme-toggle { margin-left: auto; } .header-right { display: none; } }
+
+/* ---------- Call 17/11: orçamento no cabeçalho, WhatsApp pulsante e Light/Dark discreto ---------- */
+@property --quote-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.btn-quote { position: relative; isolation: isolate; background: transparent; color: #FFFFFF; font-weight: 600; white-space: nowrap; }
+.btn-quote::before { content: ''; position: absolute; inset: -1.5px; z-index: -2; border-radius: inherit; background: conic-gradient(from var(--quote-angle), rgba(111,186,240,.25) 0 62%, #BFE6FF 82%, #FFFFFF 86%, rgba(111,186,240,.25) 94%); animation: quote-orbit 3.2s linear infinite; }
+.btn-quote::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: linear-gradient(135deg, #1B78B2, #145E8C); transition: filter .35s var(--ease); }
+.btn-quote:hover { background: transparent; transform: translateY(-1px); }
+.btn-quote:hover::after { filter: brightness(1.12); }
+.header .btn-quote { margin-left: auto; }
+@keyframes quote-orbit { to { --quote-angle: 360deg; } }
+@media (max-width: 760px) { .header .btn-quote { display: none; } }
+
+.wa-float { animation: wa-pulse 2.6s ease-out infinite; }
+.wa-label { position: absolute; right: calc(100% + 12px); top: 50%; padding: 8px 12px; border-radius: 8px; background: #0B1016; color: #F3F5F7; font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,.18); opacity: 0; transform: translate(8px, -50%); pointer-events: none; animation: wa-label 20s ease 5s infinite; transition: opacity .25s, transform .25s; }
+.wa-float:hover .wa-label, .wa-float:focus-visible .wa-label { opacity: 1; transform: translate(0, -50%); animation: none; }
+@keyframes wa-pulse { 0% { box-shadow: 0 4px 20px rgba(0,0,0,.18), 0 0 0 0 rgba(22,124,72,.45); } 70%,100% { box-shadow: 0 4px 20px rgba(0,0,0,.18), 0 0 0 16px rgba(22,124,72,0); } }
+@keyframes wa-label { 0% { opacity: 0; transform: translate(8px, -50%); } 3%,22% { opacity: 1; transform: translate(0, -50%); } 25%,100% { opacity: 0; transform: translate(8px, -50%); } }
+
+.theme-toggle { position: fixed; left: 24px; bottom: 24px; z-index: 90; min-height: 0; margin: 0; padding: 6px; border-radius: 20px; opacity: .55; transition: opacity .25s; }
+.theme-toggle:hover, .theme-toggle:focus-visible { opacity: 1; }
+.header .theme-toggle, .theme-toggle { margin-left: 0; }
+.theme-toggle .theme-track { width: 36px; height: 20px; }
+.theme-toggle .theme-thumb { top: 3px; left: 3px; width: 14px; height: 14px; }
+.theme-toggle[aria-checked="true"] .theme-thumb { transform: translateX(16px); }
+@media (prefers-reduced-motion: reduce) { .btn-quote::before, .wa-label, .wa-float { animation: none; } }

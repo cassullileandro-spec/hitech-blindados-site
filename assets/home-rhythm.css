@@ -119,3 +119,10 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 
 .home .preloader { background: linear-gradient(rgba(238,241,244,.88),rgba(238,241,244,.88)), url('media/hero-poster.webp?v=4k-20261112') center / cover; }
 .home .hero-video { background-image: url('media/hero-poster.webp?v=4k-20261112'); }
+/* Call 17/11: a abertura não ocupa a tela toda, para mostrar que há conteúdo abaixo. */
+.home .hero { min-height: max(520px, 86svh); }
+.home .hero > .video-toggle { left: calc(50% + 40px); }
+.hero-video .hero-banner { width: 100%; height: 100%; object-fit: cover; }
+.home .showroom-last { padding: 32px 0; border-top: 1px solid var(--line); }
+.home .showroom-last .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
+.home .showroom-last p { margin: 0; color: var(--txt-3); font-size: var(--aux-size); }
