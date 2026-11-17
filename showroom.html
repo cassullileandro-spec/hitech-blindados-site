@@ -29,7 +29,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=call-20261117">
+  <link rel="stylesheet" href="assets/styles.css?v=showroom-v2-20261117">
   <link rel="stylesheet" href="assets/institucional.css?v=carrosseis-20261111">
 
   <script type="application/ld+json">
@@ -70,10 +70,12 @@
           <input type="search" id="f-search" class="f-select" placeholder="Ex: Porsche, SUV, Corolla...">
         </div>
 
+        <label class="check rodizio-toggle"><input type="checkbox" id="f-rodizio"> Isento de rodízio <span class="cnt" id="rodizio-cnt"></span></label>
+
         <details class="stock-refinements" id="stock-refinements" open><summary>Refinar por marca, preço e mais</summary>
         <div class="fgroup">
           <label id="brand-filter-label">Marca</label>
-          <div id="f-marcas" class="brand-filter-grid" role="group" aria-labelledby="brand-filter-label"></div>
+          <div id="f-marcas" class="brand-filter-list" role="group" aria-labelledby="brand-filter-label"></div>
         </div>
 
         <div class="fgroup">
@@ -130,7 +132,7 @@
   <div id="site-footer"></div>
 
   <script src="assets/data.js?v=estoque-webp-2"></script>
-  <script src="assets/app.js?v=youtube-20261117"></script>
+  <script src="assets/app.js?v=showroom-v2-20261117"></script>
   <script>
     renderChrome('estoque');
 
@@ -141,30 +143,23 @@
     wideFilters.addEventListener('change', syncFilterPanel);
 
     const limites = { preco: Math.ceil(Math.max(...CARROS.map(c => c.preco)) / 10000) * 10000, ano: Math.min(...CARROS.map(c => c.ano)), km: Math.ceil(Math.max(...CARROS.map(c => c.km ?? 0)) / 5000) * 5000 };
-    const state = { search:'', marcas:new Set(), carrocerias:new Set(), combustiveis:new Set(), preco:limites.preco, ano:limites.ano, km:limites.km, sort:'relevancia' };
+    const state = { search:'', marcas:new Set(), carrocerias:new Set(), combustiveis:new Set(), preco:limites.preco, ano:limites.ano, km:limites.km, rodizio:false, sort:'relevancia' };
 
     // pré-preenche via querystring vindo da home
     const qs = new URLSearchParams(location.search);
     if (qs.get('marca')) state.marcas.add(qs.get('marca'));
     if (qs.get('carroceria')) state.carrocerias.add(qs.get('carroceria'));
+    if (qs.get('rodizio')) state.rodizio = true;
     if (qs.get('precoMax')) state.preco = +qs.get('precoMax');
 
     // helper contagem
     const countBy = (key, val) => CARROS.filter(c => c[key] === val).length;
 
-    const BRAND_LOGOS = {
-      'Audi':'filtros/audi.svg', 'BMW':'filtros/bmw.svg', 'BYD':'byd.svg', 'CAOA Chery':'filtros/chery.svg',
-      'Denza':'filtros/denza.svg', 'Ford':'filtros/ford.svg', 'GWM':'gwm.svg', 'Honda':'filtros/honda.svg',
-      'Jeep':'filtros/jeep.svg', 'Land Rover':'filtros/land-rover.svg', 'Mercedes-Benz':'filtros/mercedes-benz.svg',
-      'Omoda':'filtros/omoda.svg', 'Porsche':'filtros/porsche.svg', 'Toyota':'filtros/toyota.svg', 'Volkswagen':'filtros/volkswagen.svg'
-    };
-
     // render checkbox groups
     function checkGroup(containerId, list, stateSet, key) {
       document.getElementById(containerId).innerHTML = list.map(v => {
-        const logo = key === 'marca' && BRAND_LOGOS[v];
-        return logo
-          ? `<label class="brand-filter" title="${v}"><input type="checkbox" value="${v}" aria-label="${v}" ${stateSet.has(v)?'checked':''}><img src="assets/logos/${logo}" alt="" width="72" height="44" class="${v==='Land Rover'||v==='Mercedes-Benz'?'brand-filter-original':'brand-filter-mono'}"><span class="brand-filter-name">${v}</span><span class="cnt" aria-hidden="true">${countBy(key,v)}</span></label>`
+        return key === 'marca'
+          ? `<label class="brand-filter"><input type="checkbox" value="${v}" ${stateSet.has(v)?'checked':''}><span class="brand-filter-name">${v}</span><span class="cnt">${countBy(key,v)}</span></label>`
           : `<label class="check"><input type="checkbox" value="${v}" ${stateSet.has(v)?'checked':''}> ${v} <span class="cnt">${countBy(key,v)}</span></label>`;
       }).join('');
       document.getElementById(containerId).querySelectorAll('input').forEach(inp => {
@@ -179,6 +174,9 @@
     checkGroup('f-combustiveis', COMBUSTIVEIS, state.combustiveis, 'combustivel');
 
     // sliders
+    const rEl = document.getElementById('f-rodizio'); rEl.checked = state.rodizio;
+    document.getElementById('rodizio-cnt').textContent = CARROS.filter(isentoRodizio).length;
+    rEl.addEventListener('change', () => { state.rodizio = rEl.checked; render(); });
     const pEl = document.getElementById('f-preco'); pEl.max = limites.preco; pEl.value = state.preco;
     const aEl = document.getElementById('f-ano'); aEl.min = limites.ano; aEl.max = Math.max(...CARROS.map(c => c.ano)); aEl.value = state.ano;
     const kEl = document.getElementById('f-km'); kEl.max = limites.km; kEl.value = state.km;
@@ -188,7 +186,7 @@
     document.getElementById('f-search').addEventListener('input', e => { state.search = e.target.value.toLowerCase(); render(); });
     document.getElementById('f-sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
     document.getElementById('clear-filters').addEventListener('click', () => {
-      state.search=''; state.marcas.clear(); state.carrocerias.clear(); state.combustiveis.clear();
+      state.search=''; state.rodizio=false; state.marcas.clear(); state.carrocerias.clear(); state.combustiveis.clear();
       state.preco=limites.preco; state.ano=limites.ano; state.km=limites.km; state.sort='relevancia';
       document.getElementById('f-search').value=''; pEl.value=limites.preco; aEl.value=limites.ano; kEl.value=limites.km;
       document.getElementById('f-sort').value='relevancia';
@@ -201,6 +199,7 @@
         const hay = (c.marca+' '+c.modelo+' '+c.versao+' '+c.carroceria+' '+c.combustivel).toLowerCase();
         if (!hay.includes(state.search)) return false;
       }
+      if (state.rodizio && !isentoRodizio(c)) return false;
       if (state.marcas.size && !state.marcas.has(c.marca)) return false;
       if (state.carrocerias.size && !state.carrocerias.has(c.carroceria)) return false;
       if (state.combustiveis.size && !state.combustiveis.has(c.combustivel)) return false;
@@ -223,6 +222,7 @@
 
     function activeChips() {
       const chips = [];
+      if (state.rodizio) chips.push(['rodizio','Isento de rodízio']);
       state.marcas.forEach(m => chips.push(['marca',m]));
       state.carrocerias.forEach(m => chips.push(['carroceria',m]));
       state.combustiveis.forEach(m => chips.push(['combustivel',m]));
@@ -233,7 +233,8 @@
       box.innerHTML = chips.map(([k,v]) => `<span class="fchip">${v} <button data-k="${k}" data-v="${v}">✕</button></span>`).join('');
       box.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
         const k=b.dataset.k, v=b.dataset.v;
-        if (k==='marca') state.marcas.delete(v);
+        if (k==='rodizio') { state.rodizio=false; rEl.checked=false; }
+        else if (k==='marca') state.marcas.delete(v);
         else if (k==='carroceria') state.carrocerias.delete(v);
         else if (k==='combustivel') state.combustiveis.delete(v);
         else if (k==='preco') { state.preco=limites.preco; pEl.value=limites.preco; }

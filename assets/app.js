@@ -19,13 +19,9 @@ const CONTACT_MESSAGES = {
 };
 const whatsappLink = subject => 'https://wa.me/5511975548105?text=' + encodeURIComponent(CONTACT_MESSAGES[subject] || 'Olá! Gostaria de falar com a equipe da Hi-Tech.');
 const WA = whatsappLink('estoque');
-function proposalWhatsAppLink(values, vehicle) {
-  const field = name => String(values.get(name) || '').trim();
+function vehicleWhatsAppLink(vehicle) {
   const url = new URL(whatsappLink('estoque'));
-  const message = [CONTACT_MESSAGES.estoque, `Veículo: ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano}.`,
-    `Nome: ${field('nome')}`, `Telefone: ${field('telefone')}`,
-    field('email') ? `E-mail: ${field('email')}` : '', field('mensagem')].filter(Boolean).join('\n\n');
-  url.searchParams.set('text', message);
+  url.searchParams.set('text', `Olá! Quero negociar o ${vehicle.marca} ${vehicle.modelo} ${vehicle.ano} que vi no showroom.`);
   return url.href;
 }
 const SITE_PAGES = [
@@ -72,6 +68,8 @@ const I = {
 /* ---------- Helpers ---------- */
 const fmtPrice = n => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 0 });
 const fmtKm = n => n == null ? 'Km sob consulta' : n === 0 ? '0 km' : n.toLocaleString('pt-BR') + ' km';
+// Em SP, elétricos e híbridos ficam fora do rodízio (até 2030). Lista final confirmada pela Hi-Tech.
+const isentoRodizio = c => c.combustivel === 'Elétrico' || c.combustivel === 'Híbrido';
 const armorLabel = c => c.blindado === false ? 'Não blindado' : c.blindado === true ? (c.nivel ? 'Blindado ' + c.nivel : 'Blindado') : 'Blindagem sob consulta';
 
 function parcelaEstimada(preco, entradaPct = 20, meses = 48, taxa = 0.0149) {
@@ -261,13 +259,29 @@ function initMotion() {
   }, 1200);
 }
 
+// Lista padrão de opcionais (estilo Webmotors): todos os itens do catálogo, marcando os do carro.
+const OPCIONAIS_PADRAO = typeof CARROS === 'undefined' ? [] : [...new Set(CARROS.flatMap(c => c.opcionais || []))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+
+// Semelhantes: preços mais próximos, alternando um abaixo e um acima, sem repetir o modelo.
+function semelhantes(car, all, limit = 4) {
+  const others = all.filter(x => x.id !== car.id && x.modelo !== car.modelo);
+  const below = others.filter(x => x.preco <= car.preco).sort((a, b) => b.preco - a.preco);
+  const above = others.filter(x => x.preco > car.preco).sort((a, b) => a.preco - b.preco);
+  const picked = [], models = new Set();
+  const take = list => { const next = list.find(x => !models.has(x.modelo)); if (next) { picked.push(next); models.add(next.modelo); } return !!next; };
+  while (picked.length < limit && (take(below) | (picked.length < limit && take(above))));
+  return picked.sort((a, b) => a.preco - b.preco);
+}
+
 /* ---------- Card ---------- */
 function carCard(c) {
   return `
-  <a href="carro.html?id=${c.id}" class="car-card reveal">
+  <a href="carro.html?id=${c.id}" class="car-card reveal${c.blindado === true ? ' is-armored' : ''}">
     <div class="car-media">
       <img loading="lazy" src="${c.img}" srcset="${c.imgSrcset || ''}" sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1080px) 45vw, 400px" alt="${c.marca} ${c.modelo}" decoding="async">
       <span class="badge">${c.blindado === true ? I.shield : I.tag} ${armorLabel(c)}</span>
+      ${c.destaque ? '<span class="badge badge-featured">Destaque</span>' : ''}
+      ${isentoRodizio(c) ? '<span class="badge badge-rodizio">Isento de rodízio</span>' : ''}
     </div>
     <div class="car-body">
       <span class="car-brand">${c.marca}</span>

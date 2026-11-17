@@ -390,18 +390,6 @@ select::-ms-expand { display: none; }
 .check input:checked { background: var(--accent); border-color: var(--accent); }
 .check input:checked::after { content: '✓'; color: var(--accent-ink); font-size: 11px; font-weight: 700; }
 .check .cnt { margin-left: auto; font-family: var(--mono); font-size: var(--caption-size); color: var(--txt-3); line-height: var(--caption-leading); }
-.brand-filter-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
-.brand-filter { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 104px; padding: 18px 4px 8px; border-radius: var(--control-radius); background: transparent; color: var(--txt); cursor: pointer; }
-.brand-filter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
-.brand-filter img { width: 100%; max-width: 72px; height: 44px; object-fit: contain; }
-.brand-filter-mono { filter: brightness(0) invert(1); }
-:root[data-theme="light"] .brand-filter-mono { filter: brightness(0); }
-.brand-filter-name { font-size: 11px; line-height: 14px; text-align: center; overflow-wrap: anywhere; min-height: 28px; display: flex; align-items: center; }
-.brand-filter .cnt { position: absolute; top: 3px; right: 5px; color: var(--txt-2); font-size: 10px; line-height: 14px; pointer-events: none; }
-.brand-filter:hover { background: color-mix(in srgb,var(--accent) 8%,transparent); }
-.brand-filter:has(input:checked) { background: color-mix(in srgb,var(--accent) 14%,transparent); box-shadow: inset 0 -2px var(--accent); }
-.brand-filter:has(input:checked)::before { content: '✓'; position: absolute; top: 2px; left: 5px; color: var(--accent); font-size: 12px; line-height: 16px; pointer-events: none; }
-.brand-filter:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 .f-select { width: 100%; height: var(--control-height); padding: 7px 12px; line-height: var(--body-leading); background: var(--surface); border: 1px solid var(--field-border); border-radius: var(--control-radius); color: var(--txt); font-size: var(--body-size); font-family: inherit; }
 .f-select::placeholder, .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--txt-3); opacity: 1; }
 .range-val { display: flex; justify-content: space-between; font-family: var(--mono); font-size: var(--caption-size); color: var(--txt); margin-bottom: 12px; letter-spacing: .02em; line-height: var(--caption-leading); }
@@ -546,7 +534,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 
 .pdp-block { margin-top: 48px; padding-top: 48px; box-shadow: inset 0 1px var(--line-3); }
 .pdp-block-head { margin-bottom: var(--text-space); }
-.pdp-block-head:has(+ .spec-grid, + .opcionais) { margin-bottom: var(--collection-space); }
+.pdp-block-head:has(+ .spec-grid, + .opcionais, + .opcionais-list) { margin-bottom: var(--collection-space); }
 .pdp-block-head h2 { font-size: var(--card-title-size); line-height: var(--title-leading); letter-spacing: var(--title-tracking); font-weight: var(--title-weight); }
 .pdp-block-head h2 .serif { font-size: 1em; }
 .pdp-prose { font-size: var(--body-size); line-height: var(--body-leading); color: var(--txt-2); max-width: 62ch; }
@@ -764,3 +752,27 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .theme-toggle .theme-thumb { top: 3px; left: 3px; width: 14px; height: 14px; }
 .theme-toggle[aria-checked="true"] .theme-thumb { transform: translateX(16px); }
 @media (prefers-reduced-motion: reduce) { .btn-quote::before, .wa-label, .wa-float { animation: none; } }
+
+/* V2 · Showroom (call 17/11): blindado com borda azul, destaque, rodízio e marcas por nome */
+.car-card.is-armored { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.car-card.is-armored .car-media { margin: 1.5px 1.5px 0; border-radius: calc(var(--r) - 1.5px) calc(var(--r) - 1.5px) 0 0; }
+.badge-featured { left: auto; right: 14px; color: #FFFFFF; background: var(--accent); border-color: transparent; }
+.badge-rodizio { top: auto; bottom: 14px; color: #FFFFFF; }
+.badge-rodizio::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #3FCF8E; }
+.brand-filter-list { display: flex; flex-direction: column; }
+.brand-filter-list .brand-filter { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--txt-2); cursor: pointer; transition: color .2s; }
+.brand-filter-list .brand-filter input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.brand-filter-list .brand-filter-name { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -.01em; text-transform: uppercase; }
+.brand-filter-list .cnt { font-family: var(--mono); font-size: var(--caption-size); color: var(--txt-3); }
+.brand-filter-list .brand-filter:hover, .brand-filter-list .brand-filter:has(input:checked) { color: var(--txt); }
+.brand-filter-list .brand-filter:has(input:checked) .brand-filter-name { color: var(--accent); }
+.brand-filter-list .brand-filter:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.rodizio-toggle { margin-bottom: 16px; }
+.opcionais-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; margin: 0; padding: 0; list-style: none; }
+.opcionais-list li { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: var(--aux-size); line-height: var(--body-leading); color: var(--txt-3); }
+.opcionais-list li.has { color: var(--txt); }
+.opcionais-list li svg { width: 14px; height: 14px; flex: none; color: var(--accent); }
+.opcionais-list li:not(.has)::before { content: ''; width: 14px; flex: none; }
+@media (max-width: 860px) { .opcionais-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .opcionais-list { grid-template-columns: 1fr; } }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

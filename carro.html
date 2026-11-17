@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>try{if(sessionStorage.getItem('htpre'))document.documentElement.classList.add('pre-skip')}catch(e){}</script>
   <title>Veículo Blindado NIII-A — Hi-Tech Blindados</title>
-  <meta name="description" content="Veículo blindado nível NIII-A à venda na Hi-Tech Blindados, São Paulo. Ficha técnica completa, galeria de fotos, simulação de financiamento e proposta pelo WhatsApp.">
+  <meta name="description" content="Veículo blindado nível NIII-A à venda na Hi-Tech Blindados, São Paulo. Ficha técnica completa, galeria de fotos, simulação de financiamento e negociação pelo WhatsApp.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#F4F6F8">
   <script src="assets/theme.js?v=cards-frios-20261111-r10"></script>
@@ -27,7 +27,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/styles.css?v=call-20261117">
+  <link rel="stylesheet" href="assets/styles.css?v=showroom-v2-20261117">
   <link rel="stylesheet" href="assets/institucional.css?v=carrosseis-20261111">
 </head>
 <body class="vehicle-page">
@@ -59,7 +59,7 @@
 
   <script src="assets/data.js?v=estoque-webp-2"></script>
   <script src="assets/galerias.js?v=estoque-webp-2"></script>
-  <script src="assets/app.js?v=youtube-20261117"></script>
+  <script src="assets/app.js?v=showroom-v2-20261117"></script>
   <script>
     renderChrome();
     document.getElementById('rel-all').innerHTML = 'Ver showroom ' + I.arrow;
@@ -204,9 +204,10 @@
 
         <section class="pdp-block reveal">
           <div class="pdp-block-head"><h2>Equipamentos &amp; conforto.</h2></div>
-          <div class="opcionais">
-            ${c.opcionais.length ? c.opcionais.map(o=>`<span class="op">${I.check} ${o}</span>`).join('') : '<p>Consulte os equipamentos deste veículo com nossa equipe.</p>'}
-          </div>
+          ${c.opcionais.length ? `<ul class="opcionais-list">${OPCIONAIS_PADRAO.map(o => c.opcionais.includes(o)
+            ? `<li class="has">${I.check}<span>${o}</span></li>`
+            : `<li><span>${o}</span><span class="sr-only">(não informado)</span></li>`).join('')}</ul>`
+            : '<p class="pdp-prose">Consulte os equipamentos deste veículo com nossa equipe.</p>'}
         </section>
       </div>
 
@@ -217,9 +218,7 @@
           <div class="big-price">${fmtPrice(c.preco)}</div>
           <div class="parcela">ou a partir de <b>${fmtPrice(Math.round(parcela))}/mês</b> · 48x</div>
           <div class="buy-actions">
-            <a href="${WA}" class="btn btn-wa btn-block btn-lg">${I.wa} Falar no WhatsApp</a>
-            <a href="#proposta" class="btn btn-primary btn-block">Fazer uma proposta</a>
-            <a href="tel:1132027777" class="btn btn-ghost btn-block">${I.phone} (11) 3202-7777</a>
+            <a href="${vehicleWhatsAppLink(c)}" class="btn btn-wa btn-block btn-lg" target="_blank" rel="noopener">${I.wa} Quero negociar agora</a>
           </div>
         </div>
 
@@ -241,28 +240,8 @@
           </div>
         </div>
 
-        <div class="buy-card" id="proposta">
-          <h3>Faça uma proposta</h3>
-          <form class="contact-form" id="proposal-form" action="https://wa.me/5511975548105" method="get">
-            <label for="proposal-name">Seu nome</label>
-            <input id="proposal-name" name="nome" autocomplete="name" maxlength="80" required>
-            <label for="proposal-phone">Telefone / WhatsApp</label>
-            <input id="proposal-phone" name="telefone" type="tel" autocomplete="tel" maxlength="30" required>
-            <label for="proposal-email">E-mail <span class="optional">(opcional)</span></label>
-            <input id="proposal-email" name="email" type="email" autocomplete="email" maxlength="120">
-            <label for="proposal-message">Sua proposta ou dúvida</label>
-            <textarea id="proposal-message" name="mensagem" maxlength="2000" rows="4"></textarea>
-            <p class="fine-print">O WhatsApp será aberto para você revisar e enviar sua mensagem.</p>
-            <button class="btn btn-primary btn-block btn-lg" type="submit">Continuar no WhatsApp</button>
-          </form>
-        </div>
       </aside>
       </div>`;
-
-    document.getElementById('proposal-form').addEventListener('submit', event => {
-      event.preventDefault();
-      window.location.assign(proposalWhatsAppLink(new FormData(event.currentTarget), c));
-    });
 
     // ===== Galeria estilo Webmotors (miniaturas + setas + lightbox) =====
     if (gallery.length > 1) {
@@ -327,10 +306,7 @@
     }
     se.addEventListener('input', sim); sp.addEventListener('input', sim); sim();
 
-    // relacionados (mesma carroceria, exclui atual)
-    let rel = CARROS.filter(x => x.id !== c.id && x.carroceria === c.carroceria);
-    if (rel.length < 3) rel = CARROS.filter(x => x.id !== c.id);
-    document.getElementById('relacionados').innerHTML = rel.slice(0,4).map(carCard).join('');
+    document.getElementById('relacionados').innerHTML = semelhantes(c, CARROS).map(carCard).join('');
 
     // conteúdo da PDP é montado após o renderChrome inicial — re-observa os .reveal
     initMotion();
