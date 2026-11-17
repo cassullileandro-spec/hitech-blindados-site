@@ -140,3 +140,7 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .home-numbers-note { margin-top: 32px; color: var(--txt-3); font-size: var(--aux-size); }
 @media (max-width: 1080px) { .home .home-numbers-list { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 40px; } }
 @media (max-width: 600px) { .home .home-numbers-list strong { font-size: 56px; line-height: 56px; } .home .home-numbers-list strong > span { font-size: 24px; line-height: 32px; } }
+/* Insights na home (call 17/11): reaproveita os cards do blog. */
+.home .home-insights-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; margin-bottom: var(--collection-space); }
+.home .home-insights-head h2 { max-width: 760px; font-size: var(--hero-title-size); line-height: var(--heading-leading); }
+.home .blog-card h3 { margin-top: 16px; font-size: var(--card-title-size); line-height: 1.125; font-weight: 600; overflow-wrap: anywhere; }
