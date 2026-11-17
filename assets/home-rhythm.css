@@ -129,3 +129,14 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
   .home .hh-logo { width: 88px; height: 28px; }
   .home .hh-logo-jeep { width: 68px; }
 }
+/* Seção de números (call 17/11): só dados com fonte; 6.000 m² e Abrablin já aparecem em outros blocos. */
+.home .home-numbers h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
+.home .home-numbers-list { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--grid-gap); margin: var(--collection-space) 0 0; padding: 0; list-style: none; }
+.home .home-numbers-list li { display: grid; align-content: start; gap: 8px; padding-top: 24px; border-top: 1px solid var(--line-2); }
+.home .home-numbers-list strong { font-size: 72px; line-height: 72px; font-weight: 300; color: var(--txt); white-space: nowrap; }
+.home .home-numbers-list strong > span { margin-left: 4px; font-size: 32px; line-height: 40px; }
+.home .home-numbers-list b { margin-top: 8px; font-size: var(--body-size); line-height: var(--body-leading); font-weight: 500; color: var(--txt); }
+.home .home-numbers-list p { color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); }
+.home .home-numbers-note { margin-top: 32px; color: var(--txt-3); font-size: var(--aux-size); }
+@media (max-width: 1080px) { .home .home-numbers-list { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 40px; } }
+@media (max-width: 600px) { .home .home-numbers-list strong { font-size: 56px; line-height: 56px; } .home .home-numbers-list strong > span { font-size: 24px; line-height: 32px; } }
