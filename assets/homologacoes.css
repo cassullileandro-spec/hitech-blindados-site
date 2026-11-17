@@ -75,3 +75,4 @@
   .coverage-cards { grid-template-columns: 1fr; gap: 16px; }
   .coverage-number { margin-bottom: 24px; }
 }
+.homolog-links { display: flex; flex-wrap: wrap; gap: 8px; } .homolog-links [hidden] { display: none; }

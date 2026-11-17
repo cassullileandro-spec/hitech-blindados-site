@@ -28,3 +28,8 @@ if (inquiryForm) {
     window.location.assign('https://wa.me/5511975548105?text=' + encodeURIComponent(formatContactMessage(new FormData(inquiryForm))));
   });
 }
+
+// PDFs trocáveis (assets/docs): o botão só aparece quando o arquivo existe.
+document.querySelectorAll('a[data-doc]').forEach(link => {
+  fetch(link.href, { method: 'HEAD' }).then(response => { if (response.ok) link.hidden = false; }).catch(() => {});
+});

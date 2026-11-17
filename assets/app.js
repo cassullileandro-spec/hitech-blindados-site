@@ -30,7 +30,7 @@ const SITE_PAGES = [
   ['empresa', 'empresa.html', 'A Hi-Tech'],
   ['homologacoes', 'homologacoes.html', 'Homologações'],
   ['assistencia', 'assistencia.html', 'Assistência'],
-  ['blog', 'blog.html', 'Blog'],
+  ['blog', 'blog.html', 'Insights'], // nome provisório (call 17/11); a URL muda junto quando o nome for definido
   ['contato', 'contato.html', 'Contato']
 ];
 
