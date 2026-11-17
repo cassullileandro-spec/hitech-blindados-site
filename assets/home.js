@@ -24,6 +24,19 @@ homologTabs.forEach((tab, index) => {
   });
 });
 
+// Vídeos: o iframe do YouTube só é criado no clique (sem cookies nem peso antes disso).
+const videoDialog = document.getElementById('video-dialog');
+if (videoDialog) {
+  const frame = videoDialog.querySelector('iframe');
+  document.querySelectorAll('[data-video]').forEach(card => card.addEventListener('click', () => {
+    frame.src = `https://www.youtube-nocookie.com/embed/${card.dataset.video}?autoplay=1&rel=0`;
+    videoDialog.showModal();
+  }));
+  videoDialog.querySelector('.video-dialog-close').addEventListener('click', () => videoDialog.close());
+  videoDialog.addEventListener('click', event => { if (event.target === videoDialog) videoDialog.close(); });
+  videoDialog.addEventListener('close', () => { frame.removeAttribute('src'); });
+}
+
 // Abertura trocável: com <video id="hero-video"> toca o vídeo; com <img class="hero-banner"> fica só o banner.
 const heroVideo = document.getElementById('hero-video');
 if (heroVideo) {
