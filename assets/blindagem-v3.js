@@ -17,17 +17,17 @@
   const articles = [...panel.querySelectorAll('[data-detail]')];
   const keys = articles.map(article => article.dataset.detail);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const count = 72, home = 9, root = 'assets/media/compass-v3/';
+  // shortcut: meia volta (0–180°) gerada no Kling, sem versão aberta; giro completo precisa de modelo 3D.
+  const count = 37, home = 0, root = 'assets/media/suv-generico/';
   const images = new Map();
   const views = {
-    vidros:[.43,.36], portas:[.57,.54], opaca:[.57,.27],
-    unioes:[.51,.39], pneus:[.44,.69], mecanismos:[.57,.50]
+    vidros:[.45,.40], portas:[.64,.52], opaca:[.58,.34],
+    unioes:[.55,.41], pneus:[.51,.66], mecanismos:[.72,.40]
   };
   let cameraPart = null, reveal = null;
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
-  let timer = null, drag = null, revision = 0, retryAction = null, lastTrigger = null;
-  const source = (state, index) => `${root}${state}/${String(index).padStart(3, '0')}.webp?v=hq2`;
-  const cutSource = key => `${root}cuts-upscaled/${key}.webp?v=photo1080-1`;
+  let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
+  const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling1`;
   function moveCamera(key) {
     cameraPart = key;
     const [x,y] = views[key] || [0,0];
@@ -60,7 +60,7 @@
   const loadMode = state => Promise.all(Array.from({ length: count }, (_, i) => loadImage(source(state, i))));
   function stop() {
     clearInterval(timer); timer = null;
-    play.textContent = 'Girar 360°';
+    play.textContent = 'Girar';
     play.setAttribute('aria-pressed', 'false');
   }
   function setBusy(value) {
@@ -77,20 +77,20 @@
     parts.forEach(button => button.setAttribute('aria-expanded', 'false'));
   }
   function render(index) {
-    frame = (index % count + count) % count;
-    showImage(source(mode, frame), `Jeep Compass ${mode === 'open' ? 'com portas, capô e porta-malas abertos' : 'fechado'}, ângulo ${frame * 5} graus. Fotografia CarWale.`, image.src?.includes('/cuts-upscaled/'));
+    frame = Math.max(0, Math.min(count - 1, index));
+    showImage(source(mode, frame), `SUV conceitual sem marca, ângulo ${frame * 5} graus. Imagem gerada por IA.`);
     dragSurface.setAttribute('aria-valuenow', String(frame * 5));
     dragSurface.setAttribute('aria-valuetext', `${frame * 5} graus, ${mode === 'open' ? 'aberto' : 'fechado'}`);
     modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
     pins.hidden = !!active || frame !== home || mode !== 'closed' || timer !== null;
-    hint.textContent = mode === 'open' ? 'Portas e tampas abertas. Arraste para ver de todos os lados.' : pins.hidden ? 'Arraste para girar. “Visão geral” traz os pontos de proteção.' : 'Arraste para girar. Toque nos números para explorar.';
+    hint.textContent = pins.hidden ? 'Arraste para girar. “Visão geral” traz os pontos de proteção.' : 'Arraste para girar. Toque nos números para explorar.';
   }
   async function changeMode(next, index = frame) {
-    if (!['closed', 'open'].includes(next)) return;
+    if (next !== 'closed') return;
     const ticket = ++revision;
     stop(); closePanel(); pins.hidden = true; setBusy(true);
     retry.hidden = true;
-    status.textContent = next === 'open' ? 'Preparando o Compass aberto…' : 'Preparando o giro…';
+    status.textContent = 'Preparando o giro…';
     try {
       await loadMode(next);
       if (ticket !== revision) return;
@@ -115,21 +115,20 @@
     panel.scrollTop = 0;
     parts.forEach(button => button.setAttribute('aria-expanded', String(button.dataset.part === key)));
     stage.querySelector('.tour-detail-count').textContent = `${String(keys.indexOf(key) + 1).padStart(2, '0')} / 06`;
-    status.textContent = 'Preparando o corte ilustrativo…';
+    status.textContent = 'Preparando o detalhe…';
     if (!reduced.matches) content.animate([{ opacity:0, transform:'translateY(14px)' }, { opacity:1, transform:'none' }], { duration:320, easing:'ease-out' });
     try {
-      await Promise.all([loadMode('closed'), loadImage(cutSource(key))]);
+      await loadMode('closed');
       if (ticket !== revision) return;
       if (!cameraPart) { mode = 'closed'; ready = true; render(home); }
       moveCamera(key);
-      showImage(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual sobre o Compass; não representa sua construção real.`, true);
-      hint.textContent = 'Corte ilustrativo. “Visão geral” recompõe o exterior.';
+      hint.textContent = 'Detalhe ampliado. “Visão geral” recompõe o veículo.';
       status.textContent = '';
     } catch {
       if (ticket !== revision) return;
       moveCamera(null);
       if (ready) render(frame);
-      status.textContent = 'O corte não carregou. Você pode consultar a explicação no card.';
+      status.textContent = 'O giro não carregou. Você pode consultar a explicação no card.';
       retryAction = () => select(key, lastTrigger); retry.hidden = false;
     } finally {
       if (ticket === revision) {
@@ -166,7 +165,7 @@
       if (timer !== null) { stop(); render(frame); return; }
       ++revision; closePanel(); render(frame); pins.hidden = true;
       play.textContent = 'Pausar giro'; play.setAttribute('aria-pressed', 'true');
-      timer = setInterval(() => render(frame + 1), 85);
+      timer = setInterval(() => { if (frame + direction < 0 || frame + direction > count - 1) direction = -direction; render(frame + direction); }, 85);
     }
 
   }));
@@ -205,6 +204,5 @@
   reduced.addEventListener('change', () => { stop(); reveal?.cancel(); reveal = null; previousImage.hidden = true; });
   window.addEventListener('resize', () => moveCamera(cameraPart));
   new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(stage);
-  // shortcut: open/closed use aligned photos; individual door animation needs a licensed 3D model.
   changeMode('closed', home);
 })();
