@@ -27,7 +27,7 @@
   let cameraPart = null, reveal = null;
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
   let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
-  const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling1`;
+  const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling2`;
   const cutSource = key => `${root}cortes/${key}.webp?v=suv1`;
   const zoom = 1.6;
   function moveCamera(key) {

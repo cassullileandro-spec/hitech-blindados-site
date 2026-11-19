@@ -49,11 +49,11 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
     assert.ok(fs.statSync(path.join(base,`assets/media/suv-generico/detalhes/${key}.webp`)).size>10000);
   }
   const s=setup();assert.equal(s.loads.length,37);assert.ok(s.actions.play.disabled);finish(s);await flush();
-  assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/);assert.equal(s.intervals.size,0);assert.ok(!s.pins.hidden);
+  assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);assert.equal(s.intervals.size,0);assert.ok(!s.pins.hidden);
   s.actions.previous.fire('click');assert.equal(s.slider.attrs['aria-valuenow'],'0','Half turn does not wrap below 0°');
   s.slider.fire('keydown',{key:'End'});assert.equal(s.slider.attrs['aria-valuenow'],'180');
   s.actions.next.fire('click');assert.equal(s.slider.attrs['aria-valuenow'],'180','Half turn does not wrap past 180°');
-  s.actions.home.fire('click');await flush();assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/);assert.ok(!s.pins.hidden);
+  s.actions.home.fire('click');await flush();assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);assert.ok(!s.pins.hidden);
   s.slider.fire('pointerdown',{isPrimary:true,button:0,clientX:100,clientY:100,pointerId:1});
   s.slider.fire('pointermove',{clientX:75,clientY:101,pointerId:1,cancelable:true});assert.equal(s.slider.attrs['aria-valuenow'],'25');
   s.slider.fire('pointercancel');s.slider.fire('pointerdown',{isPrimary:true,button:0,clientX:100,clientY:100,pointerId:2});
@@ -62,14 +62,14 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.image.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv1$`));assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);const zoom=Number(s.camera.style.transform.match(/scale\(([^)]+)\)/)[1]);assert.equal(zoom,1.6,'Every detail uses the same zoom');assert.ok(!s.ghost.hidden);s.ghost.animation.onfinish();assert.ok(s.ghost.hidden);}
   s.panel.scrollTop=200;s.actions['next-detail'].fire('click');await flush();assert.equal(s.panel.scrollTop,0);assert.ok(!s.articles[0].hidden);
   const desktopTransform=s.camera.style.transform;s.mobile.matches=true;s.window.fire('resize');assert.equal(s.camera.style.transform,desktopTransform);
-  s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/);
+  s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);
   s.actions.play.fire('click');assert.equal(s.intervals.size,1);const tick=[...s.intervals.values()][0];tick();assert.equal(s.slider.attrs['aria-valuenow'],'5');
   for(let i=0;i<40;i++) tick();assert.equal(s.slider.attrs['aria-valuenow'],'155','Playback bounces back at 180°');
   s.offscreen();assert.equal(s.intervals.size,0);s.actions.play.fire('click');s.motion.fire('change');assert.equal(s.intervals.size,0);
   s.motion.matches=true;const animations=s.content.animations;s.parts[0].fire('click');await flush();assert.equal(s.content.animations,animations);
   // Late loads must not reopen a dismissed panel.
   const race=setup();finish(race);await flush();race.parts[1].fire('click');race.actions.home.fire('click');finish(race);await flush();
-  assert.match(race.image.src,/suv-generico\/000.webp\?v=kling1$/);assert.ok(race.panel.hidden);assert.equal(race.stage.attrs['aria-busy'],'false');
+  assert.match(race.image.src,/suv-generico\/000.webp\?v=kling2$/);assert.ok(race.panel.hidden);assert.equal(race.stage.attrs['aria-busy'],'false');
   const failed=setup();failed.loads[0].onerror();await flush();failed.parts[1].fire('click');failed.loads.at(-1).onerror();await flush();
   assert.ok(!failed.panel.hidden);assert.ok(!failed.articles[1].hidden);assert.ok(!failed.actions.retry.hidden);
   failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.image.src,/cortes\/portas.webp\?v=suv1$/);
