@@ -34,6 +34,7 @@ function setup() {
 const flush=()=>new Promise(setImmediate);
 const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
 (async()=>{
+  for(const key of keys) assert.ok(fs.statSync(path.join(base,`assets/media/suv-generico/cortes/${key}.webp`)).size>10000);
   for(let i=0;i<37;i++) {
     const file=path.join(base,`assets/media/suv-generico/${String(i).padStart(3,'0')}.webp`);
     const bytes=fs.readFileSync(file);
@@ -43,9 +44,9 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   assert.ok(!html.includes('noindex'), 'Main Blindagem page must be indexable');
   assert.ok(html.includes('assets/blindagem-v3.js'), 'Main Blindagem page uses V3');
   for(const key of keys) {
-    assert.ok(html.includes(`src="assets/media/compass-v3/details/${key}.webp"`));
+    assert.ok(html.includes(`src="assets/media/suv-generico/detalhes/${key}.webp"`));
     assert.ok(!html.includes('Compass'),'No brand on the page');
-    assert.ok(fs.statSync(path.join(base,`assets/media/compass-v3/details/${key}.webp`)).size>10000);
+    assert.ok(fs.statSync(path.join(base,`assets/media/suv-generico/detalhes/${key}.webp`)).size>10000);
   }
   const s=setup();assert.equal(s.loads.length,37);assert.ok(s.actions.play.disabled);finish(s);await flush();
   assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/);assert.equal(s.intervals.size,0);assert.ok(!s.pins.hidden);
@@ -58,7 +59,7 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   s.slider.fire('pointercancel');s.slider.fire('pointerdown',{isPrimary:true,button:0,clientX:100,clientY:100,pointerId:2});
   s.slider.fire('pointermove',{clientX:102,clientY:140,pointerId:2});s.slider.fire('pointermove',{clientX:30,clientY:140,pointerId:2});
   assert.equal(s.slider.attrs['aria-valuenow'],'25','Vertical scroll must not rotate');
-  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/,'Details zoom the generic SUV, never a branded cut');assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);const zoom=Number(s.camera.style.transform.match(/scale\(([^)]+)\)/)[1]);assert.equal(zoom,1.15,'Every detail uses exactly 1.15×');}
+  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.image.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv1$`));assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);const zoom=Number(s.camera.style.transform.match(/scale\(([^)]+)\)/)[1]);assert.equal(zoom,1.6,'Every detail uses the same zoom');assert.ok(!s.ghost.hidden);s.ghost.animation.onfinish();assert.ok(s.ghost.hidden);}
   s.panel.scrollTop=200;s.actions['next-detail'].fire('click');await flush();assert.equal(s.panel.scrollTop,0);assert.ok(!s.articles[0].hidden);
   const desktopTransform=s.camera.style.transform;s.mobile.matches=true;s.window.fire('resize');assert.equal(s.camera.style.transform,desktopTransform);
   s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);assert.match(s.image.src,/suv-generico\/000.webp\?v=kling1$/);
@@ -71,7 +72,7 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   assert.match(race.image.src,/suv-generico\/000.webp\?v=kling1$/);assert.ok(race.panel.hidden);assert.equal(race.stage.attrs['aria-busy'],'false');
   const failed=setup();failed.loads[0].onerror();await flush();failed.parts[1].fire('click');failed.loads.at(-1).onerror();await flush();
   assert.ok(!failed.panel.hidden);assert.ok(!failed.articles[1].hidden);assert.ok(!failed.actions.retry.hidden);
-  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.camera.style.transform,/scale\(1\.15\)/);
+  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.image.src,/cortes\/portas.webp\?v=suv1$/);
   const initial=setup();initial.loads[0].onerror();await flush();assert.ok(initial.actions.play.disabled);assert.ok(!initial.actions.retry.hidden);
   initial.parts[0].fire('click');initial.actions.close.fire('click');finish(initial);await flush();assert.equal(initial.stage.attrs['aria-busy'],'false');assert.ok(!initial.actions.play.disabled);
   const timeout=setup();[...timeout.timeouts.values()][0]();await flush();assert.ok(!timeout.actions.retry.hidden);

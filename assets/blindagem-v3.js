@@ -28,11 +28,13 @@
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
   let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
   const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling1`;
+  const cutSource = key => `${root}cortes/${key}.webp?v=suv1`;
+  const zoom = 1.6;
   function moveCamera(key) {
     cameraPart = key;
     const [x,y] = views[key] || [0,0];
     // Keep the selected point anchored while enlarging the existing whole-car image.
-    camera.style.transform = key ? `translate(${-15*x}%, ${-15*y}%) scale(1.15)` : 'none';
+    camera.style.transform = key ? `translate(${-(zoom-1)*100*x}%, ${-(zoom-1)*100*y}%) scale(${zoom})` : 'none';
   }
   function showImage(src, alt, crossfade = false) {
     const previous = image.src;
@@ -78,7 +80,7 @@
   }
   function render(index) {
     frame = Math.max(0, Math.min(count - 1, index));
-    showImage(source(mode, frame), `SUV conceitual sem marca, ângulo ${frame * 5} graus. Imagem gerada por IA.`);
+    showImage(source(mode, frame), `SUV conceitual sem marca, ângulo ${frame * 5} graus. Imagem gerada por IA.`, image.src?.includes('/cortes/'));
     dragSurface.setAttribute('aria-valuenow', String(frame * 5));
     dragSurface.setAttribute('aria-valuetext', `${frame * 5} graus, ${mode === 'open' ? 'aberto' : 'fechado'}`);
     modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
@@ -115,20 +117,21 @@
     panel.scrollTop = 0;
     parts.forEach(button => button.setAttribute('aria-expanded', String(button.dataset.part === key)));
     stage.querySelector('.tour-detail-count').textContent = `${String(keys.indexOf(key) + 1).padStart(2, '0')} / 06`;
-    status.textContent = 'Preparando o detalhe…';
+    status.textContent = 'Preparando o corte ilustrativo…';
     if (!reduced.matches) content.animate([{ opacity:0, transform:'translateY(14px)' }, { opacity:1, transform:'none' }], { duration:320, easing:'ease-out' });
     try {
-      await loadMode('closed');
+      await Promise.all([loadMode('closed'), loadImage(cutSource(key))]);
       if (ticket !== revision) return;
       if (!cameraPart) { mode = 'closed'; ready = true; render(home); }
       moveCamera(key);
-      hint.textContent = 'Detalhe ampliado. “Visão geral” recompõe o veículo.';
+      showImage(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual; não representa a construção real.`, true);
+      hint.textContent = 'Corte ilustrativo. “Visão geral” recompõe o veículo.';
       status.textContent = '';
     } catch {
       if (ticket !== revision) return;
       moveCamera(null);
       if (ready) render(frame);
-      status.textContent = 'O giro não carregou. Você pode consultar a explicação no card.';
+      status.textContent = 'O corte não carregou. Você pode consultar a explicação no card.';
       retryAction = () => select(key, lastTrigger); retry.hidden = false;
     } finally {
       if (ticket === revision) {
