@@ -3,7 +3,7 @@
   if (!stage) return;
   const image = stage.querySelector('.tour-frame');
   const camera = stage.querySelector('.tour-camera');
-  const previousImage = stage.querySelector('.tour-transition-image');
+  const cut = stage.querySelector('.tour-cut');
   const dragSurface = stage.querySelector('.tour-drag');
   const pins = stage.querySelector('.tour-pins');
   const panel = stage.querySelector('.tour-detail');
@@ -20,31 +20,33 @@
   // shortcut: meia volta (0–180°) gerada no Kling, sem versão aberta; giro completo precisa de modelo 3D.
   const count = 37, home = 0, root = 'assets/media/suv-generico/';
   const images = new Map();
+  // [x, y, zoom]: canto do recorte de cada corte na imagem inteira (box/3840×2160 da base 4K). A câmera enquadra exatamente esse recorte.
   const views = {
-    vidros:[.45,.40], portas:[.64,.52], opaca:[.58,.34],
-    unioes:[.55,.41], pneus:[.51,.66], mecanismos:[.72,.40]
+    vidros:[.3177,.2222,3], portas:[.4479,.375,3], opaca:[.3724,.162,2.4],
+    unioes:[.2063,.1538,1.6], pneus:[.332,.4861,3], mecanismos:[.4948,.287,3]
   };
-  let cameraPart = null, reveal = null;
+  let cameraPart = null, fade = null;
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
   let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
   const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling2`;
-  const cutSource = key => `${root}cortes/${key}.webp?v=suv1`;
-  const zoom = 1.6;
+  const cutSource = key => `${root}cortes/${key}.webp?v=suv2`;
   function moveCamera(key) {
     cameraPart = key;
-    const [x,y] = views[key] || [0,0];
-    // Keep the selected point anchored while enlarging the existing whole-car image.
-    camera.style.transform = key ? `translate(${-(zoom-1)*100*x}%, ${-(zoom-1)*100*y}%) scale(${zoom})` : 'none';
+    const [x,y,s] = views[key] || [0,0,1];
+    camera.style.transform = key ? `translate(${-s*x*100}%, ${-s*y*100}%) scale(${s})` : 'none';
   }
-  function showImage(src, alt, crossfade = false) {
-    const previous = image.src;
-    reveal?.cancel(); reveal = null; previousImage.hidden = true;
-    image.src = src; image.alt = alt;
-    if (!crossfade || reduced.matches || !previous || previous.endsWith(src)) return;
-    previousImage.src = previous; previousImage.hidden = false;
-    const animation = previousImage.animate([{opacity:1},{opacity:0}], {duration:520,delay:160,fill:'both',easing:'ease-in-out'});
-    reveal = animation;
-    animation.onfinish = () => { if (reveal === animation) { previousImage.hidden = true; animation.cancel(); reveal = null; } };
+  // The cut covers the stage once the camera has framed its crop, so it is shown at full resolution.
+  function showCut(src, alt) {
+    fade?.cancel(); fade = null;
+    cut.src = src; cut.alt = alt; cut.hidden = false;
+    if (!reduced.matches) fade = cut.animate([{opacity:0},{opacity:1}], {duration:520,delay:880,fill:'backwards',easing:'ease-in-out'});
+  }
+  function hideCut() {
+    fade?.cancel(); fade = null;
+    if (cut.hidden || reduced.matches) { cut.hidden = true; return; }
+    const animation = cut.animate([{opacity:1},{opacity:0}], {duration:420,fill:'forwards',easing:'ease-out'});
+    fade = animation;
+    animation.onfinish = () => { if (fade === animation) { cut.hidden = true; animation.cancel(); fade = null; } };
   }
   function loadImage(src) {
     if (images.has(src)) return images.get(src);
@@ -72,7 +74,7 @@
     stage.querySelectorAll('[data-action="previous"], [data-action="next"], [data-action="play"]').forEach(button => { button.disabled = value || !ready; });
   }
   function closePanel() {
-    moveCamera(null);
+    moveCamera(null); hideCut();
     active = null;
     panel.hidden = true;
     stage.classList.remove('has-detail');
@@ -80,7 +82,7 @@
   }
   function render(index) {
     frame = Math.max(0, Math.min(count - 1, index));
-    showImage(source(mode, frame), `SUV conceitual sem marca, ângulo ${frame * 5} graus. Imagem gerada por IA.`, image.src?.includes('/cortes/'));
+    image.src = source(mode, frame); image.alt = `SUV conceitual sem marca, ângulo ${frame * 5} graus. Imagem gerada por IA.`;
     dragSurface.setAttribute('aria-valuenow', String(frame * 5));
     dragSurface.setAttribute('aria-valuetext', `${frame * 5} graus, ${mode === 'open' ? 'aberto' : 'fechado'}`);
     modes.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mode === mode)));
@@ -124,12 +126,12 @@
       if (ticket !== revision) return;
       if (!cameraPart) { mode = 'closed'; ready = true; render(home); }
       moveCamera(key);
-      showImage(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual; não representa a construção real.`, true);
+      showCut(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual; não representa a construção real.`, true);
       hint.textContent = 'Corte ilustrativo. “Visão geral” recompõe o veículo.';
       status.textContent = '';
     } catch {
       if (ticket !== revision) return;
-      moveCamera(null);
+      moveCamera(null); hideCut();
       if (ready) render(frame);
       status.textContent = 'O corte não carregou. Você pode consultar a explicação no card.';
       retryAction = () => select(key, lastTrigger); retry.hidden = false;
@@ -204,7 +206,7 @@
   ['pointerup','pointercancel','lostpointercapture'].forEach(type => dragSurface.addEventListener(type, () => { drag = null; }));
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
   window.addEventListener('blur', stop);
-  reduced.addEventListener('change', () => { stop(); reveal?.cancel(); reveal = null; previousImage.hidden = true; });
+  reduced.addEventListener('change', stop);
   window.addEventListener('resize', () => moveCamera(cameraPart));
   new IntersectionObserver(entries => { if (!entries[0].isIntersecting) stop(); }).observe(stage);
   changeMode('closed', home);

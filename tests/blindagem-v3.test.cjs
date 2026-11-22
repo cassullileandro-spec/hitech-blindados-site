@@ -18,7 +18,7 @@ function setup() {
   const modes=[];
   const stage=element(), image=element(), slider=element(), pins=element(), panel=element(), content=element(), status=element(), hint=element(), counter=element();
   const camera=element(),ghost=element(),mobile=element();
-  const nodes={'.tour-camera':camera,'.tour-transition-image':ghost,'.tour-frame':image,'.tour-drag':slider,'.tour-pins':pins,'.tour-detail':panel,'.tour-panel-content':content,'.tour-status':status,'#tour-hint':hint,'.tour-detail-count':counter};
+  const nodes={'.tour-camera':camera,'.tour-cut':ghost,'.tour-frame':image,'.tour-drag':slider,'.tour-pins':pins,'.tour-detail':panel,'.tour-panel-content':content,'.tour-status':status,'#tour-hint':hint,'.tour-detail-count':counter};
   stage.querySelector=s=>nodes[s]||actions[s.match(/data-action="([^"]+)"/)?.[1]];
   stage.querySelectorAll=s=>s==='[data-mode]'?modes:s==='[data-action]'?Object.values(actions):[actions.previous,actions.next,actions.play];
   panel.querySelectorAll=()=>articles;
@@ -59,10 +59,13 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   s.slider.fire('pointercancel');s.slider.fire('pointerdown',{isPrimary:true,button:0,clientX:100,clientY:100,pointerId:2});
   s.slider.fire('pointermove',{clientX:102,clientY:140,pointerId:2});s.slider.fire('pointermove',{clientX:30,clientY:140,pointerId:2});
   assert.equal(s.slider.attrs['aria-valuenow'],'25','Vertical scroll must not rotate');
-  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.image.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv1$`));assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);const zoom=Number(s.camera.style.transform.match(/scale\(([^)]+)\)/)[1]);assert.equal(zoom,1.6,'Every detail uses the same zoom');assert.ok(!s.ghost.hidden);s.ghost.animation.onfinish();assert.ok(s.ghost.hidden);}
+  const crops={vidros:[1220,480,3],portas:[1720,810,3],opaca:[1430,350,2.4],pneus:[1275,1050,3],mecanismos:[1900,620,3]};
+  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.ghost.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv2$`));assert.ok(!s.ghost.hidden,'Cut overlay is shown');assert.match(s.image.src,/000.webp/,'Whole car stays under the cut');assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);
+    const [tx,ty,zoom]=s.camera.style.transform.match(/-?[\d.]+/g).map(Number);const crop=crops[keys[i]];
+    if(crop){assert.equal(zoom,crop[2]);assert.ok(Math.abs(-tx/zoom/100*3840-crop[0])<2&&Math.abs(-ty/zoom/100*2160-crop[1])<2,`Camera frames the ${keys[i]} crop`);}}
   s.panel.scrollTop=200;s.actions['next-detail'].fire('click');await flush();assert.equal(s.panel.scrollTop,0);assert.ok(!s.articles[0].hidden);
   const desktopTransform=s.camera.style.transform;s.mobile.matches=true;s.window.fire('resize');assert.equal(s.camera.style.transform,desktopTransform);
-  s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);
+  s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);s.ghost.animation.onfinish();assert.ok(s.ghost.hidden,'Cut fades out on close');assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);
   s.actions.play.fire('click');assert.equal(s.intervals.size,1);const tick=[...s.intervals.values()][0];tick();assert.equal(s.slider.attrs['aria-valuenow'],'5');
   for(let i=0;i<40;i++) tick();assert.equal(s.slider.attrs['aria-valuenow'],'155','Playback bounces back at 180°');
   s.offscreen();assert.equal(s.intervals.size,0);s.actions.play.fire('click');s.motion.fire('change');assert.equal(s.intervals.size,0);
@@ -72,7 +75,7 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   assert.match(race.image.src,/suv-generico\/000.webp\?v=kling2$/);assert.ok(race.panel.hidden);assert.equal(race.stage.attrs['aria-busy'],'false');
   const failed=setup();failed.loads[0].onerror();await flush();failed.parts[1].fire('click');failed.loads.at(-1).onerror();await flush();
   assert.ok(!failed.panel.hidden);assert.ok(!failed.articles[1].hidden);assert.ok(!failed.actions.retry.hidden);
-  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.image.src,/cortes\/portas.webp\?v=suv1$/);
+  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.ghost.src,/cortes\/portas.webp\?v=suv2$/);
   const initial=setup();initial.loads[0].onerror();await flush();assert.ok(initial.actions.play.disabled);assert.ok(!initial.actions.retry.hidden);
   initial.parts[0].fire('click');initial.actions.close.fire('click');finish(initial);await flush();assert.equal(initial.stage.attrs['aria-busy'],'false');assert.ok(!initial.actions.play.disabled);
   const timeout=setup();[...timeout.timeouts.values()][0]();await flush();assert.ok(!timeout.actions.retry.hidden);
