@@ -34,7 +34,13 @@ function setup() {
 const flush=()=>new Promise(setImmediate);
 const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
 (async()=>{
-  for(const key of keys) assert.ok(fs.statSync(path.join(base,`assets/media/suv-generico/cortes/${key}.webp`)).size>10000);
+  for(const key of keys) {
+    const bytes=fs.readFileSync(path.join(base,`assets/media/suv-generico/cortes/${key}.webp`));
+    assert.equal(bytes.toString('ascii',12,16),'VP8L','Whole-car cut uses lossless WebP');
+    assert.equal(bytes[20],0x2f);
+    const dimensions=bytes.readUInt32LE(21);
+    assert.deepEqual([(dimensions&0x3fff)+1,((dimensions>>>14)&0x3fff)+1],[2560,1440],`${key}: same frame as the original car`);
+  }
   for(let i=0;i<37;i++) {
     const file=path.join(base,`assets/media/suv-generico/${String(i).padStart(3,'0')}.webp`);
     const bytes=fs.readFileSync(file);
@@ -43,8 +49,9 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   const html=fs.readFileSync(path.join(base,'blindagem.html'),'utf8');
   assert.ok(!html.includes('noindex'), 'Main Blindagem page must be indexable');
   assert.ok(html.includes('assets/blindagem-v3.js'), 'Main Blindagem page uses V3');
+  assert.match(html, /class="tour-camera">\s*<img class="tour-frame"[^>]*>\s*<img class="tour-cut"[^>]*>\s*<\/div>/, 'Base and cut must share the same camera');
   for(const key of keys) {
-    assert.ok(html.includes(`src="assets/media/suv-generico/detalhes/${key}.webp"`));
+    assert.ok(html.includes(`src="assets/media/suv-generico/detalhes/${key}.webp?v=suv4"`));
     assert.ok(!html.includes('Compass'),'No brand on the page');
     assert.ok(fs.statSync(path.join(base,`assets/media/suv-generico/detalhes/${key}.webp`)).size>10000);
   }
@@ -59,23 +66,23 @@ const finish=s=>s.loads.forEach(i=>{if(!i.done){i.done=true;i.onload();}});
   s.slider.fire('pointercancel');s.slider.fire('pointerdown',{isPrimary:true,button:0,clientX:100,clientY:100,pointerId:2});
   s.slider.fire('pointermove',{clientX:102,clientY:140,pointerId:2});s.slider.fire('pointermove',{clientX:30,clientY:140,pointerId:2});
   assert.equal(s.slider.attrs['aria-valuenow'],'25','Vertical scroll must not rotate');
-  const crops={vidros:[1220,480,3],portas:[1720,810,3],opaca:[1430,350,2.4],pneus:[1275,1050,3],mecanismos:[1900,620,3],unioes:[1860,560,5]};
-  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.ghost.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv3$`));assert.ok(!s.ghost.hidden,'Cut overlay is shown');assert.match(s.image.src,/000.webp/,'Whole car stays under the cut');assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);
-    const [tx,ty,zoom]=s.camera.style.transform.match(/-?[\d.]+/g).map(Number);const crop=crops[keys[i]];
-    if(crop){assert.equal(zoom,crop[2]);assert.ok(Math.abs(-tx/zoom/100*3840-crop[0])<2&&Math.abs(-ty/zoom/100*2160-crop[1])<2,`Camera frames the ${keys[i]} crop`);}}
+  for(let i=0;i<keys.length;i++) {s.parts[i].fire('click');finish(s);await flush();assert.match(s.ghost.src,new RegExp(`suv-generico/cortes/${keys[i]}.webp\\?v=suv4$`));assert.ok(!s.ghost.hidden,'Cut overlay is shown');assert.match(s.image.src,/000.webp/,'Whole car stays under the cut');assert.equal(s.articles.filter(a=>!a.hidden).length,1);assert.ok(!s.articles[i].hidden);
+    const [tx,ty,zoom]=s.camera.style.transform.match(/-?[\d.]+/g).map(Number);
+    assert.equal(zoom,1.6,'All six cuts retain a modest camera zoom');
+    assert.ok(tx<=0&&ty<=0&&tx>=100*(1-zoom)&&ty>=100*(1-zoom),'Camera stays inside the full image');}
   s.panel.scrollTop=200;s.actions['next-detail'].fire('click');await flush();assert.equal(s.panel.scrollTop,0);assert.ok(!s.articles[0].hidden);
   const desktopTransform=s.camera.style.transform;s.mobile.matches=true;s.window.fire('resize');assert.equal(s.camera.style.transform,desktopTransform);
   s.actions.close.fire('click');assert.equal(s.camera.style.transform,'none');assert.ok(s.panel.hidden);s.ghost.animation.onfinish();assert.ok(s.ghost.hidden,'Cut fades out on close');assert.match(s.image.src,/suv-generico\/000.webp\?v=kling2$/);
   s.actions.play.fire('click');assert.equal(s.intervals.size,1);const tick=[...s.intervals.values()][0];tick();assert.equal(s.slider.attrs['aria-valuenow'],'5');
   for(let i=0;i<40;i++) tick();assert.equal(s.slider.attrs['aria-valuenow'],'155','Playback bounces back at 180°');
   s.offscreen();assert.equal(s.intervals.size,0);s.actions.play.fire('click');s.motion.fire('change');assert.equal(s.intervals.size,0);
-  s.motion.matches=true;const animations=s.content.animations;s.parts[0].fire('click');await flush();assert.equal(s.content.animations,animations);
+  s.motion.matches=true;const animations=s.content.animations, cutAnimations=s.ghost.animations;s.parts[0].fire('click');await flush();assert.equal(s.content.animations,animations);assert.equal(s.ghost.animations,cutAnimations,'Reduced motion also skips the cut fade');
   // Late loads must not reopen a dismissed panel.
   const race=setup();finish(race);await flush();race.parts[1].fire('click');race.actions.home.fire('click');finish(race);await flush();
   assert.match(race.image.src,/suv-generico\/000.webp\?v=kling2$/);assert.ok(race.panel.hidden);assert.equal(race.stage.attrs['aria-busy'],'false');
   const failed=setup();failed.loads[0].onerror();await flush();failed.parts[1].fire('click');failed.loads.at(-1).onerror();await flush();
   assert.ok(!failed.panel.hidden);assert.ok(!failed.articles[1].hidden);assert.ok(!failed.actions.retry.hidden);
-  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.ghost.src,/cortes\/portas.webp\?v=suv3$/);
+  failed.actions.retry.fire('click');finish(failed);await flush();assert.ok(failed.actions.retry.hidden);assert.match(failed.ghost.src,/cortes\/portas.webp\?v=suv4$/);
   const initial=setup();initial.loads[0].onerror();await flush();assert.ok(initial.actions.play.disabled);assert.ok(!initial.actions.retry.hidden);
   initial.parts[0].fire('click');initial.actions.close.fire('click');finish(initial);await flush();assert.equal(initial.stage.attrs['aria-busy'],'false');assert.ok(!initial.actions.play.disabled);
   const timeout=setup();[...timeout.timeouts.values()][0]();await flush();assert.ok(!timeout.actions.retry.hidden);

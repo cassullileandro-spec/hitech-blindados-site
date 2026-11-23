@@ -20,22 +20,21 @@
   // shortcut: meia volta (0–180°) gerada no Kling, sem versão aberta; giro completo precisa de modelo 3D.
   const count = 37, home = 0, root = 'assets/media/suv-generico/';
   const images = new Map();
-  // [x, y, zoom]: canto do recorte de cada corte na imagem inteira (box/3840×2160 da base 4K). A câmera enquadra exatamente esse recorte.
+  // O corte tem o mesmo quadro do giro; ambos acompanham a mesma câmera.
   const views = {
-    vidros:[.3177,.2222,3], portas:[.4479,.375,3], opaca:[.3724,.162,2.4],
-    unioes:[.4844,.2593,5], pneus:[.332,.4861,3], mecanismos:[.4948,.287,3]
+    vidros:[.22,.10,1.6], portas:[.29,.25,1.6], opaca:[.25,.07,1.6],
+    unioes:[.25,.12,1.6], pneus:[.19,.35,1.6], mecanismos:[.29,.23,1.6]
   };
   let cameraPart = null, fade = null;
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
   let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
   const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling2`;
-  const cutSource = key => `${root}cortes/${key}.webp?v=suv3`;
+  const cutSource = key => `${root}cortes/${key}.webp?v=suv4`;
   function moveCamera(key) {
     cameraPart = key;
     const [x,y,s] = views[key] || [0,0,1];
     camera.style.transform = key ? `translate(${-s*x*100}%, ${-s*y*100}%) scale(${s})` : 'none';
   }
-  // The cut covers the stage once the camera has framed its crop, so it is shown at full resolution.
   function showCut(src, alt) {
     fade?.cancel(); fade = null;
     cut.src = src; cut.alt = alt; cut.hidden = false;
@@ -126,7 +125,7 @@
       if (ticket !== revision) return;
       if (!cameraPart) { mode = 'closed'; ready = true; render(home); }
       moveCamera(key);
-      showCut(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual; não representa a construção real.`, true);
+      showCut(cutSource(key), `Ilustração gerada por IA: ${articles[keys.indexOf(key)].querySelector('h2').textContent}. Corte conceitual; não representa a construção real.`);
       hint.textContent = 'Corte ilustrativo. “Visão geral” recompõe o veículo.';
       status.textContent = '';
     } catch {
