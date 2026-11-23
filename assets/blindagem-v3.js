@@ -23,13 +23,13 @@
   // [x, y, zoom]: canto do recorte de cada corte na imagem inteira (box/3840×2160 da base 4K). A câmera enquadra exatamente esse recorte.
   const views = {
     vidros:[.3177,.2222,3], portas:[.4479,.375,3], opaca:[.3724,.162,2.4],
-    unioes:[.2063,.1538,1.6], pneus:[.332,.4861,3], mecanismos:[.4948,.287,3]
+    unioes:[.4844,.2593,5], pneus:[.332,.4861,3], mecanismos:[.4948,.287,3]
   };
   let cameraPart = null, fade = null;
   let mode = 'closed', frame = home, active = null, ready = false, busy = false;
   let timer = null, direction = 1, drag = null, revision = 0, retryAction = null, lastTrigger = null;
   const source = (state, index) => `${root}${String(index).padStart(3, '0')}.webp?v=kling2`;
-  const cutSource = key => `${root}cortes/${key}.webp?v=suv2`;
+  const cutSource = key => `${root}cortes/${key}.webp?v=suv3`;
   function moveCamera(key) {
     cameraPart = key;
     const [x,y,s] = views[key] || [0,0,1];
