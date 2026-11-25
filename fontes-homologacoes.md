@@ -1,6 +1,20 @@
 # Homologações — base editorial
 
-Pesquisa em 11/11/2026. Alteração local; não publicada.
+Pesquisa inicial em 11/11/2026. Conteúdo atualizado em 25/11/2026 para a prévia V2 separada.
+
+## Atualização fornecida pelo cliente — 25/11/2026
+
+[Texto Homologações Hi-Tech Site](https://docs.google.com/document/d/1ZNCKaGhYAb_pkZedfVVfxkK-xkuPGPSDIxHsv5lwd54/edit?tab=t.0), documento enviado pelo usuário e lido na íntegra. Base editorial da ampliação de três para nove marcas: Jeep, CAOA Chery, GWM, GAC, RAM, CAOA Changan, Ford, Hyundai e Mitsubishi.
+
+- Jeep: incorporados os 43 critérios técnicos Stellantis e a cobertura dos componentes modificados por **até** cinco anos. Mantida a distinção entre garantia de fábrica e cobertura da blindadora.
+- CAOA Chery: o novo material afirma a parceria exclusiva e certificada, a fábrica de 6.000 m² e mais de 20 mil veículos blindados e viaturas produzidos. Esses dados são atribuídos ao material institucional do cliente; não foram inferidos de outras montadoras.
+- GWM: incorporado o cuidado com eletrificação, sensores, baterias, sistemas e estrutura. Mantidas as soluções tradicional/Tensylon, os cinco anos da blindagem e a garantia de fábrica sujeita aos protocolos.
+- GAC: preservada a formulação de **possibilidade** de manter a garantia, conforme as condições da montadora.
+- RAM, CAOA Changan, Ford, Hyundai e Mitsubishi: utilizados os textos sobre processo homologado, materiais e preservação das características originais. A garantia de fábrica continua condicionada às regras de cada montadora.
+- Os modelos ilustrados de Jeep, GWM e RAM permanecem fundamentados nas fontes anteriores abaixo. Não foram adicionados modelos ou prazos de garantia para as outras marcas, pois o documento não os especifica.
+- A referência do texto a “certificações ISO 9001 e Bureau Veritas” não foi convertida em novo selo ou certificado: Bureau Veritas identifica uma organização, e o documento não apresenta norma, escopo ou certificado correspondente.
+
+Não se trata de verificação documental independente das novas homologações. Os textos foram organizados em apresentação, benefícios e consulta, usando os mesmos painéis nativos, sem dependências adicionais. A V1 não foi alterada.
 
 ## Referência de organização
 
@@ -18,15 +32,15 @@ Pesquisa em 11/11/2026. Alteração local; não publicada.
 
 ## Pontos pendentes
 
-- CAOA Chery: não encontrada nesta pesquisa uma fonte primária suficiente para afirmar modelos homologados, prazo de garantia e benefícios específicos. Mantida como consulta de projeto, sem essas promessas. Atualizar quando a Hi-Tech fornecer documentação.
+- Novas marcas: o material do cliente informa as parcerias e os processos, mas não fornece certificados completos, listas de modelos elegíveis ou prazos específicos para CAOA Chery, GAC, CAOA Changan, Ford, Hyundai e Mitsubishi. Os cards orientam a consulta do veículo e das condições com a equipe.
 - ISO: localizado o selo Fundação Vanzolini ISO 9001 publicado pela própria Hi-Tech; aplicado sem alteração. Ainda não conferidos número, escopo e validade do certificado original.
 - As condições de cada montadora prevalecem; consultar elegibilidade, ano, versão e proposta antes de contratar. A página não promete garantia irrestrita para o veículo inteiro.
 
 ## Implementação e revisão
 
 - `homologacoes.html` e `assets/homologacoes.css`; painéis nativos `details` com agrupamento por marca, sem nova dependência ou JavaScript.
-- Mantidos hero, navegação, rodapé e CTA final. A tabela de coberturas foi substituída por quatro blocos editoriais, a pedido do usuário.
-- Mantidas âncoras Jeep, GWM, CAOA e qualidade; acrescentada RAM.
+- Mantidos hero, navegação, rodapé, certificações de gestão e os quatro blocos de coberturas aprovados.
+- Mantidas as âncoras Jeep, GWM, RAM, CAOA e qualidade. CAOA agora abre o card dedicado; acrescentadas as âncoras das novas marcas.
 
 ## Arquivos de marca e selo
 

@@ -19,3 +19,16 @@ Arquivos em `filtros/`, próprios para a apresentação compacta do filtro:
 - BYD e GWM reutilizam os SVGs existentes nesta pasta.
 
 As marcas monocromáticas recebem contraste claro/escuro via CSS; as imagens originais utilizadas em outras seções não foram substituídas.
+
+## Homologações — 25/11/2026
+
+Logos oficiais servidas localmente, com contraste monocromático aplicado pelo CSS da página:
+
+- GAC: [cabeçalho oficial brasileiro](https://br-www-resouce-cdn.gacgroup.com/static/BR/tenant/cms/common/202503/ec5c8e6c-c5d3-450f-b4cb-3e8fbf42d0dc.webp).
+- Hyundai: [arquivo oficial](https://www.hyundai.com.br/content/dam/hmb/Hyundai_Motor_Company_logo.webp).
+- Mitsubishi: [arquivo do site brasileiro](https://media.mitsubishimotors.com.br/uploads/originals/logo_01_1_803bf48521.svg).
+- Changan: [arquivo oficial](https://www.globalchangan.com/static/clientlibs/changancms/images/header/changan-auto-logo.png). Margens transparentes removidas e conversão para WebP sem perdas, com largura de 512 px.
+- Ford: reutilizado o SVG do Simple Icons já presente em `filtros/ford.svg`, com viewport ajustado ao formato horizontal da marca em `ford-homologacao.svg`.
+- CAOA Chery: reutilizada a marca vetorial Chery de `filtros/chery.svg`; a identificação completa aparece no título do card.
+
+O uso das marcas identifica o conteúdo fornecido pela Hi-Tech; as imagens não substituem os documentos de homologação.
