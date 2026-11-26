@@ -1,6 +1,6 @@
 # Homologações — base editorial
 
-Pesquisa inicial em 11/11/2026. Conteúdo atualizado em 25/11/2026 para a prévia V2 separada.
+Pesquisa inicial em 11/11/2026. Conteúdo atualizado em 26/11/2026 para a prévia V2 separada.
 
 ## Atualização fornecida pelo cliente — 25/11/2026
 
@@ -11,7 +11,7 @@ Pesquisa inicial em 11/11/2026. Conteúdo atualizado em 25/11/2026 para a prévi
 - GWM: incorporado o cuidado com eletrificação, sensores, baterias, sistemas e estrutura. Mantidas as soluções tradicional/Tensylon, os cinco anos da blindagem e a garantia de fábrica sujeita aos protocolos.
 - GAC: preservada a formulação de **possibilidade** de manter a garantia, conforme as condições da montadora.
 - RAM, CAOA Changan, Ford, Hyundai e Mitsubishi: utilizados os textos sobre processo homologado, materiais e preservação das características originais. A garantia de fábrica continua condicionada às regras de cada montadora.
-- Os modelos ilustrados de Jeep, GWM e RAM permanecem fundamentados nas fontes anteriores abaixo. Não foram adicionados modelos ou prazos de garantia para as outras marcas, pois o documento não os especifica.
+- Os modelos ilustrados de Jeep, GWM e RAM permanecem fundamentados nas fontes anteriores abaixo. Em 26/11, acrescentado o Tiggo 7 Pro com base no anúncio arquivado da própria Hi-Tech detalhado abaixo. Não foram adicionados modelos para GAC, CAOA Changan, Ford, Hyundai ou Mitsubishi, pois não há confirmação de modelos no material recebido. Não foram inferidos novos prazos de garantia.
 - A referência do texto a “certificações ISO 9001 e Bureau Veritas” não foi convertida em novo selo ou certificado: Bureau Veritas identifica uma organização, e o documento não apresenta norma, escopo ou certificado correspondente.
 
 Não se trata de verificação documental independente das novas homologações. Os textos foram organizados em apresentação, benefícios e consulta, usando os mesmos painéis nativos, sem dependências adicionais. A V1 não foi alterada.
@@ -26,6 +26,7 @@ Não se trata de verificação documental independente das novas homologações.
 - [Jeep — inclusão do Commander, 04/03/2026](https://www.media.stellantis.com/br-pt/jeep/press/jeep-amplia-blindagem-homologada-para-o-commander): confirmação dos modelos e parceiros.
 - [GWM — blindagem](https://www.gwmmotors.com.br/pt/servicos/blindagem): Hi-Tech parceira; preservação da garantia conforme protocolos; programa com cinco anos; materiais tradicionais ou Tensylon. A página consultada não fornece lista completa de modelos elegíveis.
 - [Hi-Tech — Haval H6 PHEV19](https://www.hitechblindados.com.br/carros/gwm-haval-h6/) e [Haval H6 HEV2](https://www.hitechblindados.com.br/carros/gwm-haval-h6-3/): a própria empresa apresenta a linha H6 com certificação GWM. A página nova pede consulta de versão e ano; não inclui outros modelos GWM por inferência.
+- [Hi-Tech — Tiggo 7 Pro](https://www.hitechblindados.com.br/carros/caoa-chery-tiggo-7-pro/): cópia da página oficial coletada em 29/10/2026, preservada em `docs/levantamento-2026-10-29/fontes/hitechblindados.com.br_carros_caoa-chery-tiggo-7-pro.txt`. Anuncia o Tiggo 7 Pro 1.5 TCI Flex Hybrid Max Drive CVT, ano 2025, como “Veiculo Blindado HI-TECH CERTIFICADA CAOA CHERY”. O endereço retornou 404 em 26/11/2026. É evidência histórica de um modelo apresentado pela própria Hi-Tech, não uma lista vigente de versões elegíveis. A home e a página de homologações mostram apenas esse modelo e pedem consulta de ano e versão. Tiggo 8 Pro e Ranger Raptor não foram incluídos: os anúncios consultados informam blindagem, sem confirmação específica de certificação/homologação.
 - [RAM — programa de blindagem](https://www.ram.com.br/servicos-e-manuais/blindagem.html) e [comunicado oficial de 09/03/2026](https://www.media.stellantis.com/br-pt/ram/press/ram-lanca-blindagem-homologada-para-rampage-1500-2500-e-3500): Hi-Tech parceira; Rampage, 1500, 2500 e 3500; preservação da cobertura dos sistemas não alterados; cinco anos nos componentes alterados e vidros; recalibração ADAS. A promoção de revisões gratuitas com prazo encerrado em maio não foi utilizada.
 - [Hi-Tech — empresa](https://www.hitechblindados.com.br/empresa/) e [tecnologia](https://www.hitechblindados.com.br/tecnologia/): declaração institucional de ISO 9001:2015. Não foi conferido o certificado original vigente, seu número, emissor, escopo e validade. A copy atribui a informação à empresa e convida a solicitar os documentos.
 - [ABRABLIN — associados](https://abrablin.net/associados/): HI TECH BLINDAGENS, associada desde 2006. Corrigida a antiga descrição como “homologação pela ABRABLIN”: associação não equivale a certificação ou homologação técnica.
@@ -48,4 +49,4 @@ Não se trata de verificação documental independente das novas homologações.
 - ABRABLIN: logo original https://abrablin.net/wp-content/uploads/2023/01/logo2018.png, obtida do site da associação. Não foi escolhido um selo de anuidade sem documentação específica.
 - Jeep e GWM: reaproveitados os arquivos de marca presentes no projeto.
 - RAM: marca vetorial FCA US LLC, origem ramtrucks.com, via https://commons.wikimedia.org/wiki/File:Ram_Trucks_2009_wordmark.svg. Versão original, sem redesenho por IA. Os PNGs baixados da Stellantis não foram usados por apresentar problemas de renderização.
-- Sete carros ilustrativos gerados com image_gen, recortes prata de perfil. Arquivos e prompts em assets/media/modelos-homologados/. Não são fotografias de unidades à venda nem prova técnica de versão homologada.
+- Oito carros ilustrativos gerados com image_gen, recortes prata de perfil em `assets/media/modelos-homologados/`. Não são fotografias de unidades à venda nem prova técnica de versão homologada. O Tiggo 7 Pro foi gerado a partir das fotos 01 e 04 do anúncio da Hi-Tech, com o Compass apenas como referência de apresentação, sem reutilizar seu desenho. Prompt registrado em `output/home-modelos-confirmados-20261126/prompt-tiggo7.txt`; exportação WebP 1440×960 com alpha preservado.
