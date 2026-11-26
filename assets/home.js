@@ -3,26 +3,28 @@ renderChrome('home');
 document.querySelectorAll('[data-icon]').forEach(element => { element.innerHTML = I[element.dataset.icon] || ''; });
 initMotion();
 
-// Abas das homologações: clique e setas do teclado (padrão WAI-ARIA tabs).
-const homologTabs = [...document.querySelectorAll('.hh-tab')];
-function selectHomologTab(tab) {
-  homologTabs.forEach(item => {
-    const active = item === tab;
-    item.setAttribute('aria-selected', String(active));
-    item.tabIndex = active ? 0 : -1;
-    document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
-  });
+// O embed oficial só carrega quando o visitante se aproxima da seção.
+const instagramFeed = document.querySelector('[data-instagram-feed]');
+if (instagramFeed) {
+  const instagramObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    instagramObserver.disconnect();
+    const frameObserver = new MutationObserver(() => {
+      const frame = instagramFeed.querySelector('iframe');
+      if (!frame) return;
+      frame.title = 'Publicações de Gabriel Bucker no Instagram';
+      frameObserver.disconnect();
+    });
+    frameObserver.observe(instagramFeed, { childList: true, subtree: true });
+    const script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    script.onerror = () => frameObserver.disconnect();
+    script.onload = () => window.instgrm?.Embeds.process();
+    document.body.append(script);
+  }, { rootMargin: '400px' });
+  instagramObserver.observe(instagramFeed);
 }
-homologTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => selectHomologTab(tab));
-  tab.addEventListener('keydown', event => {
-    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
-    if (!step) return;
-    const next = homologTabs[(index + step + homologTabs.length) % homologTabs.length];
-    selectHomologTab(next);
-    next.focus();
-  });
-});
 
 // Vídeos: o iframe do YouTube só é criado no clique (sem cookies nem peso antes disso).
 const videoDialog = document.getElementById('video-dialog');

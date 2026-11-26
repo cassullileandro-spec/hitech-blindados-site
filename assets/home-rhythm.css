@@ -96,38 +96,29 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .showroom-last { padding: 32px 0; border-top: 1px solid var(--line); }
 .home .showroom-last .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
 .home .showroom-last p { margin: 0; color: var(--txt-3); font-size: var(--aux-size); }
-/* Homologações em abas por montadora (call 17/11, opção B). */
-.home .hh-tabs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: var(--collection-space); border-bottom: 1px solid var(--line-2); }
-.home .hh-tab { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 0 20px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); text-align: left; cursor: pointer; opacity: .6; transition: opacity .25s, border-color .25s; }
-.home .hh-tab:hover { opacity: .85; }
-.home .hh-tab[aria-selected="true"] { opacity: 1; border-bottom-color: var(--accent); color: var(--txt); }
-.home .hh-logo { display: block; width: 120px; height: 36px; object-fit: contain; object-position: left center; filter: brightness(0) invert(1); }
-.home .hh-logo-jeep { width: 92px; }
-.home .hh-panel { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--grid-gap-wide); align-items: center; padding-top: 48px; }
-.home .hh-panel[hidden] { display: none; }
-.home .hh-panel:focus-visible { outline-offset: 8px; }
-.home .hh-models { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
-.home .hh-models[data-count="1"] { grid-template-columns: minmax(0,1fr); }
-.home .hh-models li { display: grid; gap: 8px; color: var(--txt-2); font-size: var(--aux-size); }
-.home .hh-models img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
-.home .hh-label { display: block; margin-bottom: 16px; color: var(--accent); font-size: var(--aux-size); font-weight: 500; }
-.home .hh-copy h3 { font-size: var(--card-title-size); line-height: 40px; font-weight: 400; }
-.home .hh-copy p { margin-top: var(--text-space); color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
-.home .hh-benefits { display: grid; gap: 12px; margin: 24px 0 0; padding-left: 20px; list-style: disc; color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
-.home .hh-benefits li::marker { color: var(--accent); }
-.home .hh-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 32px; }
+/* Todas as marcas ficam visíveis; os detalhes permanecem na página de homologações. */
+.home .hh-brands { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 16px; margin: var(--collection-space) 0 0; padding: 0; list-style: none; }
+.home .hh-brands a { display: grid; place-items: center; min-height: 88px; padding: 16px 8px; border-radius: var(--r); transition: background .25s; }
+.home .hh-brands a:hover, .home .hh-brands a:focus-visible { background: rgba(255,255,255,.08); }
+.home .hh-logo { display: block; width: 100%; max-width: 112px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); }
+.home .hh-logo-jeep { max-width: 80px; }
+.home .hh-logo-mitsubishi { max-width: 72px; height: 56px; }
 .home .hh-credentials { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line-2); }
 .home .hh-credentials a { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: var(--r); background: rgba(255,255,255,.04); color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); transition: background .25s; }
 .home .hh-credentials a:hover { background: rgba(255,255,255,.08); }
 .home .hh-credentials img { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
 .home .hh-credentials b { display: block; color: var(--txt); font-weight: 500; }
 .home .hh-credentials .hh-other { justify-content: space-between; }
+@media (max-width: 1080px) {
+  .home .hh-brands { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px 16px; }
+}
 @media (max-width: 860px) {
-  .home .hh-panel { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
-  .home .hh-credentials { grid-template-columns: 1fr; margin-top: 48px; }
-  .home .hh-tab span { display: none; }
-  .home .hh-logo { width: 88px; height: 28px; }
-  .home .hh-logo-jeep { width: 68px; }
+  .home .hh-credentials { grid-template-columns: 1fr; margin-top: 32px; }
+}
+@media (max-width: 600px) {
+  .home .hh-brands a { min-height: 72px; }
+  .home .hh-logo { height: 32px; }
+  .home .hh-logo-jeep { max-width: 68px; }
 }
 /* Seção de números (call 17/11): só dados com fonte; 6.000 m² e Abrablin já aparecem em outros blocos. */
 .home .home-numbers h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
@@ -162,3 +153,19 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .video-dialog-close { position: absolute; right: 0; top: -48px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255,255,255,.15); color: #FFFFFF; font-size: 24px; line-height: 1; cursor: pointer; }
 @media (max-width: 1080px) { .home .home-videos-grid { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 32px; } }
 @media (max-width: 600px) { .home .home-videos-grid { grid-template-columns: 1fr; } }
+
+.home .home-instagram { background: var(--surface); }
+.home .home-instagram-layout { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: center; gap: var(--grid-gap-wide); }
+.home .home-instagram-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; color: var(--txt-2); font-size: var(--aux-size); }
+.home .home-instagram-kicker svg { display: block; width: 24px; height: 24px; }
+.home .home-instagram-copy h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
+.home .home-instagram-copy p { max-width: 42ch; margin-top: var(--text-space); color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
+.home .home-instagram-copy .btn { margin-top: 32px; }
+.home .home-instagram-feed { min-width: 0; border-radius: var(--r); overflow: hidden; }
+.home .home-instagram-feed .instagram-media { display: block; width: 100% !important; min-width: 0 !important; max-width: none !important; margin: 0 !important; border: 0 !important; border-radius: var(--r) !important; box-shadow: none !important; }
+.home .home-instagram-feed blockquote.instagram-media { display: grid; justify-items: center; align-content: center; gap: 20px; min-height: 400px; padding: 32px; background: var(--panel-bg); text-align: center; }
+.home .home-instagram-feed blockquote svg { width: 48px; height: 48px; }
+@media (max-width: 860px) {
+  .home .home-instagram-layout { grid-template-columns: 1fr; gap: 32px; }
+  .home .home-instagram-feed { width: 100%; max-width: 658px; margin-inline: auto; }
+}

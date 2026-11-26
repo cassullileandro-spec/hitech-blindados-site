@@ -8,6 +8,16 @@ function formatContactMessage(values) {
 
 renderChrome(document.body.dataset.page);
 
+// O link de uma marca na home já abre o respectivo programa.
+function openLinkedHomologation() {
+  const program = document.getElementById(location.hash.slice(1));
+  if (!program?.matches('.homolog-program')) return;
+  program.open = true;
+  requestAnimationFrame(() => program.scrollIntoView({ block: 'start' }));
+}
+openLinkedHomologation();
+window.addEventListener('hashchange', openLinkedHomologation);
+
 // Cópia por e-mail para os gestores (call de 17/11). Fica desligada até a Hi-Tech definir quem recebe
 // (tarefa 28). No WordPress vira a ação "E-mail" do Form do Elementor, antes do redirecionamento ao WhatsApp.
 const CONTACT_EMAIL = { endpoint: '', recipients: [] };
