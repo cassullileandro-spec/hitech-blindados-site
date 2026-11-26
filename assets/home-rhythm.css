@@ -97,12 +97,10 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .showroom-last .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
 .home .showroom-last p { margin: 0; color: var(--txt-3); font-size: var(--aux-size); }
 /* Todas as marcas ficam visíveis; os detalhes permanecem na página de homologações. */
-.home .hh-brands { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 16px; margin: var(--collection-space) 0 0; padding: 0; list-style: none; }
-.home .hh-brands a { display: grid; place-items: center; min-height: 88px; padding: 16px 8px; border-radius: var(--r); transition: background .25s; }
+.home .hh-brands { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 24px; margin: var(--collection-space) 0 0; padding: 0; list-style: none; }
+.home .hh-brands a { display: grid; place-items: center; height: 100%; min-height: 112px; padding: 16px 0; border-radius: var(--r); transition: background .25s; }
 .home .hh-brands a:hover, .home .hh-brands a:focus-visible { background: rgba(255,255,255,.08); }
-.home .hh-logo { display: block; width: 100%; max-width: 112px; height: 40px; object-fit: contain; filter: brightness(0) invert(1); }
-.home .hh-logo-jeep { max-width: 80px; }
-.home .hh-logo-mitsubishi { max-width: 72px; height: 56px; }
+.home .hh-logo { display: block; width: 100%; height: auto; overflow: hidden; filter: brightness(0) invert(1); }
 .home .hh-credentials { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line-2); }
 .home .hh-credentials a { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: var(--r); background: rgba(255,255,255,.04); color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); transition: background .25s; }
 .home .hh-credentials a:hover { background: rgba(255,255,255,.08); }
@@ -110,15 +108,13 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .hh-credentials b { display: block; color: var(--txt); font-weight: 500; }
 .home .hh-credentials .hh-other { justify-content: space-between; }
 @media (max-width: 1080px) {
-  .home .hh-brands { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px 16px; }
+  .home .hh-brands { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; max-width: 420px; margin-inline: auto; }
 }
 @media (max-width: 860px) {
   .home .hh-credentials { grid-template-columns: 1fr; margin-top: 32px; }
 }
 @media (max-width: 600px) {
   .home .hh-brands a { min-height: 72px; }
-  .home .hh-logo { height: 32px; }
-  .home .hh-logo-jeep { max-width: 68px; }
 }
 /* Seção de números (call 17/11): só dados com fonte; 6.000 m² e Abrablin já aparecem em outros blocos. */
 .home .home-numbers h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
