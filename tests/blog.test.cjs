@@ -19,6 +19,7 @@ const duplicated=structuredClone(data); duplicated.posts.push(duplicated.posts[0
 for(const file of JSON.parse(fs.readFileSync(path.join(root,'content/blog-pages.json'),'utf8'))) {
  const html=fs.readFileSync(path.join(root,file),'utf8');
  assert(html.includes('rel="canonical"') && html.includes('name="robots"'));
+ assert(html.includes('Insights</'), 'Generated navigation must preserve the Insights label');
  const category=data.categories.find(c=>file===`categoria-${c.slug}.html`);
  if(category?.hero) {
   assert(html.includes(`class="photo-hero-photo" src="${category.hero.image}"`));

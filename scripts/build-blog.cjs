@@ -53,14 +53,14 @@ function build({preview = false} = {}) {
 <meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${base+file}"><meta property="og:image" content="${base+image}"><meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/styles.css?v=blog-20261113"><link rel="stylesheet" href="assets/institucional.css?v=unidades-20261113"><link rel="stylesheet" href="assets/blog.css?v=artigos-hero-20261115">
+<link rel="stylesheet" href="assets/styles.css?v=showroom-v2-20261117"><link rel="stylesheet" href="assets/institucional.css?v=unidades-20261113"><link rel="stylesheet" href="assets/blog.css?v=artigos-hero-20261115">
 ${schema && !preview ? '<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\\u003c')+'</script>':''}
 </head><body class="inner blog-page" data-page="blog"><a href="#conteudo" class="skip-link">Ir para o conteúdo</a><div id="site-header"></div>
 <main id="conteudo">${content}</main><div id="site-footer"></div>
-<script src="assets/app.js?v=blog-20261113"></script><script>renderChrome('blog');</script><script src="assets/blog.js?v=lateral-20261113"></script>
+<script src="assets/app.js?v=iso14001-20261117"></script><script>renderChrome('blog');</script><script src="assets/blog.js?v=lateral-20261113"></script>
 </body></html>\n`;
   }
-  const crumbs = (name, parent) => `<nav class="breadcrumb" aria-label="Você está aqui"><a href="index.html">Início</a><span aria-hidden="true">/</span>${name==='Blog' ? '<span aria-current="page">Blog</span>' : '<a href="blog.html">Blog</a><span aria-hidden="true">/</span>'+(parent?`<a href="${categoryURL(parent)}">${escape(parent.name)}</a><span aria-hidden="true">/</span>`:'')+`<span aria-current="page">${escape(name)}</span>`}</nav>`;
+  const crumbs = (name, parent) => `<nav class="breadcrumb" aria-label="Você está aqui"><a href="index.html">Início</a><span aria-hidden="true">/</span>${name==='Blog' ? '<span aria-current="page">Insights</span>' : '<a href="blog.html">Insights</a><span aria-hidden="true">/</span>'+(parent?`<a href="${categoryURL(parent)}">${escape(parent.name)}</a><span aria-hidden="true">/</span>`:'')+`<span aria-current="page">${escape(name)}</span>`}</nav>`;
   const card = p => `<article class="blog-card" data-blog-card data-category="${p.category}" data-search="${escape(p.title+' '+p.description+' '+cat(p).name)}">
 <a class="blog-card-cover" href="${articleURL(p)}" tabindex="-1" aria-hidden="true"><img src="${p.thumbnail || p.image}" alt="" width="800" height="500" loading="lazy" decoding="async"></a>
 <div class="blog-card-copy"><a class="blog-category" href="${categoryURL(cat(p))}">${escape(cat(p).name)}</a><h2><a href="${articleURL(p)}">${escape(p.title)}</a></h2><p>${escape(p.description)}</p><div class="blog-meta"><time datetime="${p.date}">${date(p.date)}</time><span>${minutes(p)} min de leitura</span></div><a class="blog-read" href="${articleURL(p)}" aria-label="Ler: ${escape(p.title)}">Ler artigo <span aria-hidden="true">↗</span></a></div></article>`;

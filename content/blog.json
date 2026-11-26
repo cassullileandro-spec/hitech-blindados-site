@@ -222,6 +222,160 @@
         "href": "showroom.html"
       },
       "thumbnail": "assets/media/empresa-showroom-800.webp"
+    },
+    {
+      "slug": "teto-solar-blindado-abertura-ou-transparencia",
+      "title": "Teto solar blindado: abertura ou transparência?",
+      "description": "Conheça as configurações apresentadas pela Hi-Tech e o que confirmar antes de escolher a solução para o seu veículo.",
+      "category": "blindagem",
+      "date": "2026-11-26",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/hitech/acabamento-interno-1600.webp",
+      "thumbnail": "assets/media/hitech/acabamento-interno-800.webp",
+      "imageAlt": "Profissional da Hi-Tech trabalhando no acabamento interno junto ao teto do veículo",
+      "intro": "A configuração do teto solar faz parte da escolha do projeto de blindagem. A Hi-Tech apresenta duas soluções: uma opaca, com manta de aramida, e outra com vidro blindado. Elas preservam características diferentes do equipamento, por isso vale entender a escolha antes de contratar.",
+      "sections": [
+        {
+          "title": "A solução opaca mantém a abertura",
+          "paragraphs": [
+            "Na configuração opaca apresentada pela Hi-Tech, a manta de aramida permite manter a abertura e o fechamento do teto solar. Em contrapartida, a área que antes era transparente recebe o material opaco.",
+            "Essa opção faz sentido para a conversa sobre funcionalidade: informe à equipe se abrir o teto faz parte do uso que você quer preservar. A disponibilidade precisa ser confirmada para o modelo e a versão do veículo."
+          ]
+        },
+        {
+          "title": "A solução com vidro preserva a transparência",
+          "paragraphs": [
+            "Na configuração com vidro blindado apresentada pela equipe, o teto mantém a entrada de luz natural e passa a ser fixo. A solução permite preservar a transparência, com uma forma de uso diferente da opção que abre.",
+            "Ao comparar as alternativas, diferencie a abertura do teto do movimento da cortina interna. Peça à equipe que explique como cada recurso ficará no projeto do seu carro."
+          ]
+        },
+        {
+          "title": "Confirme a configuração do seu veículo",
+          "paragraphs": [
+            "A escolha deve considerar as opções disponíveis para o seu carro e o que você espera do equipamento. Antes de fechar a proposta, esclareça os cuidados de uso, a vedação e as condições de manutenção e garantia da configuração escolhida."
+          ],
+          "bullets": [
+            "Modelo, versão e configuração original do teto.",
+            "Preferência por abertura ou transparência.",
+            "Funcionamento previsto após a blindagem.",
+            "Cuidados, revisões e condições de garantia."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Explorar a proteção do veículo",
+        "href": "blindagem.html"
+      },
+      "tags": [
+        "teto solar",
+        "aramida",
+        "vidro balístico"
+      ]
+    },
+    {
+      "slug": "materiais-blindagem-comparacao-de-peso",
+      "title": "Materiais da blindagem: o que a comparação de peso mostra?",
+      "description": "Entenda como a escolha dos materiais se relaciona ao projeto e por que o peso de uma peça não representa o carro inteiro.",
+      "category": "blindagem",
+      "date": "2026-11-26",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/hitech/linha-montagem-1600.webp",
+      "thumbnail": "assets/media/hitech/linha-montagem-800.webp",
+      "imageAlt": "Veículos em diferentes etapas de montagem na fábrica da Hi-Tech",
+      "intro": "Aramida, aço, vidros balísticos e aplicações com Tensylon / UltraPoly fazem parte das opções apresentadas pela Hi-Tech. A composição é definida por projeto: conhecer um material ajuda na escolha, mas não substitui a avaliação do conjunto instalado no veículo.",
+      "sections": [
+        {
+          "title": "O que a demonstração de uma peça permite observar",
+          "paragraphs": [
+            "Em suas demonstrações, a equipe compara peças de proteção de coluna produzidas com materiais diferentes. Essa comparação permite visualizar componentes e perceber diferenças de peso entre as peças apresentadas.",
+            "O exemplo não representa, por si só, a redução de peso de toda a blindagem. O resultado do veículo depende de quais componentes serão utilizados, de suas áreas de aplicação e da configuração contratada."
+          ]
+        },
+        {
+          "title": "Tensylon é uma opção dentro do projeto",
+          "paragraphs": [
+            "A Hi-Tech apresenta aplicações de Tensylon em painéis UltraPoly nas áreas previstas pelo projeto. A proposta deve esclarecer onde esse material será utilizado e quais outros componentes fazem parte da solução.",
+            "A escolha de um material não significa que ele substituirá todos os demais. Pergunte à equipe pela composição aplicável ao seu modelo e pelos recursos do veículo que serão considerados na instalação."
+          ]
+        },
+        {
+          "title": "Compare propostas com a mesma base",
+          "paragraphs": [
+            "Para comparar alternativas, reúna as informações de cada proposta. Números de uma peça isolada ou de outro carro não devem ser tratados como o resultado garantido para o seu veículo.",
+            "Confirme a composição, o peso previsto do conjunto e as condições comerciais do projeto apresentado. Assim, a decisão considera o que será efetivamente instalado e acompanhado após a entrega."
+          ],
+          "bullets": [
+            "Materiais e áreas de aplicação.",
+            "Configuração prevista para o modelo e a versão.",
+            "Peso do conjunto e condições da proposta.",
+            "Cuidados e acompanhamento após a instalação."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Conhecer os materiais da blindagem",
+        "href": "blindagem.html#materiais"
+      },
+      "tags": [
+        "Tensylon",
+        "UltraPoly",
+        "aramida",
+        "aço",
+        "peso"
+      ]
+    },
+    {
+      "slug": "vidros-balisticos-composicao-garantia",
+      "title": "Vidros balísticos: o que conferir na composição e na garantia?",
+      "description": "Fabricante, linha, condições de cobertura e cuidados: as informações para entender a opção prevista no seu projeto.",
+      "category": "blindagem",
+      "date": "2026-11-26",
+      "author": "Equipe Hi-Tech",
+      "status": "published",
+      "image": "assets/media/hitech/instalacao-vidro-1600.webp",
+      "thumbnail": "assets/media/hitech/instalacao-vidro-800.webp",
+      "imageAlt": "Instalação de vidro na porta de um veículo por um profissional da Hi-Tech",
+      "intro": "Os vidros balísticos podem ter composições e condições de garantia diferentes. Para entender a opção do seu projeto, peça à equipe a identificação do produto e as condições que acompanham sua instalação e seu uso.",
+      "sections": [
+        {
+          "title": "Conheça o vidro previsto na proposta",
+          "paragraphs": [
+            "Confirme o fabricante e a linha do vidro escolhido. Peça que a equipe apresente as características do produto e esclareça como ele integra o projeto do seu veículo.",
+            "A comparação deve considerar produtos e configurações identificados. Uma característica apresentada para uma opção não deve ser estendida automaticamente a todos os vidros."
+          ]
+        },
+        {
+          "title": "Leia o prazo junto com as condições",
+          "paragraphs": [
+            "O prazo é uma parte da informação sobre garantia. Também é necessário saber quais eventos estão cobertos, quem responde pelo atendimento, quando a cobertura começa e quais cuidados ou revisões são exigidos.",
+            "Se a proposta mencionar cobertura para delaminação, peça as condições aplicáveis à linha escolhida. A garantia do vidro, a dos demais materiais, a da instalação e a da montadora precisam ser entendidas separadamente."
+          ],
+          "bullets": [
+            "Fabricante e linha do produto.",
+            "Prazo e início da cobertura.",
+            "Eventos cobertos e exclusões.",
+            "Cuidados, revisões e responsável pelo atendimento."
+          ]
+        },
+        {
+          "title": "Apresente as mudanças à assistência",
+          "paragraphs": [
+            "Ao perceber uma alteração na transparência, na aparência ou no funcionamento do vidro, conte à equipe o que mudou e quando isso começou. Reúna os documentos da blindagem e o histórico de revisões, quando disponíveis.",
+            "A avaliação do veículo orienta o atendimento. A possibilidade de cobertura depende do produto, da necessidade identificada e das condições de garantia aplicáveis ao caso."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Conhecer a assistência",
+        "href": "assistencia.html"
+      },
+      "tags": [
+        "vidros balísticos",
+        "garantia",
+        "delaminação"
+      ]
     }
   ]
 }
