@@ -94,6 +94,14 @@ ${related.length?'<section class="section blog-related"><div class="wrap"><h2>Co
     pages.set(file,shell(file,p.title,p.description,content,{image:p.image,type:'article',schema:{'@context':'https://schema.org','@type':'BlogPosting',headline:p.title,description:p.description,image:base+p.image,datePublished:p.date,author:{'@type':'Organization',name:p.author},publisher:{'@type':'Organization',name:'Hi-Tech Blindados',logo:{'@type':'ImageObject',url:base+'assets/media/logo-hitech.webp'}},mainEntityOfPage:base+file,articleSection:category.name,inLanguage:'pt-BR'}}));
   }
   const manifest=path.join(root,'content/blog-pages.json');
+  if (!preview) {
+    const homeFile=path.join(root,'index.html');
+    const home=fs.readFileSync(homeFile,'utf8');
+    const homeBlock=/<!-- HOME INSIGHTS START -->[\s\S]*?<!-- HOME INSIGHTS END -->/;
+    assert(homeBlock.test(home), 'Bloco de artigos da home não encontrado');
+    const cards=posts.slice(0,3).map(p=>card(p).replace('<h2>','<h3>').replace('</h2>','</h3>')).join('\n');
+    fs.writeFileSync(homeFile,home.replace(homeBlock,()=>`<!-- HOME INSIGHTS START -->\n${cards}\n<!-- HOME INSIGHTS END -->`));
+  }
   const previous=fs.existsSync(manifest)?JSON.parse(fs.readFileSync(manifest,'utf8')):[];
   for (const file of previous) {
     assert(/^(blog|categoria-[a-z0-9-]+|artigo-[a-z0-9-]+)\.html$/.test(file));

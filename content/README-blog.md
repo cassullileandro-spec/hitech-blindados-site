@@ -9,7 +9,7 @@ O blog usa o projeto estático atual, sem dependências ou painel externo. A fon
 3. Escolha uma categoria pelo slug e um botão final apontando para uma página existente. `featured: true` destaca um artigo na abertura do blog.
 4. Mantenha `status: "draft"` enquanto o conteúdo estiver em revisão.
 5. Execute na raiz: `node scripts/build-blog.cjs --preview`. Esta prévia mostra rascunhos com aviso, bloqueia indexação e não inclui as páginas do blog no sitemap.
-6. Após revisar o conteúdo, altere os artigos aprovados para `status: "published"` e execute `node scripts/build-blog.cjs`. Só os publicados entram na versão final. O comando remove páginas geradas que deixaram de fazer parte da seleção.
+6. Após revisar o conteúdo, altere os artigos aprovados para `status: "published"` e execute `node scripts/build-blog.cjs`. Só os publicados entram na versão final. O comando remove páginas geradas que deixaram de fazer parte da seleção e atualiza os três artigos mais recentes na home. A prévia editorial não altera a home.
 7. Confira localmente com `python3 -m http.server 8765`, abra `blog.html` e rode `node tests/blog.test.cjs`.
 8. Versione o JSON, os HTMLs gerados, `content/blog-pages.json`, as capas e o sitemap. Publique pelo fluxo GitHub Pages existente.
 
