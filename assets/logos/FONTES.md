@@ -32,3 +32,8 @@ Logos oficiais servidas localmente, com contraste monocromático aplicado pelo C
 - CAOA Chery: reutilizada a marca vetorial Chery de `filtros/chery.svg`; a identificação completa aparece no título do card.
 
 O uso das marcas identifica o conteúdo fornecido pela Hi-Tech; as imagens não substituem os documentos de homologação.
+
+## Ajuste de proporções da home — 26/11/2026
+
+- Changan horizontal: [arquivo publicado pela Changan South Africa](https://www.changanmotors.co.za/wp-content/uploads/2026/05/changan-logo-1920w.png), obtido do [site da marca](https://www.changanmotors.co.za/). Símbolo à esquerda e nome à direita, preservados. Convertido para `changan-horizontal.webp` sem perdas, com alpha e dimensões originais 789×154. Aplicado somente nas abas da home, em um viewport SVG rente à área visível (7, 10, 772, 139), com margem de segurança de 1 px para preservar a suavização das bordas.
+- Demais logos e seus recortes foram preservados. A escala agora é limitada dentro de botões com padding em todos os lados; a altura da Mitsubishi não aumenta a fileira.
