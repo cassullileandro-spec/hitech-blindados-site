@@ -3,6 +3,32 @@ renderChrome('home');
 document.querySelectorAll('[data-icon]').forEach(element => { element.innerHTML = I[element.dataset.icon] || ''; });
 initMotion();
 
+// Abas de homologações: Jeep já está aberta no HTML, inclusive antes do JavaScript.
+const homologTabs = [...document.querySelectorAll('.hh-tab')];
+function selectHomologTab(tab) {
+  homologTabs.forEach(item => {
+    const selected = item === tab;
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+    document.getElementById(item.getAttribute('aria-controls')).hidden = !selected;
+  });
+}
+homologTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectHomologTab(tab));
+  tab.addEventListener('keydown', event => {
+    const target = {
+      ArrowRight: (index + 1) % homologTabs.length,
+      ArrowLeft: (index - 1 + homologTabs.length) % homologTabs.length,
+      Home: 0,
+      End: homologTabs.length - 1
+    }[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    selectHomologTab(homologTabs[target]);
+    homologTabs[target].focus();
+  });
+});
+
 // O embed oficial só carrega quando o visitante se aproxima da seção.
 const instagramFeed = document.querySelector('[data-instagram-feed]');
 if (instagramFeed) {

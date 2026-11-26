@@ -96,11 +96,27 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
 .home .showroom-last { padding: 32px 0; border-top: 1px solid var(--line); }
 .home .showroom-last .wrap { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; }
 .home .showroom-last p { margin: 0; color: var(--txt-3); font-size: var(--aux-size); }
-/* Todas as marcas ficam visíveis; os detalhes permanecem na página de homologações. */
+/* As nove marcas compartilham o mesmo espaço; Jeep inicia selecionada. */
 .home .hh-brands { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 24px; margin: var(--collection-space) 0 0; padding: 0; list-style: none; }
-.home .hh-brands a { display: grid; place-items: center; height: 100%; min-height: 112px; padding: 16px 0; border-radius: var(--r); transition: background .25s; }
-.home .hh-brands a:hover, .home .hh-brands a:focus-visible { background: rgba(255,255,255,.08); }
+.home .hh-brands .hh-tab { display: grid; place-items: center; width: 100%; height: 100%; min-height: 112px; border: 0; background: none; cursor: pointer; padding: 16px 0; border-radius: var(--r); transition: background .25s; }
+.home .hh-brands .hh-tab:hover, .home .hh-brands .hh-tab:focus-visible { background: rgba(255,255,255,.08); }
+.home .hh-tab[aria-selected="true"] { background: rgba(255,255,255,.04); box-shadow: inset 0 -2px var(--accent); }
 .home .hh-logo { display: block; width: 100%; height: auto; overflow: hidden; filter: brightness(0) invert(1); }
+.home .hh-panel { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: var(--grid-gap-wide); align-items: center; padding-top: 48px; }
+.home .hh-panel[hidden] { display: none; }
+.home .hh-panel:focus-visible { outline-offset: 8px; }
+.home .hh-models { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.home .hh-models[data-count="1"] { grid-template-columns: minmax(0,1fr); }
+.home .hh-models li { display: grid; gap: 8px; color: var(--txt-2); font-size: var(--aux-size); }
+.home .hh-models img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; }
+.home .hh-label { display: block; margin-bottom: 16px; color: var(--accent); font-size: var(--aux-size); font-weight: 500; }
+.home .hh-copy h3 { font-size: var(--card-title-size); line-height: 40px; font-weight: 400; }
+.home .hh-copy p { margin-top: var(--text-space); color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
+.home .hh-benefits { display: grid; gap: 12px; margin: 24px 0 0; padding-left: 20px; list-style: disc; color: var(--txt-2); font-size: var(--body-size); line-height: var(--body-leading); }
+.home .hh-benefits li::marker { color: var(--accent); }
+.home .hh-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 32px; }
+.home .hh-panel--text { grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; }
+.home .hh-info .hh-benefits { margin-top: 0; }
 .home .hh-credentials { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line-2); }
 .home .hh-credentials a { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: var(--r); background: rgba(255,255,255,.04); color: var(--txt-2); font-size: var(--aux-size); line-height: var(--body-leading); transition: background .25s; }
 .home .hh-credentials a:hover { background: rgba(255,255,255,.08); }
@@ -111,10 +127,11 @@ html:has(#layout-grid-inspector) .home .reveal { opacity: 1; transform: none; tr
   .home .hh-brands { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; max-width: 420px; margin-inline: auto; }
 }
 @media (max-width: 860px) {
+  .home .hh-panel { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
   .home .hh-credentials { grid-template-columns: 1fr; margin-top: 32px; }
 }
 @media (max-width: 600px) {
-  .home .hh-brands a { min-height: 72px; }
+  .home .hh-brands .hh-tab { min-height: 72px; }
 }
 /* Seção de números (call 17/11): só dados com fonte; 6.000 m² e Abrablin já aparecem em outros blocos. */
 .home .home-numbers h2 { font-size: var(--hero-title-size); line-height: var(--heading-leading); }
