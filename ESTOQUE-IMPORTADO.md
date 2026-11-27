@@ -34,3 +34,12 @@ SUVs com carroceria comercialmente chamada coupé ou sportback continuam em SUV,
 - Estoque e home conferidos em desktop e celular; busca, limpeza de filtros, categorias e navegação/expansão de galeria verificadas.
 - Faixas dos filtros derivadas do estoque: preços até R$ 800.000, anos desde 1973 e quilometragem até 140.000 km. O estado inicial mostra todos os anúncios.
 - Não publicado. Formulários não enviados; disponibilidade comercial depende da atualização do estoque original. Não foi feita uma checagem HTTP individual de todas as 645 fotos.
+
+
+## Atualização somente da V2 — 27/11/2026
+
+Conferência do PDF de veículos de 19/11 enviado pela Hi-Tech. 43 linhas analisadas; 30 linhas relacionadas a 30 anúncios existentes por modelo, versão, ano-modelo e condição. 25 anúncios alterados: 24 preços, sete quilometragens e a classificação do Evoque como não blindado. Os Haval H6 HEV2 agora orientam consultar prazo de entrega.
+
+Os combustíveis conferidos já coincidiam com os cadastros. O código do BYD Song Plus diverge e foi separado para confirmação, sem alterar sua classificação. Quatro quilometragens menores que as existentes também foram retidas. Fotos, IDs, versões, destaques e demais cadastros foram preservados. Ausência no PDF não foi interpretada como venda; unidades repetidas não foram fundidas nem receberam dados individuais umas das outras.
+
+O PDF original e o cruzamento completo ficam fora do site publicado, pois incluem informações internas. A escolha dos destaques comerciais continua dependendo da Hi-Tech. Os dados comerciais refletem a data da fonte e devem ser reconfirmados no atendimento.

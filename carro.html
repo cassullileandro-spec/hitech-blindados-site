@@ -57,7 +57,7 @@
 
   <div id="site-footer"></div>
 
-  <script src="assets/data.js?v=estoque-webp-2"></script>
+  <script src="assets/data.js?v=showroom-20261127"></script>
   <script src="assets/galerias.js?v=estoque-webp-2"></script>
   <script src="assets/app.js?v=iso14001-20261117"></script>
   <script>
@@ -118,7 +118,7 @@
           "@type": "Offer",
           "priceCurrency": "BRL",
           "price": c.preco,
-          "availability": "https://schema.org/InStock",
+          "availability": c.disponibilidade === "sob_consulta" ? undefined : "https://schema.org/InStock",
           "itemCondition": c.condicao === "Novo" ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
           "url": url,
           "seller": { "@type": "AutoDealer", "name": "Hi-Tech Blindados", "telephone": "+551132027777", "areaServed": "São Paulo" }

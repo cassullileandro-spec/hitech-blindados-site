@@ -68,7 +68,7 @@ const I = {
 /* ---------- Helpers ---------- */
 const fmtPrice = n => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 0 });
 const fmtKm = n => n == null ? 'Km sob consulta' : n === 0 ? '0 km' : n.toLocaleString('pt-BR') + ' km';
-// Em SP, elétricos e híbridos ficam fora do rodízio (até 2030). Lista final confirmada pela Hi-Tech.
+// Filtro por combustível do cadastro; a conferência do PDF de 19/11 está registrada em ESTOQUE-IMPORTADO.md.
 const isentoRodizio = c => c.combustivel === 'Elétrico' || c.combustivel === 'Híbrido';
 const armorLabel = c => c.blindado === false ? 'Não blindado' : c.blindado === true ? (c.nivel ? 'Blindado ' + c.nivel : 'Blindado') : 'Blindagem sob consulta';
 

@@ -30,11 +30,24 @@ for (const c of cars) {
  assert(c.nivel==null || c.blindado===true);
 }
 assert.equal(cars.find(c=>c.id==='corolla-cross-xre').km,43700);
-assert.equal(cars.find(c=>c.id==='mercedes-e300').preco,629800);
+assert.equal(cars.find(c=>c.id==='mercedes-e300').preco,609800);
 assert.equal(cars.find(c=>c.id==='jeep-compass').modelo,'Compass Longitude Diesel');
 assert.equal(cars.find(c=>c.id==='volkswagen-kombi-1-5-luxo').blindado,false);
-assert.equal(cars.find(c=>c.id==='range-evoque').blindado,null);
+assert.equal(cars.find(c=>c.id==='range-evoque').blindado,false);
 assert.equal(cars.find(c=>c.id==='denza-b5-gs').km,null);
+for (const id of ['denza-b5-gs','denza-b5-gs-2','gwm-haval-h6-2','gwm-haval-h6-3']) assert.equal(cars.find(c=>c.id===id).disponibilidade,'sob_consulta');
+// O PDF de 19/11 não deve reduzir odômetros nem transformar o Song Plus em Flex.
+for (const [id,km] of Object.entries({'corolla-cross-xre':43700,'toyota-hilux-sw4':138073,'honda-hr-v-touring':39800,'volkswagen-tiguan-r-line':72000})) assert.equal(cars.find(c=>c.id===id).km,km);
+assert.equal(cars.find(c=>c.id==='byd-song-plus-4').combustivel,'Híbrido');
+assert.equal(cars.find(c=>c.id==='cayenne-coupe-hibrid').preco,830000);
+assert.equal(cars.find(c=>c.id==='cayenne-coupe-hibrid').km,8600);
+assert.equal(cars.find(c=>c.id==='bmw-x3-x-drive').km,23000);
+for (const id of ['gwm-haval-h6-2','gwm-haval-h6-3']) {
+ const car=cars.find(c=>c.id===id);
+ assert.equal(car.preco,344999);
+ assert(!car.resumo.toLowerCase().includes('pronta entrega'));
+}
+
 assert.equal(galleries['ford-ranger-2'].length,9);
 for (const url of galleries['ford-ranger-2']) assert.match(url,/\/estoque\/ford-ranger-2\/\d+\.webp$/,'Raptor must use the locally converted original photos');
 assert(read('carro.html').includes('new URL(gallery[0], url).href'),'Open Graph image stays absolute');
