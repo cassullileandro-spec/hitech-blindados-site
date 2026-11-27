@@ -37,3 +37,8 @@ O uso das marcas identifica o conteúdo fornecido pela Hi-Tech; as imagens não 
 
 - Changan horizontal: [arquivo publicado pela Changan South Africa](https://www.changanmotors.co.za/wp-content/uploads/2026/05/changan-logo-1920w.png), obtido do [site da marca](https://www.changanmotors.co.za/). Símbolo à esquerda e nome à direita, preservados. Convertido para `changan-horizontal.webp` sem perdas, com alpha e dimensões originais 789×154. Aplicado somente nas abas da home, em um viewport SVG rente à área visível (7, 10, 772, 139), com margem de segurança de 1 px para preservar a suavização das bordas.
 - Demais logos e seus recortes foram preservados. A escala agora é limitada dentro de botões com padding em todos os lados; a altura da Mitsubishi não aumenta a fileira.
+
+## Mitsubishi horizontal na home — 27/11/2026
+
+- `mitsubishi-horizontal.svg`: composição horizontal solicitada pelo usuário, montada com os vetores do [arquivo original do site brasileiro](https://media.mitsubishimotors.com.br/uploads/originals/logo_01_1_803bf48521.svg), já preservado em `mitsubishi.svg`. Símbolo à esquerda e lettering MITSUBISHI MOTORS à direita; geometrias dos 19 paths copiadas integralmente, com translação e escala proporcional. Sem reconstrução por IA ou fonte substituta. O slogan não integra esta composição compacta. Não é apresentado como download de uma nova versão oficial pronta.
+- Aplicação limitada às abas da home: mesma largura máxima, altura de quadro e padding das demais marcas. Logo vertical da página de homologações preservada.
